@@ -17,12 +17,12 @@ func NewTokenstore(db *sqlx.DB) *Tokenstore {
 	return &Tokenstore{db}
 }
 
-func (db *Tokenstore) Save(userID int, token *oauth2.Token) error {
+func (db *Tokenstore) SaveToken(userID int, token *oauth2.Token) error {
 	strToken, err := tokenToJSON(token)
 	if err != nil {
 		return err
 	}
-	previousToken, err := db.ForUser(userID)
+	previousToken, err := db.GetUserToken(userID)
 	if previousToken != nil && err == nil {
 		_, err := db.Exec(
 			"UPDATE tokens SET token = $2, updated_at = now() WHERE user_id = $1",
@@ -37,7 +37,7 @@ func (db *Tokenstore) Save(userID int, token *oauth2.Token) error {
 	return err
 }
 
-func (db *Tokenstore) ForUser(userID int) (*oauth2.Token, error) {
+func (db *Tokenstore) GetUserToken(userID int) (*oauth2.Token, error) {
 	var token string
 	err := db.Get(
 		&token, "SELECT token FROM tokens WHERE user_id = $1", userID,
