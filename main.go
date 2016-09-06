@@ -8,6 +8,7 @@ import (
 
 	"github.com/caarlos0/env"
 	"github.com/caarlos0/watchub/datastores/database"
+	"github.com/caarlos0/watchub/dto"
 	"github.com/caarlos0/watchub/static"
 	"github.com/google/go-github/github"
 	"github.com/labstack/echo"
@@ -46,7 +47,7 @@ func main() {
 	e := echo.New()
 	e.SetRenderer(static.New("static/*.html"))
 	e.GET("/", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "index", "")
+		return c.Render(http.StatusOK, "index", dto.User{})
 	})
 	e.GET("/login", func(c echo.Context) error {
 		url := oauthConf.AuthCodeURL(oauthStateString, oauth2.AccessTypeOnline)
@@ -72,7 +73,7 @@ func main() {
 		if err := store.Save(*u.ID, token); err != nil {
 			return err
 		}
-		return c.Render(http.StatusOK, "index", *u.Login)
+		return c.Render(http.StatusOK, "index", dto.User{*u.Login})
 	})
 	e.Run(standard.New(fmt.Sprintf(":%d", cfg.Port)))
 }
