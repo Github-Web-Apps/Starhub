@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
 
@@ -26,6 +25,7 @@ type config struct {
 }
 
 func main() {
+	log.Println("Starting up...")
 	cfg := config{}
 	err := env.Parse(&cfg)
 	if err != nil {
@@ -44,9 +44,7 @@ func main() {
 	oauthStateString := "thisshouldberandom"
 
 	e := echo.New()
-	e.SetRenderer(&static.Template{
-		Templates: template.Must(template.ParseGlob("static/*.html")),
-	})
+	e.SetRenderer(static.New("static/*.html"))
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "index", "")
 	})

@@ -8,9 +8,15 @@ import (
 )
 
 type Template struct {
-	Templates *template.Template
+	templates *template.Template
+}
+
+func New(glob string) *Template {
+	return &Template{
+		templates: template.Must(template.ParseGlob("static/*.html")),
+	}
 }
 
 func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	return t.Templates.ExecuteTemplate(w, name, data)
+	return t.templates.ExecuteTemplate(w, name+".html", data)
 }
