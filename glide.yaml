@@ -3,7 +3,6 @@ import:
 - package: github.com/google/go-github
   subpackages:
   - '...'
-- package: github.com/GeertJohan/go.rice
 - package: github.com/labstack/echo
   version: ^2.0.2
   subpackages:

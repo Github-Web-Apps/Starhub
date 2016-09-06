@@ -5,10 +5,6 @@ imports:
   version: 65331f179c42e3ffe33457b69bee55472a779cd6
 - name: github.com/daaku/go.zipexe
   version: a5fe2436ffcb3236e175e5149162b41cd28bd27d
-- name: github.com/GeertJohan/go.rice
-  version: 9fdfd46f9806a9228aae341d65ab75c5235c383c
-  subpackages:
-  - embedded
 - name: github.com/golang/protobuf
   version: 1f49d83d9aa00e6ce4fc8258c71cc7786aec968a
   subpackages:

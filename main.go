@@ -6,7 +6,6 @@ import (
 	"log"
 	"net/http"
 
-	rice "github.com/GeertJohan/go.rice"
 	"github.com/caarlos0/env"
 	"github.com/caarlos0/watchub/datastores/database"
 	"github.com/google/go-github/github"
@@ -43,9 +42,9 @@ func main() {
 	oauthStateString := "thisshouldberandom"
 
 	e := echo.New()
-	assetHandler := http.FileServer(rice.MustFindBox("static").HTTPBox())
-	e.GET("/", standard.WrapHandler(assetHandler))
-	e.GET("/static/*", standard.WrapHandler(http.StripPrefix("/static/", assetHandler)))
+	// e.GET("/", standard.WrapHandler(assetHandler))
+	// e.GET("/static/*", standard.WrapHandler(http.StripPrefix("/static/", assetHandler)))
+	e.Static("/", "static/")
 	e.GET("/login", func(c echo.Context) error {
 		url := oauthConf.AuthCodeURL(oauthStateString, oauth2.AccessTypeOnline)
 		return c.Redirect(http.StatusTemporaryRedirect, url)
