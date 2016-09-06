@@ -8,9 +8,11 @@ import (
 
 	rice "github.com/GeertJohan/go.rice"
 	"github.com/caarlos0/env"
+	"github.com/caarlos0/watch/datastores/database"
 	"github.com/google/go-github/github"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
+	_ "github.com/lib/pq"
 	"golang.org/x/oauth2"
 	githuboauth "golang.org/x/oauth2/github"
 )
@@ -19,6 +21,7 @@ type config struct {
 	Port         int    `env:"PORT" envDefault:"3000"`
 	ClientID     string `env:"GITHUB_CLIENT_ID"`
 	ClientSecret string `env:"GITHUB_CLIENT_SECRET"`
+	DatabaseURL  string `env:"DATABASE_URL" envDefault:"postgres://localhost:5432/watchub?sslmode=disable"`
 }
 
 func main() {
@@ -27,6 +30,10 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	db := database.Connect(cfg.DatabaseURL)
+	defer db.Close()
+	store := database.NewDatastore(db)
+
 	oauthConf := &oauth2.Config{
 		ClientID:     cfg.ClientID,
 		ClientSecret: cfg.ClientSecret,
@@ -58,6 +65,9 @@ func main() {
 		client := github.NewClient(oauthClient)
 		u, _, err := client.Users.Get("")
 		if err != nil {
+			return err
+		}
+		if err := store.Save(*u.ID, token); err != nil {
 			return err
 		}
 		return c.String(200, "Hello, "+*u.Login+"!")

@@ -13,3 +13,9 @@ import:
   - '...'
 - package: github.com/caarlos0/env
   version: ^2.0.0
+- package: github.com/lib/pq
+  subpackages:
+  - '...'
+- package: github.com/jmoiron/sqlx
+  subpackages:
+  - '...'

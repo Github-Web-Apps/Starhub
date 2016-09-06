@@ -1,5 +1,5 @@
-hash: ef4282c429585d7809405ba4097b6681dcd1f80462921a8852d10d8f40be62cd
-updated: 2016-09-06T01:16:09.696127147-03:00
+hash: c7a935d509b5aa9f22a831d20913c3163874894c4153884e5530aea517a9b1a4
+updated: 2016-09-06T01:48:18.337089863-03:00
 imports:
 - name: github.com/caarlos0/env
   version: 65331f179c42e3ffe33457b69bee55472a779cd6
@@ -22,6 +22,10 @@ imports:
   version: 9235644dd9e52eeae6fa48efd539fdc351a0af53
   subpackages:
   - query
+- name: github.com/jmoiron/sqlx
+  version: 7396209bbeada6a4fcc28aa9408f89b2e71cac39
+  subpackages:
+  - '...'
 - name: github.com/kardianos/osext
   version: c2c54e542fb797ad986b31721e1baedf214ca413
 - name: github.com/labstack/echo
@@ -36,6 +40,11 @@ imports:
   subpackages:
   - color
   - log
+- name: github.com/lib/pq
+  version: 50761b0867bd1d9d069276790bcd4a3bccf2324a
+  subpackages:
+  - '...'
+  - oid
 - name: github.com/mattn/go-colorable
   version: ed8eb9e318d7a84ce5915b495b7d35e0cfe7b5a8
 - name: github.com/mattn/go-isatty
