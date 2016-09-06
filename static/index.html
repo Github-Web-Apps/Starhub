@@ -14,11 +14,11 @@
   <div class="container" style="padding-top: 20px">
     <div class="jumbotron">
       <h1 class="display-3">Watchub</h1>
+      <p class="lead">Receive notifications about watches, unwatches, stars and unstars.</p>
       {{if eq .User ""}}
-        <p class="lead">Receive notifications about watches, unwatches, stars and unstars.</p>
         <p><a class="btn btn-lg btn-success" href="/login" role="button">Signup</a></p>
       {{else}}
-        <p class="lead">Hi, {{.User}}!</p>
+        <p class="lead">Hey, {{.User}}, you're are all set up. Just wait for the emails next days.</p>
       {{end}}
     </div>
   </div>
