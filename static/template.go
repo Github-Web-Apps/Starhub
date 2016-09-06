@@ -1,9 +1,9 @@
 package static
 
 import (
+	"html/template"
 	"io"
 
-	"github.com/alecthomas/template"
 	"github.com/labstack/echo"
 )
 

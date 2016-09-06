@@ -3,10 +3,10 @@ package main
 import (
 	"errors"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 
-	"github.com/alecthomas/template"
 	"github.com/caarlos0/env"
 	"github.com/caarlos0/watchub/datastores/database"
 	"github.com/caarlos0/watchub/static"
