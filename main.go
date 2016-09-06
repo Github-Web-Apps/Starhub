@@ -1,39 +1,66 @@
 package main
 
 import (
+	"errors"
+	"fmt"
+	"log"
 	"net/http"
 
 	rice "github.com/GeertJohan/go.rice"
+	"github.com/caarlos0/env"
+	"github.com/google/go-github/github"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
+	"golang.org/x/oauth2"
+	githuboauth "golang.org/x/oauth2/github"
 )
 
+type config struct {
+	Port         int    `env:"PORT" envDefault:"3000"`
+	ClientID     string `env:"GITHUB_CLIENT_ID"`
+	ClientSecret string `env:"GITHUB_CLIENT_SECRET"`
+}
+
 func main() {
-	// ts := oauth2.StaticTokenSource(
-	// 	&oauth2.Token{AccessToken: os.Getenv("GITHUB_TOKEN")},
-	// )
-	// tc := oauth2.NewClient(oauth2.NoContext, ts)
-	// client := github.NewClient(tc)
-	// user := os.Args[1]
-	// log.Println("Gathering data for", user)
-
-	// followers, err := followers.Get(user, client)
-	// if err != nil {
-	// 	log.Fatalln(err)
-	// }
-
-	// log.Println("You have a total of", len(followers), "followers!")
-	// for _, follower := range followers {
-	// 	log.Println(*follower.Login)
-	// }
+	cfg := config{}
+	err := env.Parse(&cfg)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	oauthConf := &oauth2.Config{
+		ClientID:     cfg.ClientID,
+		ClientSecret: cfg.ClientSecret,
+		Scopes:       []string{"user:email", "repo"},
+		Endpoint:     githuboauth.Endpoint,
+	}
+	oauthStateString := "thisshouldberandom"
 
 	e := echo.New()
-	// the file server for rice. "app" is the folder where the files come from.
 	assetHandler := http.FileServer(rice.MustFindBox("static").HTTPBox())
-	// serves the index.html from rice
 	e.GET("/", standard.WrapHandler(assetHandler))
-
-	// servers other static files
 	e.GET("/static/*", standard.WrapHandler(http.StripPrefix("/static/", assetHandler)))
+	e.GET("/login", func(c echo.Context) error {
+		url := oauthConf.AuthCodeURL(oauthStateString, oauth2.AccessTypeOnline)
+		return c.Redirect(http.StatusTemporaryRedirect, url)
+	})
+	e.GET("/github_callback", func(c echo.Context) error {
+		state := c.FormValue("state")
+		if state != oauthStateString {
+			return errors.New("Invalid state!")
+		}
+		code := c.FormValue("code")
+		token, err := oauthConf.Exchange(oauth2.NoContext, code)
+		if err != nil {
+			return err
+		}
+		fmt.Println("Save token here:", token)
+		oauthClient := oauthConf.Client(oauth2.NoContext, token)
+		client := github.NewClient(oauthClient)
+		u, _, err := client.Users.Get("")
+		if err != nil {
+			return err
+		}
+		return c.String(200, "Hello, "+*u.Login+"!")
+	})
 	e.Run(standard.New(":3000"))
 }

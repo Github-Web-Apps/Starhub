@@ -11,3 +11,5 @@ import:
 - package: golang.org/x/oauth2
   subpackages:
   - '...'
+- package: github.com/caarlos0/env
+  version: ^2.0.0

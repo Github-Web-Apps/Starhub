@@ -1,12 +1,18 @@
-hash: 4ecd03653c8383f65afebdeca7e1ea1a75f5f99bc56a3866a6635fa33b64e709
-updated: 2016-09-06T01:03:27.80012868-03:00
+hash: ef4282c429585d7809405ba4097b6681dcd1f80462921a8852d10d8f40be62cd
+updated: 2016-09-06T01:16:09.696127147-03:00
 imports:
+- name: github.com/caarlos0/env
+  version: 65331f179c42e3ffe33457b69bee55472a779cd6
 - name: github.com/daaku/go.zipexe
   version: a5fe2436ffcb3236e175e5149162b41cd28bd27d
 - name: github.com/GeertJohan/go.rice
   version: 9fdfd46f9806a9228aae341d65ab75c5235c383c
   subpackages:
   - embedded
+- name: github.com/golang/protobuf
+  version: 1f49d83d9aa00e6ce4fc8258c71cc7786aec968a
+  subpackages:
+  - proto
 - name: github.com/google/go-github
   version: 6d1b527d46849e8fc9238298ebe86dced178609c
   subpackages:
@@ -44,8 +50,20 @@ imports:
   version: 3c3a985cb79f52a3190fbc056984415ca6763d01
   subpackages:
   - '...'
+  - github
+  - internal
 - name: golang.org/x/sys
   version: a646d33e2ee3172a661fc09bca23bb4889a41bc8
   subpackages:
   - unix
+- name: google.golang.org/appengine
+  version: 4f7eeb5305a4ba1966344836ba4af9996b7b4e05
+  subpackages:
+  - internal
+  - internal/base
+  - internal/datastore
+  - internal/log
+  - internal/remote_api
+  - internal/urlfetch
+  - urlfetch
 testImports: []
