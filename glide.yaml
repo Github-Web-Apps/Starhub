@@ -1,4 +1,4 @@
-package: github.com/caarlos0/watch
+package: github.com/caarlos0/watchub
 import:
 - package: github.com/google/go-github
   subpackages:

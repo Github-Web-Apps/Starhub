@@ -8,7 +8,7 @@ import (
 
 	rice "github.com/GeertJohan/go.rice"
 	"github.com/caarlos0/env"
-	"github.com/caarlos0/watch/datastores/database"
+	"github.com/caarlos0/watchub/datastores/database"
 	"github.com/google/go-github/github"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
