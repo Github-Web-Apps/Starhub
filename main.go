@@ -22,6 +22,7 @@ type config struct {
 	Port         int    `env:"PORT" envDefault:"3000"`
 	ClientID     string `env:"GITHUB_CLIENT_ID"`
 	ClientSecret string `env:"GITHUB_CLIENT_SECRET"`
+	OauthState   string `env:"OAUTH_STATE"`
 	DatabaseURL  string `env:"DATABASE_URL" envDefault:"postgres://localhost:5432/watchub?sslmode=disable"`
 }
 
@@ -39,10 +40,9 @@ func main() {
 	oauthConf := &oauth2.Config{
 		ClientID:     cfg.ClientID,
 		ClientSecret: cfg.ClientSecret,
-		Scopes:       []string{"user:email", "repo"},
+		Scopes:       []string{"user:email", "public_repo"},
 		Endpoint:     githuboauth.Endpoint,
 	}
-	oauthStateString := "thisshouldberandom"
 
 	e := echo.New()
 	e.SetRenderer(static.New("static/*.html"))
@@ -50,12 +50,12 @@ func main() {
 		return c.Render(http.StatusOK, "index", dto.User{})
 	})
 	e.GET("/login", func(c echo.Context) error {
-		url := oauthConf.AuthCodeURL(oauthStateString, oauth2.AccessTypeOnline)
+		url := oauthConf.AuthCodeURL(cfg.OauthState, oauth2.AccessTypeOnline)
 		return c.Redirect(http.StatusTemporaryRedirect, url)
 	})
 	e.GET("/github_callback", func(c echo.Context) error {
 		state := c.FormValue("state")
-		if state != oauthStateString {
+		if state != cfg.OauthState {
 			return errors.New("Invalid state!")
 		}
 		code := c.FormValue("code")
@@ -73,7 +73,7 @@ func main() {
 		if err := store.Save(*u.ID, token); err != nil {
 			return err
 		}
-		return c.Render(http.StatusOK, "index", dto.User{*u.Login})
+		return c.Render(http.StatusOK, "index", dto.User{User: *u.Login})
 	})
 	e.Run(standard.New(fmt.Sprintf(":%d", cfg.Port)))
 }
