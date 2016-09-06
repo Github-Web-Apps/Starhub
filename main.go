@@ -71,5 +71,5 @@ func main() {
 		}
 		return c.String(200, "Hello, "+*u.Login+"!")
 	})
-	e.Run(standard.New(":3000"))
+	e.Run(standard.New(fmt.Sprintf(":%d", cfg.Port)))
 }
