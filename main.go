@@ -6,8 +6,10 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/alecthomas/template"
 	"github.com/caarlos0/env"
 	"github.com/caarlos0/watchub/datastores/database"
+	"github.com/caarlos0/watchub/static"
 	"github.com/google/go-github/github"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
@@ -42,9 +44,12 @@ func main() {
 	oauthStateString := "thisshouldberandom"
 
 	e := echo.New()
-	// e.GET("/", standard.WrapHandler(assetHandler))
-	// e.GET("/static/*", standard.WrapHandler(http.StripPrefix("/static/", assetHandler)))
-	e.Static("/", "static/")
+	e.SetRenderer(&static.Template{
+		Templates: template.Must(template.ParseGlob("static/*.html")),
+	})
+	e.GET("/", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "index", "")
+	})
 	e.GET("/login", func(c echo.Context) error {
 		url := oauthConf.AuthCodeURL(oauthStateString, oauth2.AccessTypeOnline)
 		return c.Redirect(http.StatusTemporaryRedirect, url)
@@ -69,7 +74,7 @@ func main() {
 		if err := store.Save(*u.ID, token); err != nil {
 			return err
 		}
-		return c.String(200, "Hello, "+*u.Login+"!")
+		return c.Render(http.StatusOK, "index", *u.Login)
 	})
 	e.Run(standard.New(fmt.Sprintf(":%d", cfg.Port)))
 }
