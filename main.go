@@ -34,7 +34,7 @@ func main() {
 	oauth := oauth.New(store, config)
 
 	// schedulers
-	scheduler := scheduler.New(store, oauth)
+	scheduler := scheduler.New(config, store, oauth)
 	scheduler.Start()
 	defer scheduler.Stop()
 

@@ -1,5 +1,5 @@
-hash: e226e0d97c66f1eb646ad4863a7768c9b799a7e8d7b911cb529baf56cb47540d
-updated: 2016-09-07T13:50:57.892357126-03:00
+hash: 7c9a2271f4b2f3cbac15cbbe06f567b3b9b11f3038a6a9f9204e2a6abce01f8c
+updated: 2016-09-07T16:21:18.011153819-03:00
 imports:
 - name: github.com/caarlos0/env
   version: 65331f179c42e3ffe33457b69bee55472a779cd6
@@ -46,6 +46,12 @@ imports:
   version: b024fc5ea0e34bc3f83d9941c8d60b0622bfaca4
   subpackages:
   - '...'
+- name: github.com/sendgrid/rest
+  version: d37acbf70185e33da36a233f4df95848b052427c
+- name: github.com/sendgrid/sendgrid-go
+  version: ccdbf45dbbbfb100c4a59a64802d58d5059098f3
+  subpackages:
+  - '...'
 - name: github.com/valyala/fasttemplate
   version: 3b874956e03f1636d171bda64b130f9135f42cff
 - name: golang.org/x/net
@@ -73,5 +79,15 @@ imports:
   - internal/urlfetch
   - urlfetch
 testImports:
+- name: github.com/davecgh/go-spew
+  version: 66f99a29a08158b999b0dc2e7ccacf1131d4e0b4
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: 792786c7400a136282c1664665ae0a8db921c6c2
+  subpackages:
+  - difflib
 - name: github.com/stretchr/testify
   version: f390dcf405f7b83c997eac1b06768bb9f44dec18
+  subpackages:
+  - assert

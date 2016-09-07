@@ -1,15 +1,9 @@
 package followers
 
-import (
-	"github.com/caarlos0/watchub/oauth"
-	"github.com/google/go-github/github"
-	"golang.org/x/oauth2"
-)
+import "github.com/google/go-github/github"
 
 // Get the list of followers of a given user
-func Get(token *oauth2.Token, oauth *oauth.Oauth) ([]*github.User, error) {
-	client := oauth.Client(token)
-
+func Get(client *github.Client) ([]*github.User, error) {
 	opt := &github.ListOptions{PerPage: 10}
 
 	var allFollowers []*github.User

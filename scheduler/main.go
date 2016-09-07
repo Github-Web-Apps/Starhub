@@ -6,24 +6,29 @@ import (
 
 	"golang.org/x/oauth2"
 
+	"github.com/caarlos0/watchub/config"
 	"github.com/caarlos0/watchub/datastores"
-	"github.com/caarlos0/watchub/diff"
 	"github.com/caarlos0/watchub/followers"
+	"github.com/caarlos0/watchub/mail"
 	"github.com/caarlos0/watchub/oauth"
 	"github.com/google/go-github/github"
 	"github.com/robfig/cron"
 )
 
 // New scheduler
-func New(store datastores.Datastore, oauth *oauth.Oauth) *cron.Cron {
+func New(
+	config config.Config, store datastores.Datastore, oauth *oauth.Oauth,
+) *cron.Cron {
 	c := cron.New()
-	fn := process(store, oauth)
-	c.AddFunc("@every 1h", fn)
+	fn := process(config, store, oauth)
+	c.AddFunc(config.Schedule, fn)
 	go fn()
 	return c
 }
 
-func process(store datastores.Datastore, oauth *oauth.Oauth) func() {
+func process(
+	config config.Config, store datastores.Datastore, oauth *oauth.Oauth,
+) func() {
 	return func() {
 		execs, err := store.Executions()
 		if err != nil {
@@ -37,7 +42,13 @@ func process(store datastores.Datastore, oauth *oauth.Oauth) func() {
 				log.Println(err)
 				continue
 			}
-			followers, err := followers.Get(token, oauth)
+			client := oauth.Client(token)
+			user, _, err := client.Users.Get("")
+			if err != nil {
+				log.Println(err)
+				continue
+			}
+			followers, err := followers.Get(client)
 			if err != nil {
 				log.Println(err)
 				continue
@@ -58,11 +69,15 @@ func process(store datastores.Datastore, oauth *oauth.Oauth) func() {
 			if len(previousFollowers) == 0 {
 				log.Println("First execution for user", exec.UserID)
 			} else {
-				newFollowers := diff.Of(followersLogin, previousFollowers)
-				unfollowers := diff.Of(previousFollowers, followersLogin)
-				log.Println(
-					exec.UserID, "has", len(newFollowers), "new followers and",
-					len(unfollowers), "unfollows",
+				// newFollowers := diff.Of(followersLogin, previousFollowers)
+				// unfollowers := diff.Of(previousFollowers, followersLogin)
+				m := mail.New(config)
+				m.SendWelcome(
+					mail.WelcomeData{
+						Login:     *user.Login,
+						Email:     *user.Email,
+						Followers: len(followers),
+					},
 				)
 			}
 		}
