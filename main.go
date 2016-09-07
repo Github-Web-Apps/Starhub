@@ -18,10 +18,14 @@ import (
 
 func main() {
 	log.Println("Starting up...")
+
+	// config
 	config, err := config.Get()
 	if err != nil {
 		log.Panicln(err)
 	}
+
+	// datastores
 	db := database.Connect(config.DatabaseURL)
 	defer db.Close()
 	store := database.NewDatastore(db)
@@ -31,11 +35,13 @@ func main() {
 	scheduler.Start()
 	defer scheduler.Stop()
 
+	// routes
 	e := echo.New()
 	e.SetRenderer(static.New("static/*.html"))
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "index", dto.User{})
 	})
 	oauth.Mount(e, store, config)
+
 	e.Run(standard.New(fmt.Sprintf(":%d", config.Port)))
 }
