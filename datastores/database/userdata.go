@@ -17,25 +17,27 @@ func NewUserdatastore(db *sqlx.DB) *Userdatastore {
 	return &Userdatastore{db}
 }
 
-func (db *Userdatastore) GetFollowers(userID int64) ([]int64, error) {
-	var ids []sql.NullInt64
-	var result []int64
-	err := db.QueryRowx(
+// GetFollowers of a given userID
+func (db *Userdatastore) GetFollowers(userID int64) ([]string, error) {
+	var logins []sql.NullString
+	var result []string
+	err := db.QueryRow(
 		"SELECT followers FROM tokens WHERE user_id = $1",
 		userID,
-	).Scan(pq.Array(&ids))
+	).Scan(pq.Array(&logins))
 	if err != nil {
 		return result, err
 	}
-	for _, id := range ids {
+	for _, id := range logins {
 		if id.Valid {
-			result = append(result, id.Int64)
+			result = append(result, id.String)
 		}
 	}
 	return result, nil
 }
 
-func (db *Userdatastore) SaveFollowers(userID int64, followers []int64) error {
+// SaveFollowers for a given userID
+func (db *Userdatastore) SaveFollowers(userID int64, followers []string) error {
 	_, err := db.Exec(
 		"UPDATE tokens SET followers = $2 WHERE user_id = $1",
 		userID,

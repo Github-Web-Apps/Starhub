@@ -6,8 +6,9 @@ import (
 	"golang.org/x/oauth2"
 )
 
-func Get(token *oauth2.Token) ([]*github.User, error) {
-	client := github.NewClient(oauth.Config.Client(oauth2.NoContext, token))
+// Get the list of followers of a given user
+func Get(token *oauth2.Token, oauth *oauth.Oauth) ([]*github.User, error) {
+	client := oauth.Client(token)
 
 	opt := &github.ListOptions{PerPage: 10}
 

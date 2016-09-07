@@ -7,20 +7,23 @@ import (
 	"golang.org/x/oauth2"
 
 	"github.com/caarlos0/watchub/datastores"
+	"github.com/caarlos0/watchub/diff"
 	"github.com/caarlos0/watchub/followers"
+	"github.com/caarlos0/watchub/oauth"
 	"github.com/google/go-github/github"
 	"github.com/robfig/cron"
 )
 
-func New(store datastores.Datastore) *cron.Cron {
+// New scheduler
+func New(store datastores.Datastore, oauth *oauth.Oauth) *cron.Cron {
 	c := cron.New()
-	fn := process(store)
+	fn := process(store, oauth)
 	c.AddFunc("@every 1h", fn)
 	go fn()
 	return c
 }
 
-func process(store datastores.Datastore) func() {
+func process(store datastores.Datastore, oauth *oauth.Oauth) func() {
 	return func() {
 		execs, err := store.Executions()
 		if err != nil {
@@ -34,7 +37,7 @@ func process(store datastores.Datastore) func() {
 				log.Println(err)
 				continue
 			}
-			followers, err := followers.Get(token)
+			followers, err := followers.Get(token, oauth)
 			if err != nil {
 				log.Println(err)
 				continue
@@ -44,29 +47,34 @@ func process(store datastores.Datastore) func() {
 				log.Println(err)
 				continue
 			}
+			followersLogin := toLoginArray(followers)
 			if err := store.SaveFollowers(
-				exec.UserID, toIDArray(followers),
+				exec.UserID, followersLogin,
 			); err != nil {
 				log.Println(err)
 				continue
 			}
+
 			if len(previousFollowers) == 0 {
 				log.Println("First execution for user", exec.UserID)
+			} else {
+				newFollowers := diff.Of(followersLogin, previousFollowers)
+				unfollowers := diff.Of(previousFollowers, followersLogin)
+				log.Println(
+					exec.UserID, "has", len(newFollowers), "new followers and",
+					len(unfollowers), "unfollows",
+				)
 			}
-			log.Println(
-				exec.UserID, "had", len(previousFollowers),
-				"and now have", len(followers), "followers",
-			)
 		}
 	}
 }
 
-func toIDArray(users []*github.User) []int64 {
-	var ids []int64
+func toLoginArray(users []*github.User) []string {
+	var logins []string
 	for _, u := range users {
-		ids = append(ids, int64(*u.ID))
+		logins = append(logins, *u.Login)
 	}
-	return ids
+	return logins
 }
 
 func tokenFromJSON(jsonStr string) (*oauth2.Token, error) {

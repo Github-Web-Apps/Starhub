@@ -1,5 +1,5 @@
-hash: ce9c17f9356cf78f919fb9439758d47173c508a08d3fadf50e22013fbd23c58a
-updated: 2016-09-06T22:28:17.573491546-03:00
+hash: e226e0d97c66f1eb646ad4863a7768c9b799a7e8d7b911cb529baf56cb47540d
+updated: 2016-09-07T13:50:57.892357126-03:00
 imports:
 - name: github.com/caarlos0/env
   version: 65331f179c42e3ffe33457b69bee55472a779cd6
@@ -49,7 +49,7 @@ imports:
 - name: github.com/valyala/fasttemplate
   version: 3b874956e03f1636d171bda64b130f9135f42cff
 - name: golang.org/x/net
-  version: 1358eff22f0dd0c54fc521042cc607f6ff4b531a
+  version: 9313baa13d9262e49d07b20ed57dceafcd7240cc
   subpackages:
   - context
 - name: golang.org/x/oauth2
@@ -59,7 +59,7 @@ imports:
   - github
   - internal
 - name: golang.org/x/sys
-  version: a646d33e2ee3172a661fc09bca23bb4889a41bc8
+  version: 30de6d19a3bd89a5f38ae4028e23aaa5582648af
   subpackages:
   - unix
 - name: google.golang.org/appengine
@@ -72,4 +72,6 @@ imports:
   - internal/remote_api
   - internal/urlfetch
   - urlfetch
-testImports: []
+testImports:
+- name: github.com/stretchr/testify
+  version: f390dcf405f7b83c997eac1b06768bb9f44dec18

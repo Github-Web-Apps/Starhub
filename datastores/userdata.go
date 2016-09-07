@@ -1,6 +1,6 @@
 package datastores
 
 type Userdatastore interface {
-	GetFollowers(userID int64) ([]int64, error)
-	SaveFollowers(userID int64, followers []int64) error
+	GetFollowers(userID int64) ([]string, error)
+	SaveFollowers(userID int64, followers []string) error
 }

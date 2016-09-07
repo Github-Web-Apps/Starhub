@@ -13,41 +13,56 @@ import (
 	githuboauth "golang.org/x/oauth2/github"
 )
 
-var Config *oauth2.Config
+type Oauth struct {
+	config *oauth2.Config
+	store  datastores.Datastore
+	state  string
+}
 
-func Mount(
-	e *echo.Echo, store datastores.Datastore, config config.Config,
-) *echo.Group {
+// New oauth
+func New(store datastores.Datastore, config config.Config) *Oauth {
+	return &Oauth{
+		config: &oauth2.Config{
+			ClientID:     config.ClientID,
+			ClientSecret: config.ClientSecret,
+			Scopes:       []string{"user:email", "public_repo"},
+			Endpoint:     githuboauth.Endpoint,
+		},
+		store: store,
+		state: config.OauthState,
+	}
+}
+
+// Client for a given token
+func (o *Oauth) Client(token *oauth2.Token) *github.Client {
+	return github.NewClient(o.config.Client(oauth2.NoContext, token))
+}
+
+// Mount the routes as a group of a given echo instance
+func (o *Oauth) Mount(e *echo.Echo) *echo.Group {
 	login := e.Group("login")
 
-	Config = &oauth2.Config{
-		ClientID:     config.ClientID,
-		ClientSecret: config.ClientSecret,
-		Scopes:       []string{"user:email", "public_repo"},
-		Endpoint:     githuboauth.Endpoint,
-	}
-
 	login.GET("", func(c echo.Context) error {
-		url := Config.AuthCodeURL(config.OauthState, oauth2.AccessTypeOnline)
+		url := o.config.AuthCodeURL(o.state, oauth2.AccessTypeOnline)
 		return c.Redirect(http.StatusTemporaryRedirect, url)
 	})
 
 	login.GET("/callback", func(c echo.Context) error {
 		state := c.FormValue("state")
-		if state != config.OauthState {
+		if state != o.state {
 			return errors.New("Invalid state!")
 		}
 		code := c.FormValue("code")
-		token, err := Config.Exchange(oauth2.NoContext, code)
+		token, err := o.config.Exchange(oauth2.NoContext, code)
 		if err != nil {
 			return err
 		}
-		client := github.NewClient(Config.Client(oauth2.NoContext, token))
+		client := github.NewClient(o.config.Client(oauth2.NoContext, token))
 		u, _, err := client.Users.Get("")
 		if err != nil {
 			return err
 		}
-		if err := store.SaveToken(int64(*u.ID), token); err != nil {
+		if err := o.store.SaveToken(int64(*u.ID), token); err != nil {
 			return err
 		}
 		return c.Render(http.StatusOK, "index", dto.User{User: *u.Login})

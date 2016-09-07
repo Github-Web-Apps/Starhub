@@ -15,6 +15,7 @@ func NewExecstore(db *sqlx.DB) *Execstore {
 	return &Execstore{db}
 }
 
+// Executions get the executions that should be made
 func (db *Execstore) Executions() ([]datastores.Execution, error) {
 	var executions []datastores.Execution
 	return executions, db.Select(

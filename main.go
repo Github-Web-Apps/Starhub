@@ -30,8 +30,11 @@ func main() {
 	defer db.Close()
 	store := database.NewDatastore(db)
 
+	// oauth
+	oauth := oauth.New(store, config)
+
 	// schedulers
-	scheduler := scheduler.New(store)
+	scheduler := scheduler.New(store, oauth)
 	scheduler.Start()
 	defer scheduler.Stop()
 
@@ -41,7 +44,10 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "index", dto.User{})
 	})
-	oauth.Mount(e, store, config)
 
+	// mount oauth routes
+	oauth.Mount(e)
+
+	// RUN!
 	e.Run(standard.New(fmt.Sprintf(":%d", config.Port)))
 }
