@@ -13,12 +13,14 @@ import (
 	githuboauth "golang.org/x/oauth2/github"
 )
 
+var Config *oauth2.Config
+
 func Mount(
 	e *echo.Echo, store datastores.Datastore, config config.Config,
 ) *echo.Group {
 	login := e.Group("login")
 
-	oauthConf := &oauth2.Config{
+	Config = &oauth2.Config{
 		ClientID:     config.ClientID,
 		ClientSecret: config.ClientSecret,
 		Scopes:       []string{"user:email", "public_repo"},
@@ -26,7 +28,7 @@ func Mount(
 	}
 
 	login.GET("", func(c echo.Context) error {
-		url := oauthConf.AuthCodeURL(config.OauthState, oauth2.AccessTypeOnline)
+		url := Config.AuthCodeURL(config.OauthState, oauth2.AccessTypeOnline)
 		return c.Redirect(http.StatusTemporaryRedirect, url)
 	})
 
@@ -36,11 +38,11 @@ func Mount(
 			return errors.New("Invalid state!")
 		}
 		code := c.FormValue("code")
-		token, err := oauthConf.Exchange(oauth2.NoContext, code)
+		token, err := Config.Exchange(oauth2.NoContext, code)
 		if err != nil {
 			return err
 		}
-		client := github.NewClient(oauthConf.Client(oauth2.NoContext, token))
+		client := github.NewClient(Config.Client(oauth2.NoContext, token))
 		u, _, err := client.Users.Get("")
 		if err != nil {
 			return err
