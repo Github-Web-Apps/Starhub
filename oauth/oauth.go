@@ -13,6 +13,7 @@ import (
 	githuboauth "golang.org/x/oauth2/github"
 )
 
+// Oauth info
 type Oauth struct {
 	config *oauth2.Config
 	store  datastores.Datastore
