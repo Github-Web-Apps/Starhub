@@ -27,14 +27,16 @@ func (db *Tokenstore) SaveToken(userID int, token *oauth2.Token) error {
 	previousToken, err := db.GetUserToken(userID)
 	if previousToken != nil && err == nil {
 		_, err := db.Exec(
-			"UPDATE tokens SET token = $2, updated_at = now() WHERE user_id = $1",
+			"UPDATE tokens SET token = $2, next = now(), updated_at = now() WHERE user_id = $1",
 			userID,
 			strToken,
 		)
 		return err
 	}
 	_, err = db.Exec(
-		"INSERT INTO tokens(user_id, token) VALUES($1, $2)", userID, strToken,
+		"INSERT INTO tokens(user_id, token, next) VALUES($1, $2, now())",
+		userID,
+		strToken,
 	)
 	return err
 }
