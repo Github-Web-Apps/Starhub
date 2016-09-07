@@ -26,7 +26,7 @@ func New(store datastores.Datastore, config config.Config) *Oauth {
 		config: &oauth2.Config{
 			ClientID:     config.ClientID,
 			ClientSecret: config.ClientSecret,
-			Scopes:       []string{"user:email", "public_repo"},
+			Scopes:       []string{"user:email"},
 			Endpoint:     githuboauth.Endpoint,
 		},
 		store: store,
