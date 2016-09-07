@@ -2,6 +2,7 @@ package database
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/jmoiron/sqlx"
 	"golang.org/x/oauth2"
@@ -46,6 +47,15 @@ func (db *Tokenstore) GetUserToken(userID int) (*oauth2.Token, error) {
 		return nil, err
 	}
 	return tokenFromJSON(token)
+}
+
+func (db *Tokenstore) Schedule(userID int, date time.Time) error {
+	_, err := db.Exec(
+		"UPDATE tokens SET next = $2, updated_at = now() WHERE user_id = $1",
+		userID,
+		date,
+	)
+	return err
 }
 
 func tokenToJSON(token *oauth2.Token) (string, error) {

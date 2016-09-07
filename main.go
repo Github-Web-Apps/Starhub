@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/caarlos0/env"
 	"github.com/caarlos0/watchub/datastores/database"
@@ -70,7 +71,10 @@ func main() {
 		if err != nil {
 			return err
 		}
-		if err := store.Save(*u.ID, token); err != nil {
+		if err := store.SaveToken(*u.ID, token); err != nil {
+			return err
+		}
+		if err := store.Schedule(*u.ID, time.Now()); err != nil {
 			return err
 		}
 		return c.Render(http.StatusOK, "index", dto.User{User: *u.Login})
