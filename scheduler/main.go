@@ -8,6 +8,7 @@ import (
 
 	"github.com/caarlos0/watchub/datastores"
 	"github.com/caarlos0/watchub/followers"
+	"github.com/google/go-github/github"
 	"github.com/robfig/cron"
 )
 
@@ -38,9 +39,34 @@ func process(store datastores.Datastore) func() {
 				log.Println(err)
 				continue
 			}
-			log.Println(exec.UserID, "has", len(followers), "followers")
+			previousFollowers, err := store.GetFollowers(exec.UserID)
+			if err != nil {
+				log.Println(err)
+				continue
+			}
+			if err := store.SaveFollowers(
+				exec.UserID, toIDArray(followers),
+			); err != nil {
+				log.Println(err)
+				continue
+			}
+			if len(previousFollowers) == 0 {
+				log.Println("First execution for user", exec.UserID)
+			}
+			log.Println(
+				exec.UserID, "had", len(previousFollowers),
+				"and now have", len(followers), "followers",
+			)
 		}
 	}
+}
+
+func toIDArray(users []*github.User) []int64 {
+	var ids []int64
+	for _, u := range users {
+		ids = append(ids, int64(*u.ID))
+	}
+	return ids
 }
 
 func tokenFromJSON(jsonStr string) (*oauth2.Token, error) {

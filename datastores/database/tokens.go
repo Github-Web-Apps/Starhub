@@ -25,7 +25,7 @@ const insertTokenStm = `
 		DO UPDATE SET token = $2, updated_at = now(), next = now();
 `
 
-func (db *Tokenstore) SaveToken(userID int, token *oauth2.Token) error {
+func (db *Tokenstore) SaveToken(userID int64, token *oauth2.Token) error {
 	strToken, err := tokenToJSON(token)
 	if err != nil {
 		return err
@@ -34,7 +34,7 @@ func (db *Tokenstore) SaveToken(userID int, token *oauth2.Token) error {
 	return err
 }
 
-func (db *Tokenstore) Schedule(userID int, date time.Time) error {
+func (db *Tokenstore) Schedule(userID int64, date time.Time) error {
 	_, err := db.Exec(
 		"UPDATE tokens SET next = $2, updated_at = now() WHERE user_id = $1",
 		userID,

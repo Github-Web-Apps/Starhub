@@ -47,7 +47,7 @@ func Mount(
 		if err != nil {
 			return err
 		}
-		if err := store.SaveToken(*u.ID, token); err != nil {
+		if err := store.SaveToken(int64(*u.ID), token); err != nil {
 			return err
 		}
 		return c.Render(http.StatusOK, "index", dto.User{User: *u.Login})

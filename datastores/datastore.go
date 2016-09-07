@@ -4,4 +4,5 @@ package datastores
 type Datastore interface {
 	Tokenstore
 	Execstore
+	Userdatastore
 }

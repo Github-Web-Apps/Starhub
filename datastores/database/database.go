@@ -26,8 +26,10 @@ func NewDatastore(db *sql.DB) datastores.Datastore {
 	return struct {
 		*Tokenstore
 		*Execstore
+		*Userdatastore
 	}{
 		NewTokenstore(dbx),
 		NewExecstore(dbx),
+		NewUserdatastore(dbx),
 	}
 }
