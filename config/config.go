@@ -10,7 +10,7 @@ type Config struct {
 	OauthState     string `env:"OAUTH_STATE"`
 	DatabaseURL    string `env:"DATABASE_URL" envDefault:"postgres://localhost:5432/watchub?sslmode=disable"`
 	SendgridAPIKey string `env:"SENDGRID_API_KEY"`
-	Schedule       string `env:"SCHEDULE" envDefault:"@hourly"`
+	Schedule       string `env:"SCHEDULE" envDefault:"@every 1m"`
 }
 
 // Get the config

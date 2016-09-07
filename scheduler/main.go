@@ -8,6 +8,7 @@ import (
 
 	"github.com/caarlos0/watchub/config"
 	"github.com/caarlos0/watchub/datastores"
+	"github.com/caarlos0/watchub/diff"
 	"github.com/caarlos0/watchub/followers"
 	"github.com/caarlos0/watchub/mail"
 	"github.com/caarlos0/watchub/oauth"
@@ -76,8 +77,19 @@ func process(
 					},
 				)
 			} else {
-				// newFollowers := diff.Of(followersLogin, previousFollowers)
-				// unfollowers := diff.Of(previousFollowers, followersLogin)
+				newFollowers := diff.Of(followersLogin, previousFollowers)
+				unfollowers := diff.Of(previousFollowers, followersLogin)
+				if len(newFollowers) > 0 || len(unfollowers) > 0 {
+					m.SendChanges(
+						mail.ChangesData{
+							Login:        *user.Login,
+							Email:        *user.Email,
+							Followers:    len(followers),
+							NewFollowers: newFollowers,
+							Unfollowers:  unfollowers,
+						},
+					)
+				}
 			}
 		}
 	}
