@@ -66,12 +66,8 @@ func process(
 				continue
 			}
 
+			m := mail.New(config)
 			if len(previousFollowers) == 0 {
-				log.Println("First execution for user", exec.UserID)
-			} else {
-				// newFollowers := diff.Of(followersLogin, previousFollowers)
-				// unfollowers := diff.Of(previousFollowers, followersLogin)
-				m := mail.New(config)
 				m.SendWelcome(
 					mail.WelcomeData{
 						Login:     *user.Login,
@@ -79,6 +75,9 @@ func process(
 						Followers: len(followers),
 					},
 				)
+			} else {
+				// newFollowers := diff.Of(followersLogin, previousFollowers)
+				// unfollowers := diff.Of(previousFollowers, followersLogin)
 			}
 		}
 	}
