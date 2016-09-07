@@ -25,7 +25,9 @@ func NewDatastore(db *sql.DB) datastores.Datastore {
 	dbx := sqlx.NewDb(db, "postgres")
 	return struct {
 		*Tokenstore
+		*Execstore
 	}{
 		NewTokenstore(dbx),
+		NewExecstore(dbx),
 	}
 }
