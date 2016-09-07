@@ -18,3 +18,7 @@ import:
 - package: github.com/jmoiron/sqlx
   subpackages:
   - '...'
+- package: github.com/robfig/cron
+  version: ^1.0.0
+  subpackages:
+  - '...'

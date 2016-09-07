@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
+	"github.com/caarlos0/watchub/datastores"
 	"github.com/jmoiron/sqlx"
 	"golang.org/x/oauth2"
 )
@@ -47,6 +48,13 @@ func (db *Tokenstore) GetUserToken(userID int) (*oauth2.Token, error) {
 		return nil, err
 	}
 	return tokenFromJSON(token)
+}
+
+func (db *Tokenstore) Executions() ([]datastores.Execution, error) {
+	var executions []datastores.Execution
+	return executions, db.Select(
+		&executions, "SELECT user_id, token FROM tokens WHERE next <= now()",
+	)
 }
 
 func (db *Tokenstore) Schedule(userID int, date time.Time) error {

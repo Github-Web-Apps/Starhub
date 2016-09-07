@@ -1,10 +1,8 @@
-hash: c7a935d509b5aa9f22a831d20913c3163874894c4153884e5530aea517a9b1a4
-updated: 2016-09-06T01:48:18.337089863-03:00
+hash: ce9c17f9356cf78f919fb9439758d47173c508a08d3fadf50e22013fbd23c58a
+updated: 2016-09-06T22:28:17.573491546-03:00
 imports:
 - name: github.com/caarlos0/env
   version: 65331f179c42e3ffe33457b69bee55472a779cd6
-- name: github.com/daaku/go.zipexe
-  version: a5fe2436ffcb3236e175e5149162b41cd28bd27d
 - name: github.com/golang/protobuf
   version: 1f49d83d9aa00e6ce4fc8258c71cc7786aec968a
   subpackages:
@@ -22,8 +20,7 @@ imports:
   version: 7396209bbeada6a4fcc28aa9408f89b2e71cac39
   subpackages:
   - '...'
-- name: github.com/kardianos/osext
-  version: c2c54e542fb797ad986b31721e1baedf214ca413
+  - reflectx
 - name: github.com/labstack/echo
   version: fbcdf70c52c155ae9aa58e72ee0532fa2f1cad2e
   subpackages:
@@ -45,6 +42,10 @@ imports:
   version: ed8eb9e318d7a84ce5915b495b7d35e0cfe7b5a8
 - name: github.com/mattn/go-isatty
   version: 66b8e73f3f5cda9f96b69efd03dd3d7fc4a5cdb8
+- name: github.com/robfig/cron
+  version: b024fc5ea0e34bc3f83d9941c8d60b0622bfaca4
+  subpackages:
+  - '...'
 - name: github.com/valyala/fasttemplate
   version: 3b874956e03f1636d171bda64b130f9135f42cff
 - name: golang.org/x/net

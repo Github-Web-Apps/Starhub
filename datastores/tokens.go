@@ -10,4 +10,5 @@ type Tokenstore interface {
 	SaveToken(userID int, token *oauth2.Token) error
 	GetUserToken(userID int) (*oauth2.Token, error)
 	Schedule(userID int, date time.Time) error
+	Executions() ([]Execution, error)
 }

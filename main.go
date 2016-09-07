@@ -10,6 +10,7 @@ import (
 	"github.com/caarlos0/env"
 	"github.com/caarlos0/watchub/datastores/database"
 	"github.com/caarlos0/watchub/dto"
+	"github.com/caarlos0/watchub/scheduler"
 	"github.com/caarlos0/watchub/static"
 	"github.com/google/go-github/github"
 	"github.com/labstack/echo"
@@ -45,6 +46,11 @@ func main() {
 		Endpoint:     githuboauth.Endpoint,
 	}
 
+	// schedulers
+	scheduler := scheduler.New(store)
+	scheduler.Start()
+	defer scheduler.Stop()
+
 	e := echo.New()
 	e.SetRenderer(static.New("static/*.html"))
 	e.GET("/", func(c echo.Context) error {
@@ -78,6 +84,13 @@ func main() {
 			return err
 		}
 		return c.Render(http.StatusOK, "index", dto.User{User: *u.Login})
+	})
+	e.GET("/executions", func(c echo.Context) error {
+		executions, err := store.Executions()
+		if err != nil {
+			return err
+		}
+		return c.JSON(200, executions)
 	})
 	e.Run(standard.New(fmt.Sprintf(":%d", cfg.Port)))
 }
