@@ -4,9 +4,9 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/caarlos0/watchub/config"
-	"github.com/caarlos0/watchub/datastores"
-	"github.com/caarlos0/watchub/dto"
+	"github.com/caarlos0/watchub/internal/config"
+	"github.com/caarlos0/watchub/internal/datastores"
+	"github.com/caarlos0/watchub/internal/dto"
 	"github.com/google/go-github/github"
 	"github.com/labstack/echo"
 	"golang.org/x/oauth2"

@@ -6,7 +6,7 @@ import (
 
 	"html/template"
 
-	"github.com/caarlos0/watchub/config"
+	"github.com/caarlos0/watchub/internal/config"
 	sendgrid "github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )

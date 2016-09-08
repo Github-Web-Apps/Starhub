@@ -5,12 +5,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/caarlos0/watchub/config"
-	"github.com/caarlos0/watchub/datastores/database"
-	"github.com/caarlos0/watchub/dto"
-	"github.com/caarlos0/watchub/oauth"
-	"github.com/caarlos0/watchub/scheduler"
-	"github.com/caarlos0/watchub/static"
+	"github.com/caarlos0/watchub/internal/config"
+	"github.com/caarlos0/watchub/internal/datastores/database"
+	"github.com/caarlos0/watchub/internal/dto"
+	"github.com/caarlos0/watchub/internal/oauth"
+	"github.com/caarlos0/watchub/internal/scheduler"
+	"github.com/caarlos0/watchub/internal/template"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	_ "github.com/lib/pq"
@@ -40,7 +40,7 @@ func main() {
 
 	// routes
 	e := echo.New()
-	e.SetRenderer(static.New("static/*.html"))
+	e.SetRenderer(template.New("static/*.html"))
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "index", dto.User{})
 	})

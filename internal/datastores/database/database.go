@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/caarlos0/watchub/datastores"
+	"github.com/caarlos0/watchub/internal/datastores"
 	"github.com/jmoiron/sqlx"
 )
 

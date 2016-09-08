@@ -6,12 +6,12 @@ import (
 
 	"golang.org/x/oauth2"
 
-	"github.com/caarlos0/watchub/config"
-	"github.com/caarlos0/watchub/datastores"
-	"github.com/caarlos0/watchub/diff"
-	"github.com/caarlos0/watchub/followers"
-	"github.com/caarlos0/watchub/mail"
-	"github.com/caarlos0/watchub/oauth"
+	"github.com/caarlos0/watchub/internal/config"
+	"github.com/caarlos0/watchub/internal/datastores"
+	"github.com/caarlos0/watchub/internal/diff"
+	"github.com/caarlos0/watchub/internal/followers"
+	"github.com/caarlos0/watchub/internal/mail"
+	"github.com/caarlos0/watchub/internal/oauth"
 	"github.com/google/go-github/github"
 	"github.com/robfig/cron"
 )
