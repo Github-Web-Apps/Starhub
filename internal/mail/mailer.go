@@ -66,7 +66,7 @@ func (mailer *Mailer) send(name, email, content, subject string) {
 func (mailer *Mailer) SendChanges(data ChangesData) {
 	subject := "Your report from Watchub!"
 	var mailContent bytes.Buffer
-	err := mailer.templates.ExecuteTemplate(&mailContent, "welcome.html", data)
+	err := mailer.templates.ExecuteTemplate(&mailContent, "changes.html", data)
 	if err != nil {
 		log.Println("Failed to mail", data, ".", err)
 	}
@@ -77,7 +77,7 @@ func (mailer *Mailer) SendChanges(data ChangesData) {
 func (mailer *Mailer) SendWelcome(data WelcomeData) {
 	subject := "Welcome to Watchub!"
 	var mailContent bytes.Buffer
-	err := mailer.templates.ExecuteTemplate(&mailContent, "changes.html", data)
+	err := mailer.templates.ExecuteTemplate(&mailContent, "welcome.html", data)
 	if err != nil {
 		log.Println("Failed to mail", data, ".", err)
 	}
