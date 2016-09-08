@@ -36,61 +36,68 @@ func process(
 			log.Println(err)
 			return
 		}
+		mailer := mail.New(config)
 		for _, exec := range execs {
 			log.Println("Processing", exec.UserID)
 			token, err := tokenFromJSON(exec.Token)
 			if err != nil {
 				log.Println(err)
-				continue
+				return
 			}
 			client := oauth.Client(token)
-			user, _, err := client.Users.Get("")
-			if err != nil {
-				log.Println(err)
-				continue
-			}
-			followers, err := followers.Get(client)
-			if err != nil {
-				log.Println(err)
-				continue
-			}
-			previousFollowers, err := store.GetFollowers(exec.UserID)
-			if err != nil {
-				log.Println(err)
-				continue
-			}
-			followersLogin := toLoginArray(followers)
-			if err := store.SaveFollowers(
-				exec.UserID, followersLogin,
-			); err != nil {
-				log.Println(err)
-				continue
-			}
+			go doProcess(client, mailer, store, exec)
+		}
+	}
+}
 
-			m := mail.New(config)
-			if len(previousFollowers) == 0 {
-				m.SendWelcome(
-					mail.WelcomeData{
-						Login:     *user.Login,
-						Email:     *user.Email,
-						Followers: len(followers),
-					},
-				)
-			} else {
-				newFollowers := diff.Of(followersLogin, previousFollowers)
-				unfollowers := diff.Of(previousFollowers, followersLogin)
-				if len(newFollowers) > 0 || len(unfollowers) > 0 {
-					m.SendChanges(
-						mail.ChangesData{
-							Login:        *user.Login,
-							Email:        *user.Email,
-							Followers:    len(followers),
-							NewFollowers: newFollowers,
-							Unfollowers:  unfollowers,
-						},
-					)
-				}
-			}
+func doProcess(
+	client *github.Client,
+	mailer *mail.Mailer,
+	store datastores.Datastore,
+	exec datastores.Execution,
+) {
+	user, _, err := client.Users.Get("")
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	followers, err := followers.Get(client)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	previousFollowers, err := store.GetFollowers(exec.UserID)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	followersLogin := toLoginArray(followers)
+	if err := store.SaveFollowers(exec.UserID, followersLogin); err != nil {
+		log.Println(err)
+		return
+	}
+
+	if len(previousFollowers) == 0 {
+		mailer.SendWelcome(
+			mail.WelcomeData{
+				Login:     *user.Login,
+				Email:     *user.Email,
+				Followers: len(followers),
+			},
+		)
+	} else {
+		newFollowers := diff.Of(followersLogin, previousFollowers)
+		unfollowers := diff.Of(previousFollowers, followersLogin)
+		if len(newFollowers) > 0 || len(unfollowers) > 0 {
+			mailer.SendChanges(
+				mail.ChangesData{
+					Login:        *user.Login,
+					Email:        *user.Email,
+					Followers:    len(followers),
+					NewFollowers: newFollowers,
+					Unfollowers:  unfollowers,
+				},
+			)
 		}
 	}
 }
