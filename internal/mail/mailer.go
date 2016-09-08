@@ -41,12 +41,20 @@ type ChangesData struct {
 	Unfollowers  []string
 }
 
-func (mailer *Mailer) send(name, email, content, subject string) {
-	from := mail.NewEmail("Watchhub", mailer.from)
+func (mailer *Mailer) send(
+	name, email, subject, template string, data interface{},
+) {
+	from := mail.NewEmail("Watchub", mailer.from)
 	to := mail.NewEmail(name, email)
 
+	var content bytes.Buffer
+	if err := mailer.templates.ExecuteTemplate(
+		&content, template+".html", data,
+	); err != nil {
+		log.Println("Failed to mail", data, ".", err)
+	}
 	m := mail.NewV3MailInit(
-		from, subject, to, mail.NewContent("text/html", content),
+		from, subject, to, mail.NewContent("text/html", content.String()),
 	)
 
 	request := sendgrid.GetRequest(
@@ -64,22 +72,12 @@ func (mailer *Mailer) send(name, email, content, subject string) {
 
 // SendChanges report to an existing user
 func (mailer *Mailer) SendChanges(data ChangesData) {
-	subject := "Your report from Watchub!"
-	var mailContent bytes.Buffer
-	err := mailer.templates.ExecuteTemplate(&mailContent, "changes.html", data)
-	if err != nil {
-		log.Println("Failed to mail", data, ".", err)
-	}
-	mailer.send(data.Login, data.Email, mailContent.String(), subject)
+	mailer.send(
+		data.Login, data.Email, "Your report from Watchub!", "changes", data,
+	)
 }
 
 // SendWelcome email to a new user
 func (mailer *Mailer) SendWelcome(data WelcomeData) {
-	subject := "Welcome to Watchub!"
-	var mailContent bytes.Buffer
-	err := mailer.templates.ExecuteTemplate(&mailContent, "welcome.html", data)
-	if err != nil {
-		log.Println("Failed to mail", data, ".", err)
-	}
-	mailer.send(data.Login, data.Email, mailContent.String(), subject)
+	mailer.send(data.Login, data.Email, "Welcome to Watchub!", "welcome", data)
 }
