@@ -34,7 +34,7 @@ const changesTemplate = `
 
 {{if .NewFollowers }}
 	<p>
-		<h3>People who starting <strong>following</strong> you:</h3>
+		<h3>People who are now <strong>following</strong> you:</h3>
 		<ul>
 			{{range $index, $element := .NewFollowers}}
 			<li>
