@@ -37,8 +37,9 @@ func (db *Userdatastore) SaveFollowers(userID int64, followers []string) error {
 	return err
 }
 
-func (db *Userdatastore) GetStars(userID int64) ([]datastores.Stars, error) {
-	var result []datastores.Stars
+// GetStars of a given userID
+func (db *Userdatastore) GetStars(userID int64) ([]datastores.Star, error) {
+	var result []datastores.Star
 	var stars json.RawMessage
 	if err := db.QueryRow(
 		"SELECT stars FROM tokens WHERE user_id = $1",
@@ -49,6 +50,16 @@ func (db *Userdatastore) GetStars(userID int64) ([]datastores.Stars, error) {
 	return result, json.Unmarshal(stars, &result)
 }
 
-func (db *Userdatastore) SaveStars(userID int64, stars []datastores.Stars) error {
-	return nil
+// SaveStars for a given userID
+func (db *Userdatastore) SaveStars(userID int64, stars []datastores.Star) error {
+	data, err := json.Marshal(stars)
+	if err != nil {
+		return err
+	}
+	_, err = db.Exec(
+		"UPDATE tokens SET stars = $2 WHERE user_id = $1",
+		userID,
+		data,
+	)
+	return err
 }
