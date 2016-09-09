@@ -8,9 +8,14 @@ import (
 )
 
 func TestSimpleDiff(t *testing.T) {
-	assert := assert.New(t)
 	a := []string{"a", "b", "c"}
 	b := []string{"a", "b", "d", "e", "f"}
-	assert.Equal([]string{"c"}, diff.Of(a, b))
-	assert.Equal([]string{"d", "e", "f"}, diff.Of(b, a))
+	t.Run("['c']", testDiffFunc(a, b, []string{"c"}))
+	t.Run("['d','e','f']", testDiffFunc(b, a, []string{"d", "e", "f"}))
+}
+
+func testDiffFunc(left, right, expected []string) func(*testing.T) {
+	return func(t *testing.T) {
+		assert.Equal(t, expected, diff.Of(left, right))
+	}
 }
