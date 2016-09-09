@@ -12,6 +12,7 @@ import (
 	"github.com/caarlos0/watchub/internal/followers"
 	"github.com/caarlos0/watchub/internal/mail"
 	"github.com/caarlos0/watchub/internal/oauth"
+	"github.com/caarlos0/watchub/internal/stargazers"
 	"github.com/google/go-github/github"
 	"github.com/robfig/cron"
 )
@@ -77,12 +78,33 @@ func doProcess(
 		return
 	}
 
-	if len(previousFollowers) == 0 {
+	stars, err := stargazers.Get(client)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	previousStars, err := store.GetStars(exec.UserID)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	if err := store.SaveStars(exec.UserID, stars); err != nil {
+		log.Println(err)
+		return
+	}
+
+	if len(previousFollowers) == 0 && len(previousStars) == 0 {
+		starCount := 0
+		for _, star := range stars {
+			starCount += len(star.Stargazers)
+		}
 		mailer.SendWelcome(
 			mail.WelcomeData{
 				Login:     *user.Login,
 				Email:     *user.Email,
 				Followers: len(followers),
+				Stars:     starCount,
+				Repos:     len(stars),
 			},
 		)
 	} else {
