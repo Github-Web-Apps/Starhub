@@ -27,18 +27,29 @@ func New(config config.Config) *Mailer {
 	}
 }
 
+type StarData struct {
+	Repo  string
+	Users []string
+}
+
 type WelcomeData struct {
 	Login     string
 	Email     string
 	Followers int
+	Stars     int
+	Repos     int
 }
 
 type ChangesData struct {
 	Login        string
 	Email        string
 	Followers    int
+	Stars        int
+	Repos        int
 	NewFollowers []string
 	Unfollowers  []string
+	NewStars     []StarData
+	Unstars      []StarData
 }
 
 func (mailer *Mailer) send(

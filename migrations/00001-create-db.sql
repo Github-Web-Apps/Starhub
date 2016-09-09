@@ -5,6 +5,7 @@ CREATE TABLE tokens(
   token text not null,
   next timestamp,
   followers text[] default array[]::varchar[],
+  stars json default '[]'::json,
   created_at timestamp default current_timestamp,
   updated_at timestamp default current_timestamp
 );
