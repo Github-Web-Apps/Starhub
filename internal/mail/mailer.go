@@ -28,9 +28,8 @@ func New(config config.Config) *Mailer {
 }
 
 type StarData struct {
-	Repo     string
-	NewStars []string
-	Unstars  []string
+	Repo  string
+	Users []string
 }
 
 type WelcomeData struct {
@@ -45,9 +44,12 @@ type ChangesData struct {
 	Login        string
 	Email        string
 	Followers    int
+	Stars        int
+	Repos        int
 	NewFollowers []string
 	Unfollowers  []string
-	Stars        []StarData
+	NewStars     []StarData
+	Unstars      []StarData
 }
 
 func (mailer *Mailer) send(
