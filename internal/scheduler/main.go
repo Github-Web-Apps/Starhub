@@ -64,6 +64,10 @@ func doProcess(
 		log.Println(err)
 		return
 	}
+	if user.Email == nil {
+		log.Println("Cannot get email address for", *user.Login, " id", *user.ID)
+		return
+	}
 	followers, err := followers.Get(client)
 	if err != nil {
 		log.Println(err)
