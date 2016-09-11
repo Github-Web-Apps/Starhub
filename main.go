@@ -44,6 +44,9 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "index", dto.User{})
 	})
+	e.GET("/donate", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "donate", nil)
+	})
 
 	// mount oauth routes
 	oauth.Mount(e)

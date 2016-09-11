@@ -19,7 +19,7 @@
 
 {{if .Unfollowers }}
   <p>
-    <h3>Users that <strong>unfollowed</strong> you:</h3>
+    <h3>Users that are <strong>not following</strong> you anymore:</h3>
     <ul>
       {{range $index, $element := .Unfollowers}}
         <li>
@@ -49,7 +49,7 @@
 {{end}}
 
 {{if .Unstars}}
-  <h3>Users that have unstarred public repos you have access to:</h3>
+  <h3>Users that unstarred public repos you have access to:</h3>
   <ul>
     {{range $index, $element := .Unstars}}
       <li>
@@ -73,10 +73,16 @@
 </p>
 
 <p>
-  We will watch for more changes and let you know!
+  We will continue to watch for changes and let you know!
+</p>
+
+<p>
+  Like our service? Maybe you'll consider
+  <a href="http://watchub.pw/donate">donating</a>.
 </p>
 
 <p style="color: #666">
   Sincerely,<br/>
-  The Watchub Team
+  The Watchub Team<br/>
+  <a href="http://watchub.pw">watchub.pw</a>
 <p>
