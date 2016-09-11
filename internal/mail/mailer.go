@@ -22,7 +22,7 @@ type Mailer struct {
 func New(config config.Config) *Mailer {
 	return &Mailer{
 		key:       config.SendgridAPIKey,
-		from:      "caarlos0@gmail.com",
+		from:      "noreply@watchub.pw",
 		templates: template.Must(template.ParseGlob("static/mail/*.html")),
 	}
 }
