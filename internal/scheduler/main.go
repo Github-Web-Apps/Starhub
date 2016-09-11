@@ -2,6 +2,7 @@ package scheduler
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"time"
 
@@ -43,7 +44,7 @@ func process(
 			log.Println("Processing", exec.UserID)
 			token, err := tokenFromJSON(exec.Token)
 			if err != nil {
-				log.Println(err)
+				log.Println("Failed to get the token", exec.UserID, err)
 				return
 			}
 			client := oauth.Client(token)
@@ -59,58 +60,68 @@ func doProcess(
 	exec datastores.Execution,
 ) {
 	start := time.Now()
+
+	// user info
 	user, _, err := client.Users.Get("")
 	if err != nil {
-		log.Println(err)
+		log.Println("Failed to get user data", exec.UserID, err)
 		return
 	}
-	if user.Email == nil {
-		log.Println("Cannot get email address for", *user.Login, " id", *user.ID)
+	email, err := getEmail(client)
+	if err != nil {
+		log.Println("Failed to get user email", exec.UserID, err)
 		return
 	}
+
+	// followers
 	followers, err := followers.Get(client)
 	if err != nil {
-		log.Println(err)
+		log.Println(
+			"Failed to store user followers from github", exec.UserID, err,
+		)
 		return
 	}
 	previousFollowers, err := store.GetFollowers(exec.UserID)
 	if err != nil {
-		log.Println(err)
+		log.Println("Failed to get user followers from db", exec.UserID, err)
 		return
 	}
 	followersLogin := toLoginArray(followers)
 	if err := store.SaveFollowers(exec.UserID, followersLogin); err != nil {
-		log.Println(err)
+		log.Println("Failed to store user followers to db", exec.UserID, err)
 		return
 	}
 
+	// stars
 	stars, err := stargazers.Get(client)
 	if err != nil {
-		log.Println(err)
+		log.Println(
+			"Failed to get user repos stargazers from github", exec.UserID, err,
+		)
 		return
 	}
 	previousStars, err := store.GetStars(exec.UserID)
 	if err != nil {
-		log.Println(err)
+		log.Println(
+			"Failed to get user repos stargazers from db", exec.UserID, err,
+		)
 		return
 	}
 	if err := store.SaveStars(exec.UserID, stars); err != nil {
-		log.Println(err)
+		log.Println(
+			"Failed to store user repos stargazers to db", exec.UserID, err,
+		)
 		return
 	}
 
-	starCount := 0
-	for _, star := range stars {
-		starCount += len(star.Stargazers)
-	}
-
+	// send email
 	if len(previousFollowers)+len(previousStars) == 0 {
 		mailer.SendWelcome(
 			mail.WelcomeData{
 				Login:     *user.Login,
-				Email:     *user.Email,
+				Email:     email,
 				Followers: len(followers),
-				Stars:     starCount,
+				Stars:     countStars(stars),
 				Repos:     len(stars),
 			},
 		)
@@ -122,9 +133,9 @@ func doProcess(
 			mailer.SendChanges(
 				mail.ChangesData{
 					Login:        *user.Login,
-					Email:        *user.Email,
+					Email:        email,
 					Followers:    len(followers),
-					Stars:        starCount,
+					Stars:        countStars(stars),
 					Repos:        len(stars),
 					NewFollowers: newFollowers,
 					Unfollowers:  unfollowers,
@@ -134,7 +145,31 @@ func doProcess(
 			)
 		}
 	}
-	log.Println("Processing", exec.UserID, "took", time.Since(start).Seconds(), "seconds")
+	log.Println(
+		"Processing", exec.UserID, "=", email,
+		"took", time.Since(start).Seconds(), "seconds",
+	)
+}
+
+func countStars(stars []datastores.Star) int {
+	starCount := 0
+	for _, star := range stars {
+		starCount += len(star.Stargazers)
+	}
+	return starCount
+}
+
+func getEmail(client *github.Client) (email string, err error) {
+	emails, _, err := client.Users.ListEmails(&github.ListOptions{PerPage: 10})
+	if err != nil {
+		return email, err
+	}
+	for _, e := range emails {
+		if *e.Primary && *e.Verified {
+			return *e.Email, err
+		}
+	}
+	return email, errors.New("No email found!")
 }
 
 func stargazerStatistics(stars, previousStars []datastores.Star) (newStars, unstars []mail.StarData) {
