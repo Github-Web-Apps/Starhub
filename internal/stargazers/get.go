@@ -1,6 +1,7 @@
 package stargazers
 
 import (
+	"log"
 	"sync"
 
 	"github.com/caarlos0/watchub/internal/datastores"
@@ -40,6 +41,7 @@ func Get(client *github.Client) (result []datastores.Star, err error) {
 			}
 		}
 	}()
+	log.Println("Waiting for the goroutines to end")
 	wg.Wait()
 	return result, err
 }

@@ -27,8 +27,5 @@ func getPage(
 	if err != nil {
 		return repos, 0, err
 	}
-	if err != nil {
-		return repos, 0, err
-	}
 	return repos, resp.NextPage, err
 }
