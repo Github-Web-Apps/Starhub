@@ -24,9 +24,7 @@ func New(
 	config config.Config, store datastores.Datastore, oauth *oauth.Oauth,
 ) *cron.Cron {
 	c := cron.New()
-	fn := process(config, store, oauth)
-	c.AddFunc(config.Schedule, fn)
-	go fn()
+	c.AddFunc(config.Schedule, process(config, store, oauth))
 	return c
 }
 
@@ -172,8 +170,9 @@ func getEmail(client *github.Client) (email string, err error) {
 	return email, errors.New("No email found!")
 }
 
-func stargazerStatistics(stars, previousStars []datastores.Star) (newStars, unstars []mail.StarData) {
-	start := time.Now()
+func stargazerStatistics(
+	stars, previousStars []datastores.Star,
+) (newStars, unstars []mail.StarData) {
 	for _, s := range stars {
 		for _, os := range previousStars {
 			if s.RepoID != os.RepoID {
@@ -188,7 +187,6 @@ func stargazerStatistics(stars, previousStars []datastores.Star) (newStars, unst
 			break
 		}
 	}
-	log.Println("stargazerStatistics took", time.Since(start).Nanoseconds(), "ns")
 	return newStars, unstars
 }
 

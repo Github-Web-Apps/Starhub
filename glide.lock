@@ -1,14 +1,14 @@
-hash: 7c9a2271f4b2f3cbac15cbbe06f567b3b9b11f3038a6a9f9204e2a6abce01f8c
-updated: 2016-09-07T16:21:18.011153819-03:00
+hash: a76c37af50e450e4dcbb377478939d16861d6520543eec7e7dc02c14fd21cb2d
+updated: 2016-10-13T14:41:42.882101914-03:00
 imports:
 - name: github.com/caarlos0/env
   version: 65331f179c42e3ffe33457b69bee55472a779cd6
 - name: github.com/golang/protobuf
-  version: 1f49d83d9aa00e6ce4fc8258c71cc7786aec968a
+  version: 98fa357170587e470c5f27d3c3ea0947b71eb455
   subpackages:
   - proto
 - name: github.com/google/go-github
-  version: 6d1b527d46849e8fc9238298ebe86dced178609c
+  version: 93d3f730320429a6e1ecf2ac1778db832930948a
   subpackages:
   - '...'
   - github
@@ -17,12 +17,12 @@ imports:
   subpackages:
   - query
 - name: github.com/jmoiron/sqlx
-  version: 7396209bbeada6a4fcc28aa9408f89b2e71cac39
+  version: 05b81a7d5d38058e42148dc01f17daf4acba4640
   subpackages:
   - '...'
   - reflectx
 - name: github.com/labstack/echo
-  version: fbcdf70c52c155ae9aa58e72ee0532fa2f1cad2e
+  version: 04e6901d05b58ddbae579a6252a3d1bb3f334adc
   subpackages:
   - '...'
   - engine
@@ -49,27 +49,30 @@ imports:
 - name: github.com/sendgrid/rest
   version: d37acbf70185e33da36a233f4df95848b052427c
 - name: github.com/sendgrid/sendgrid-go
-  version: ccdbf45dbbbfb100c4a59a64802d58d5059098f3
+  version: ca6ecc07783a951106449c92d908195ae886b2ca
   subpackages:
   - '...'
+  - helpers/mail
+- name: github.com/stackimpact/stackimpact-go
+  version: ed2dc847aa5907a415e6f8c589be21f1ce3289ab
 - name: github.com/valyala/fasttemplate
   version: 3b874956e03f1636d171bda64b130f9135f42cff
 - name: golang.org/x/net
-  version: 9313baa13d9262e49d07b20ed57dceafcd7240cc
+  version: 6d3beaea10370160dea67f5c9327ed791afd5389
   subpackages:
   - context
 - name: golang.org/x/oauth2
-  version: 3c3a985cb79f52a3190fbc056984415ca6763d01
+  version: 1e695b1c8febf17aad3bfa7bf0a819ef94b98ad5
   subpackages:
   - '...'
   - github
   - internal
 - name: golang.org/x/sys
-  version: 30de6d19a3bd89a5f38ae4028e23aaa5582648af
+  version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
   subpackages:
   - unix
 - name: google.golang.org/appengine
-  version: 4f7eeb5305a4ba1966344836ba4af9996b7b4e05
+  version: 596d349602aa23355ff46ade49ebfeb99c0fc550
   subpackages:
   - internal
   - internal/base
@@ -80,14 +83,14 @@ imports:
   - urlfetch
 testImports:
 - name: github.com/davecgh/go-spew
-  version: 66f99a29a08158b999b0dc2e7ccacf1131d4e0b4
+  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
   subpackages:
   - spew
 - name: github.com/pmezard/go-difflib
-  version: 792786c7400a136282c1664665ae0a8db921c6c2
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
   subpackages:
   - difflib
 - name: github.com/stretchr/testify
-  version: f390dcf405f7b83c997eac1b06768bb9f44dec18
+  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
   subpackages:
   - assert
