@@ -14,6 +14,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	_ "github.com/lib/pq"
+	stackimpact "github.com/stackimpact/stackimpact-go"
 )
 
 func main() {
@@ -23,6 +24,10 @@ func main() {
 	config, err := config.Get()
 	if err != nil {
 		log.Panicln(err)
+	}
+
+	if config.StackImpactKey != "" {
+		stackimpact.NewAgent().Configure(config.StackImpactKey, "Watchub")
 	}
 
 	// datastores
