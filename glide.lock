@@ -53,8 +53,6 @@ imports:
   subpackages:
   - '...'
   - helpers/mail
-- name: github.com/stackimpact/stackimpact-go
-  version: ed2dc847aa5907a415e6f8c589be21f1ce3289ab
 - name: github.com/valyala/fasttemplate
   version: 3b874956e03f1636d171bda64b130f9135f42cff
 - name: golang.org/x/net
