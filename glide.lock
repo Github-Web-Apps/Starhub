@@ -1,8 +1,8 @@
-hash: a76c37af50e450e4dcbb377478939d16861d6520543eec7e7dc02c14fd21cb2d
-updated: 2016-10-13T14:41:42.882101914-03:00
+hash: 7c9a2271f4b2f3cbac15cbbe06f567b3b9b11f3038a6a9f9204e2a6abce01f8c
+updated: 2016-11-27T13:43:25.815853181-02:00
 imports:
 - name: github.com/caarlos0/env
-  version: 65331f179c42e3ffe33457b69bee55472a779cd6
+  version: d0de832ed2fbc4e7bfaa30ab5cf0b3417d15f529
 - name: github.com/golang/protobuf
   version: 98fa357170587e470c5f27d3c3ea0947b71eb455
   subpackages:
@@ -22,9 +22,10 @@ imports:
   - '...'
   - reflectx
 - name: github.com/labstack/echo
-  version: 04e6901d05b58ddbae579a6252a3d1bb3f334adc
+  version: e08070379af60f5b9c0fb5bb2d1527ba9624fe43
   subpackages:
   - '...'
+  - context
   - engine
   - engine/standard
   - log
@@ -49,7 +50,7 @@ imports:
 - name: github.com/sendgrid/rest
   version: d37acbf70185e33da36a233f4df95848b052427c
 - name: github.com/sendgrid/sendgrid-go
-  version: ca6ecc07783a951106449c92d908195ae886b2ca
+  version: aae62ebbdabd46754b041a12b9f74d2ffdfc49d7
   subpackages:
   - '...'
   - helpers/mail
