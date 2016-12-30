@@ -4,6 +4,8 @@ import (
 	"errors"
 	"net/http"
 
+	"context"
+
 	"github.com/caarlos0/watchub/internal/config"
 	"github.com/caarlos0/watchub/internal/datastores"
 	"github.com/caarlos0/watchub/internal/dto"
@@ -12,6 +14,8 @@ import (
 	"golang.org/x/oauth2"
 	githuboauth "golang.org/x/oauth2/github"
 )
+
+const applicationsURL = "https://github.com/settings/connections/applications/"
 
 // Oauth info
 type Oauth struct {
@@ -36,7 +40,7 @@ func New(store datastores.Datastore, config config.Config) *Oauth {
 
 // Client for a given token
 func (o *Oauth) Client(token *oauth2.Token) *github.Client {
-	return github.NewClient(o.config.Client(oauth2.NoContext, token))
+	return github.NewClient(o.config.Client(context.Background(), token))
 }
 
 // Mount the routes as a group of a given echo instance
@@ -54,11 +58,11 @@ func (o *Oauth) Mount(e *echo.Echo) *echo.Group {
 			return errors.New("invalid state")
 		}
 		code := c.FormValue("code")
-		token, err := o.config.Exchange(oauth2.NoContext, code)
+		token, err := o.config.Exchange(context.Background(), code)
 		if err != nil {
 			return err
 		}
-		client := github.NewClient(o.config.Client(oauth2.NoContext, token))
+		client := github.NewClient(o.config.Client(context.Background(), token))
 		u, _, err := client.Users.Get("")
 		if err != nil {
 			return err
@@ -66,7 +70,10 @@ func (o *Oauth) Mount(e *echo.Echo) *echo.Group {
 		if err := o.store.SaveToken(int64(*u.ID), token); err != nil {
 			return err
 		}
-		return c.Render(http.StatusOK, "index", dto.User{User: *u.Login})
+		return c.Render(http.StatusOK, "index", dto.User{
+			User: *u.Login,
+			ChangeSubscriptionURL: applicationsURL + o.config.ClientID,
+		})
 	})
 
 	return login

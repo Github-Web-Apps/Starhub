@@ -2,5 +2,6 @@ package dto
 
 // User DTO
 type User struct {
-	User string
+	User                  string
+	ChangeSubscriptionURL string
 }
