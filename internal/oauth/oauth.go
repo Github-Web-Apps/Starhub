@@ -51,7 +51,7 @@ func (o *Oauth) Mount(e *echo.Echo) *echo.Group {
 	login.GET("/callback", func(c echo.Context) error {
 		state := c.FormValue("state")
 		if state != o.state {
-			return errors.New("Invalid state!")
+			return errors.New("invalid state")
 		}
 		code := c.FormValue("code")
 		token, err := o.config.Exchange(oauth2.NoContext, code)
