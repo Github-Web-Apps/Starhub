@@ -1,14 +1,14 @@
-hash: 7c9a2271f4b2f3cbac15cbbe06f567b3b9b11f3038a6a9f9204e2a6abce01f8c
-updated: 2016-11-27T13:43:25.815853181-02:00
+hash: 87648f0917e743cf6e560d8b9ec79f9b2cf0d9bd744ed545b0b1441bf9aee3ff
+updated: 2016-12-30T21:28:35.075498129-02:00
 imports:
 - name: github.com/caarlos0/env
   version: d0de832ed2fbc4e7bfaa30ab5cf0b3417d15f529
 - name: github.com/golang/protobuf
-  version: 98fa357170587e470c5f27d3c3ea0947b71eb455
+  version: df1d3ca07d2d07bba352d5b73c4313b4e2a6203e
   subpackages:
   - proto
 - name: github.com/google/go-github
-  version: 93d3f730320429a6e1ecf2ac1778db832930948a
+  version: 939928b912496ed4fbeb6e4beb2467b4fa540af7
   subpackages:
   - '...'
   - github
@@ -25,12 +25,11 @@ imports:
   version: e08070379af60f5b9c0fb5bb2d1527ba9624fe43
   subpackages:
   - '...'
-  - context
   - engine
   - engine/standard
   - log
 - name: github.com/labstack/gommon
-  version: 431777a5117c8de4352a400dad1e2a55f484b189
+  version: c7a42f4800da9d39225ce15411f48288d622e517
   subpackages:
   - color
   - log
@@ -54,12 +53,17 @@ imports:
   subpackages:
   - '...'
   - helpers/mail
-- name: github.com/valyala/fasttemplate
-  version: 3b874956e03f1636d171bda64b130f9135f42cff
+- name: github.com/Sirupsen/logrus
+  version: d26492970760ca5d33129d2d799e34be5c4782eb
 - name: golang.org/x/net
   version: 6d3beaea10370160dea67f5c9327ed791afd5389
   subpackages:
   - context
+  - http2
+  - http2/hpack
+  - idna
+  - lex/httplex
+  - websocket
 - name: golang.org/x/oauth2
   version: 1e695b1c8febf17aad3bfa7bf0a819ef94b98ad5
   subpackages:
@@ -67,11 +71,11 @@ imports:
   - github
   - internal
 - name: golang.org/x/sys
-  version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
+  version: a646d33e2ee3172a661fc09bca23bb4889a41bc8
   subpackages:
   - unix
 - name: google.golang.org/appengine
-  version: 596d349602aa23355ff46ade49ebfeb99c0fc550
+  version: 3f4dbbc0ec153a39878fd524ece9f39732bd4998
   subpackages:
   - internal
   - internal/base
