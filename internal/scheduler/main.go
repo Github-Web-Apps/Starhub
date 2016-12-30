@@ -19,9 +19,13 @@ import (
 	"github.com/robfig/cron"
 )
 
+const applicationsURL = "https://github.com/settings/connections/applications/"
+
 // New scheduler
 func New(
-	config config.Config, store datastores.Datastore, oauth *oauth.Oauth,
+	config config.Config,
+	store datastores.Datastore,
+	oauth *oauth.Oauth,
 ) *cron.Cron {
 	c := cron.New()
 	c.AddFunc(config.Schedule, process(config, store, oauth))
@@ -29,8 +33,11 @@ func New(
 }
 
 func process(
-	config config.Config, store datastores.Datastore, oauth *oauth.Oauth,
+	config config.Config,
+	store datastores.Datastore,
+	oauth *oauth.Oauth,
 ) func() {
+	url := applicationsURL + config.ClientID
 	return func() {
 		execs, err := store.Executions()
 		if err != nil {
@@ -46,7 +53,7 @@ func process(
 				return
 			}
 			client := oauth.Client(token)
-			go doProcess(client, mailer, store, exec)
+			go doProcess(client, mailer, store, exec, url)
 		}
 	}
 }
@@ -56,6 +63,7 @@ func doProcess(
 	mailer *mail.Mailer,
 	store datastores.Datastore,
 	exec datastores.Execution,
+	url string,
 ) {
 	start := time.Now()
 
@@ -121,6 +129,7 @@ func doProcess(
 				Followers: len(followers),
 				Stars:     countStars(stars),
 				Repos:     len(stars),
+				ChangeSubscriptionURL: url,
 			},
 		)
 	} else {
@@ -130,15 +139,16 @@ func doProcess(
 		if len(newFollowers)+len(unfollowers)+len(newStars)+len(unstars) > 0 {
 			mailer.SendChanges(
 				mail.ChangesData{
-					Login:        *user.Login,
-					Email:        email,
-					Followers:    len(followers),
-					Stars:        countStars(stars),
-					Repos:        len(stars),
-					NewFollowers: newFollowers,
-					Unfollowers:  unfollowers,
-					NewStars:     newStars,
-					Unstars:      unstars,
+					Login:                 *user.Login,
+					Email:                 email,
+					Followers:             len(followers),
+					Stars:                 countStars(stars),
+					Repos:                 len(stars),
+					NewFollowers:          newFollowers,
+					Unfollowers:           unfollowers,
+					NewStars:              newStars,
+					Unstars:               unstars,
+					ChangeSubscriptionURL: url,
 				},
 			)
 		}

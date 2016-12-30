@@ -2,9 +2,8 @@ package mail
 
 import (
 	"bytes"
-	"log"
-
 	"html/template"
+	"log"
 
 	"github.com/caarlos0/watchub/internal/config"
 	sendgrid "github.com/sendgrid/sendgrid-go"
@@ -33,28 +32,28 @@ type StarData struct {
 }
 
 type WelcomeData struct {
-	Login     string
-	Email     string
-	Followers int
-	Stars     int
-	Repos     int
+	Login                 string
+	Email                 string
+	Followers             int
+	Stars                 int
+	Repos                 int
+	ChangeSubscriptionURL string
 }
 
 type ChangesData struct {
-	Login        string
-	Email        string
-	Followers    int
-	Stars        int
-	Repos        int
-	NewFollowers []string
-	Unfollowers  []string
-	NewStars     []StarData
-	Unstars      []StarData
+	Login                 string
+	Email                 string
+	Followers             int
+	Stars                 int
+	Repos                 int
+	NewFollowers          []string
+	Unfollowers           []string
+	NewStars              []StarData
+	Unstars               []StarData
+	ChangeSubscriptionURL string
 }
 
-func (mailer *Mailer) send(
-	name, email, subject, template string, data interface{},
-) {
+func (mailer *Mailer) send(name, email, subject, template string, data interface{}) {
 	from := mail.NewEmail("Watchub", mailer.from)
 	to := mail.NewEmail(name, email)
 
