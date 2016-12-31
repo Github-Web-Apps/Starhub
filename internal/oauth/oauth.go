@@ -70,7 +70,7 @@ func (o *Oauth) Mount(e *echo.Echo) *echo.Group {
 		if err := o.store.SaveToken(int64(*u.ID), token); err != nil {
 			return err
 		}
-		return c.Render(http.StatusOK, "index", dto.User{
+		return c.Render(http.StatusOK, "index", dto.IndexData{
 			User: *u.Login,
 			ChangeSubscriptionURL: applicationsURL + o.config.ClientID,
 		})

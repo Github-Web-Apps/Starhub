@@ -43,7 +43,7 @@ func main() {
 	e.SetRenderer(template.New("static/*.html"))
 	e.Static("/static", "static")
 	e.GET("/", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "index", dto.User{})
+		return c.Render(http.StatusOK, "index", dto.IndexData{})
 	})
 	e.GET("/donate", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "donate", nil)

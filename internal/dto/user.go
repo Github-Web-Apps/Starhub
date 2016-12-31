@@ -1,7 +1,7 @@
 package dto
 
-// User DTO
-type User struct {
+// IndexData DTO
+type IndexData struct {
 	User                  string
 	ChangeSubscriptionURL string
 }
