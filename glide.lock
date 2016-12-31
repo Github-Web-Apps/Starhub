@@ -1,5 +1,5 @@
-hash: 7c9a2271f4b2f3cbac15cbbe06f567b3b9b11f3038a6a9f9204e2a6abce01f8c
-updated: 2016-12-30T22:00:22.183012709-02:00
+hash: 87648f0917e743cf6e560d8b9ec79f9b2cf0d9bd744ed545b0b1441bf9aee3ff
+updated: 2016-12-30T22:06:52.032872494-02:00
 imports:
 - name: github.com/caarlos0/env
   version: d0de832ed2fbc4e7bfaa30ab5cf0b3417d15f529
@@ -54,6 +54,8 @@ imports:
   subpackages:
   - '...'
   - helpers/mail
+- name: github.com/Sirupsen/logrus
+  version: d26492970760ca5d33129d2d799e34be5c4782eb
 - name: github.com/valyala/fasttemplate
   version: 3b874956e03f1636d171bda64b130f9135f42cff
 - name: golang.org/x/net
