@@ -1,14 +1,14 @@
 hash: 7c9a2271f4b2f3cbac15cbbe06f567b3b9b11f3038a6a9f9204e2a6abce01f8c
-updated: 2016-11-27T13:43:25.815853181-02:00
+updated: 2016-12-30T22:00:22.183012709-02:00
 imports:
 - name: github.com/caarlos0/env
   version: d0de832ed2fbc4e7bfaa30ab5cf0b3417d15f529
 - name: github.com/golang/protobuf
-  version: 98fa357170587e470c5f27d3c3ea0947b71eb455
+  version: 8ee79997227bf9b34611aee7946ae64735e6fd93
   subpackages:
   - proto
 - name: github.com/google/go-github
-  version: 93d3f730320429a6e1ecf2ac1778db832930948a
+  version: 90861904aa86352a956f91ba0664df93a3547584
   subpackages:
   - '...'
   - github
@@ -17,7 +17,7 @@ imports:
   subpackages:
   - query
 - name: github.com/jmoiron/sqlx
-  version: 05b81a7d5d38058e42148dc01f17daf4acba4640
+  version: cac998c4f0959c19c638c523e374fa8e4e0bcfe3
   subpackages:
   - '...'
   - reflectx
@@ -30,25 +30,25 @@ imports:
   - engine/standard
   - log
 - name: github.com/labstack/gommon
-  version: 431777a5117c8de4352a400dad1e2a55f484b189
+  version: c8c07aa087422c146b86d2f79556b450a8e630a1
   subpackages:
   - color
   - log
 - name: github.com/lib/pq
-  version: 50761b0867bd1d9d069276790bcd4a3bccf2324a
+  version: 5bf161122cd640c2a5a2c1d7fa49ea9befff31dd
   subpackages:
   - '...'
   - oid
 - name: github.com/mattn/go-colorable
-  version: ed8eb9e318d7a84ce5915b495b7d35e0cfe7b5a8
+  version: d228849504861217f796da67fae4f6e347643f15
 - name: github.com/mattn/go-isatty
-  version: 66b8e73f3f5cda9f96b69efd03dd3d7fc4a5cdb8
+  version: 30a891c33c7cde7b02a981314b4228ec99380cca
 - name: github.com/robfig/cron
   version: b024fc5ea0e34bc3f83d9941c8d60b0622bfaca4
   subpackages:
   - '...'
 - name: github.com/sendgrid/rest
-  version: d37acbf70185e33da36a233f4df95848b052427c
+  version: 3ec51b4f1754e13e92409355851a0a82e9a06461
 - name: github.com/sendgrid/sendgrid-go
   version: aae62ebbdabd46754b041a12b9f74d2ffdfc49d7
   subpackages:
@@ -57,21 +57,21 @@ imports:
 - name: github.com/valyala/fasttemplate
   version: 3b874956e03f1636d171bda64b130f9135f42cff
 - name: golang.org/x/net
-  version: 6d3beaea10370160dea67f5c9327ed791afd5389
+  version: 8fd7f25955530b92e73e9e1932a41b522b22ccd9
   subpackages:
   - context
 - name: golang.org/x/oauth2
-  version: 1e695b1c8febf17aad3bfa7bf0a819ef94b98ad5
+  version: 314dd2c0bf3ebd592ec0d20847d27e79d0dbe8dd
   subpackages:
   - '...'
   - github
   - internal
 - name: golang.org/x/sys
-  version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
+  version: d75a52659825e75fff6158388dddc6a5b04f9ba5
   subpackages:
   - unix
 - name: google.golang.org/appengine
-  version: 596d349602aa23355ff46ade49ebfeb99c0fc550
+  version: 08a149cfaee099e6ce4be01c0113a78c85ee1dee
   subpackages:
   - internal
   - internal/base
