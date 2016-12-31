@@ -176,7 +176,7 @@ func getEmail(client *github.Client) (email string, err error) {
 			return *e.Email, err
 		}
 	}
-	return email, errors.New("No email found!")
+	return email, errors.New("no email found")
 }
 
 func stargazerStatistics(stars, previousStars []datastores.Star) (newStars, unstars []mail.StarData) {
