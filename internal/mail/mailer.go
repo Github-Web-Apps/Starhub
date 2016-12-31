@@ -3,8 +3,8 @@ package mail
 import (
 	"bytes"
 	"html/template"
-	"log"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/caarlos0/watchub/internal/config"
 	sendgrid "github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
@@ -61,7 +61,7 @@ func (mailer *Mailer) send(name, email, subject, template string, data interface
 	if err := mailer.templates.ExecuteTemplate(
 		&content, template+".html", data,
 	); err != nil {
-		log.Println("Failed to mail", data, ".", err)
+		log.WithError(err).Println("Failed to mail", data)
 	}
 	m := mail.NewV3MailInit(
 		from, subject, to, mail.NewContent("text/html", content.String()),
@@ -74,9 +74,9 @@ func (mailer *Mailer) send(name, email, subject, template string, data interface
 	request.Body = mail.GetRequestBody(m)
 	_, err := sendgrid.API(request)
 	if err != nil {
-		log.Println("Failed to mail to", email, ".", err)
+		log.WithField("email", email).WithError(err).Println("Failed to send email")
 	} else {
-		log.Println("Mail sent to", email)
+		log.WithField("email", email).Println("Mail sent")
 	}
 }
 

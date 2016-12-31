@@ -1,9 +1,9 @@
 package stargazers
 
 import (
-	"log"
 	"sync"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/caarlos0/watchub/internal/datastores"
 	"github.com/caarlos0/watchub/internal/repos"
 	"github.com/google/go-github/github"

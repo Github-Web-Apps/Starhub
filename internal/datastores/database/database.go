@@ -2,8 +2,8 @@ package database
 
 import (
 	"database/sql"
-	"log"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/caarlos0/watchub/internal/datastores"
 	"github.com/jmoiron/sqlx"
 )
@@ -12,10 +12,10 @@ import (
 func Connect(url string) *sql.DB {
 	db, err := sql.Open("postgres", url)
 	if err != nil {
-		log.Fatal(err)
+		log.WithError(err).Fatal("Failed to open connection to database")
 	}
 	if err := db.Ping(); err != nil {
-		log.Fatal(err)
+		log.WithError(err).Fatal("Failed to ping database")
 	}
 	return db
 }

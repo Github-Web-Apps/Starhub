@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/caarlos0/watchub/internal/config"
 	"github.com/caarlos0/watchub/internal/datastores/database"
 	"github.com/caarlos0/watchub/internal/dto"

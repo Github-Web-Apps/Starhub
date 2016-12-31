@@ -3,11 +3,9 @@ package scheduler
 import (
 	"encoding/json"
 	"errors"
-	"log"
 	"time"
 
-	"golang.org/x/oauth2"
-
+	log "github.com/Sirupsen/logrus"
 	"github.com/caarlos0/watchub/internal/config"
 	"github.com/caarlos0/watchub/internal/datastores"
 	"github.com/caarlos0/watchub/internal/diff"
@@ -17,6 +15,7 @@ import (
 	"github.com/caarlos0/watchub/internal/stargazers"
 	"github.com/google/go-github/github"
 	"github.com/robfig/cron"
+	"golang.org/x/oauth2"
 )
 
 const applicationsURL = "https://github.com/settings/connections/applications/"
@@ -46,10 +45,11 @@ func process(
 		}
 		mailer := mail.New(config)
 		for _, exec := range execs {
-			log.Println("Processing", exec.UserID)
+			log.WithField("user_id", exec.UserID).Println("Processing...")
 			token, err := tokenFromJSON(exec.Token)
 			if err != nil {
-				log.Println("Failed to get the token", exec.UserID, err)
+				log.WithField("user_id", exec.UserID).WithError(err).
+					Println("Failed to get the token")
 				return
 			}
 			client := oauth.Client(token)
@@ -70,53 +70,53 @@ func doProcess(
 	// user info
 	user, _, err := client.Users.Get("")
 	if err != nil {
-		log.Println("Failed to get user data", exec.UserID, err)
+		log.WithField("user_id", exec.UserID).WithError(err).
+			Println("Failed to get user data")
 		return
 	}
 	email, err := getEmail(client)
 	if err != nil {
-		log.Println("Failed to get user email", exec.UserID, err)
+		log.WithField("user_id", exec.UserID).WithError(err).
+			Println("Failed to get user email addr")
 		return
 	}
 
 	// followers
 	followers, err := followers.Get(client)
 	if err != nil {
-		log.Println(
-			"Failed to store user followers from github", exec.UserID, err,
-		)
+		log.WithField("user_id", exec.UserID).WithError(err).
+			Println("Failed to store user followers from github")
 		return
 	}
 	previousFollowers, err := store.GetFollowers(exec.UserID)
 	if err != nil {
-		log.Println("Failed to get user followers from db", exec.UserID, err)
+		log.WithField("user_id", exec.UserID).WithError(err).
+			Println("Failed to get user followers from db")
 		return
 	}
 	followersLogin := toLoginArray(followers)
 	if err := store.SaveFollowers(exec.UserID, followersLogin); err != nil {
-		log.Println("Failed to store user followers to db", exec.UserID, err)
+		log.WithField("user_id", exec.UserID).WithError(err).
+			Println("Failed to store user followers to db")
 		return
 	}
 
 	// stars
 	stars, err := stargazers.Get(client)
 	if err != nil {
-		log.Println(
-			"Failed to get user repos stargazers from github", exec.UserID, err,
-		)
+		log.WithField("user_id", exec.UserID).WithError(err).
+			Println("Failed to get user repos stargazers from github")
 		return
 	}
 	previousStars, err := store.GetStars(exec.UserID)
 	if err != nil {
-		log.Println(
-			"Failed to get user repos stargazers from db", exec.UserID, err,
-		)
+		log.WithField("user_id", exec.UserID).WithError(err).
+			Println("Failed to get user repos stargazers from db")
 		return
 	}
 	if err := store.SaveStars(exec.UserID, stars); err != nil {
-		log.Println(
-			"Failed to store user repos stargazers to db", exec.UserID, err,
-		)
+		log.WithField("user_id", exec.UserID).WithError(err).
+			Println("Failed to store user repos stargazers to db")
 		return
 	}
 
@@ -124,11 +124,11 @@ func doProcess(
 	if len(previousFollowers)+len(previousStars) == 0 {
 		mailer.SendWelcome(
 			mail.WelcomeData{
-				Login:     *user.Login,
-				Email:     email,
-				Followers: len(followers),
-				Stars:     countStars(stars),
-				Repos:     len(stars),
+				Login:                 *user.Login,
+				Email:                 email,
+				Followers:             len(followers),
+				Stars:                 countStars(stars),
+				Repos:                 len(stars),
 				ChangeSubscriptionURL: url,
 			},
 		)
@@ -153,10 +153,8 @@ func doProcess(
 			)
 		}
 	}
-	log.Println(
-		"Processing", exec.UserID, "=", email,
-		"took", time.Since(start).Seconds(), "seconds",
-	)
+	log.WithField("user_id", exec.UserID).WithField("email", email).
+		Println("Processing took", time.Since(start).Seconds(), "seconds")
 }
 
 func countStars(stars []datastores.Star) int {
@@ -180,9 +178,7 @@ func getEmail(client *github.Client) (email string, err error) {
 	return email, errors.New("No email found!")
 }
 
-func stargazerStatistics(
-	stars, previousStars []datastores.Star,
-) (newStars, unstars []mail.StarData) {
+func stargazerStatistics(stars, previousStars []datastores.Star) (newStars, unstars []mail.StarData) {
 	for _, s := range stars {
 		for _, os := range previousStars {
 			if s.RepoID != os.RepoID {
