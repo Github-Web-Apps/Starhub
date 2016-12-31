@@ -154,7 +154,8 @@ func doProcess(
 		}
 	}
 	log.WithField("user_id", exec.UserID).WithField("email", email).
-		Println("Processing took", time.Since(start).Seconds(), "seconds")
+		WithField("time_taken", time.Since(start).Seconds()).
+		Println("Successfully processed")
 }
 
 func countStars(stars []datastores.Star) int {
