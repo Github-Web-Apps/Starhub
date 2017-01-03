@@ -124,11 +124,11 @@ func doProcess(
 	if len(previousFollowers)+len(previousStars) == 0 {
 		mailer.SendWelcome(
 			mail.WelcomeData{
-				Login:                 *user.Login,
-				Email:                 email,
-				Followers:             len(followers),
-				Stars:                 countStars(stars),
-				Repos:                 len(stars),
+				Login:     *user.Login,
+				Email:     email,
+				Followers: len(followers),
+				Stars:     countStars(stars),
+				Repos:     len(stars),
 				ChangeSubscriptionURL: url,
 			},
 		)

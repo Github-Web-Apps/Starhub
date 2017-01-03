@@ -27,7 +27,7 @@ func main() {
 
 	// datastores
 	db := database.Connect(config.DatabaseURL)
-	defer db.Close()
+	defer func() { _ = db.Close() }()
 	store := database.NewDatastore(db)
 
 	// oauth
@@ -53,5 +53,5 @@ func main() {
 	oauth.Mount(e)
 
 	// RUN!
-	e.Run(standard.New(fmt.Sprintf(":%d", config.Port)))
+	log.Fatalln(e.Run(standard.New(fmt.Sprintf(":%d", config.Port))))
 }
