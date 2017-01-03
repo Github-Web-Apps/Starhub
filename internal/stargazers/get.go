@@ -18,6 +18,7 @@ func Get(client *github.Client) (result []datastores.Star, err error) {
 	var wg sync.WaitGroup
 	results := make(chan datastores.Star, len(repos))
 	errors := make(chan error)
+	// TODO errgroup
 	for _, repo := range repos {
 		wg.Add(1)
 		go func(client *github.Client, repo *github.Repository) {
