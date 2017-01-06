@@ -72,6 +72,7 @@ func (o *Oauth) Mount(e *echo.Echo) *echo.Group {
 		}
 		return c.Render(http.StatusOK, "index", dto.IndexData{
 			User: *u.Login,
+			UserID: *u.ID,
 			ChangeSubscriptionURL: applicationsURL + o.config.ClientID,
 		})
 	})

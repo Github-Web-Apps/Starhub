@@ -1,71 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/apple-touch-icon-144x144.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/apple-touch-icon-152x152.png" />
-  <link rel="icon" type="image/png" href="/static/favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="/static/favicon-16x16.png" sizes="16x16" />
-
-
-  <title>Watchub</title>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
-</head>
-<body style="padding-top: 1.5rem; padding-bottom: 1.5rem;">
-  <div class="container">
-    <div class="header">
-      <nav>
-        <ul class="nav nav-pills pull-xs-right">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/donate">Donate</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-        </ul>
-      </nav>
-      <h3 class="text-muted" style="line-height: 3rem;">Watchub</h3>
-    </div>
-    <div class="jumbotron">
-      <h1 class="display-3">Watchub</h1>
-      <hr/>
-      <p class="lead">
-        Thanks for using Watchub and thanks for be interested in donating for us!
-      </p>
-      <p>
-        The following methods are available:
-        <ul>
-          <li>
-            BTC @ <code>1HXzTNrxHtnTnJrTiVTzggaAb3Z51ijgSs</code>
-          </li>
-          <li>
-            Dollars @
-            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HNHJDEXE9ALNG">
-              Paypal
-            </a>
-          </li>
-        </ul>
-      </p>
-    </div>
-    <footer class="footer">
-      <p>&copy; Watchub 2016, by <a href="https://github.com/caarlos0">@caarlos0</a></p>
-    </footer>
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-85002396-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
-</html>
+{{ define "content" }}
+<h3>
+  Thanks for using Watchub and thanks for being interested in donating!
+</h3>
+<br>
+<p class="lead">You can donate by the following methods:</p>
+<p>
+  BTC @ <code>1HXzTNrxHtnTnJrTiVTzggaAb3Z51ijgSs</code>
+</p>
+<p><small>or</small></p>
+<p>
+  Dollars @
+  <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HNHJDEXE9ALNG">
+    Paypal
+  </a>
+</p>
+{{ end }}

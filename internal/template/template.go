@@ -12,11 +12,10 @@ type Template struct {
 }
 
 func New(glob string) *Template {
-	return &Template{
-		templates: template.Must(template.ParseGlob("static/*.html")),
-	}
+	return &Template{}
 }
 
 func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	return t.templates.ExecuteTemplate(w, name+".html", data)
+	templates, _ := template.ParseFiles("static/layout.html", "static/"+name+".html")
+	return templates.ExecuteTemplate(w, "layout", data)
 }
