@@ -11,29 +11,40 @@
   <link rel="icon" type="image/png" href="/static/favicon-16x16.png" sizes="16x16" />
   <title>Watchub</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/octicons.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css">
 </head>
-<body style="padding-top: 1.5rem; padding-bottom: 1.5rem;">
-  <div class="container">
-    <a class="link-gray-dark" href="/"><h1>Watchub</h1></a>
-    <hr>
-    <p class="lead">
-      Be notified of people who followed/unfollowed you and starred/unstarred
-      your repositories.
-    </p>
-    <div class="blankslate blankslate-spacious blankslate-large">
-       {{ template "content" . }}
+<body>
+  <div class="ui inverted vertical masthead center aligned segment">
+    <div class="ui container">
+      <div class="ui large secondary inverted pointing menu">
+        <a class="item" href="/">Home</a>
+        <a class="item" href="/donate">Donate</a>
+        <div class="right item">
+          <a class="ui inverted button" href="/login">Log in</a>
+        </div>
+      </div>
     </div>
-    <footer class="text-gray text-center pt-4">
+
+    <div class="ui text container very padded">
+      <h1 class="ui inverted header">
+        Watchub
+      </h1>
+      <h4>Be notified of people who followed/unfollowed you and starred/unstarred your repositories</h4>
+    </div>
+  </div>
+  <div class="ui very padded vertical stripe segment">
+    <div class="ui text container">
+      {{ template "content" . }}
+    </div>
+  </div>
+  <div class="ui vertical stripe">
+    <div class="ui text container center aligned">
       <p>
-        Liking our service?
-        Maybe you'll consider <a class="link-gray-dark" href="/donate">donating</a>.
+        <small>
+          &copy; Watchub 2016-2017, by <a class="ui" href="https://github.com/caarlos0">@caarlos0</a>
+        </small>
       </p>
-      <p>
-        &copy; Watchub 2016, by <a class="link-gray-dark" href="https://github.com/caarlos0">@caarlos0</a>
-      </p>
-    </footer>
+    </div>
   </div>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

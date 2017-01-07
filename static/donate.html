@@ -1,17 +1,19 @@
 {{ define "content" }}
-<h3>
+<h3 class="ui header">
   Thanks for using Watchub and thanks for being interested in donating!
+  <div class="sub header">We accept donations in the following methods:</div>
 </h3>
-<br>
-<p class="lead">You can donate by the following methods:</p>
-<p>
-  BTC @ <code>1HXzTNrxHtnTnJrTiVTzggaAb3Z51ijgSs</code>
-</p>
-<p><small>or</small></p>
-<p>
-  Dollars @
-  <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HNHJDEXE9ALNG">
-    Paypal
-  </a>
-</p>
+<div class="ui very padded segment">
+  <p>
+    BTC @ <code>1HXzTNrxHtnTnJrTiVTzggaAb3Z51ijgSs</code>
+  </p>
+  <div class="ui horizontal divider">
+    Or
+  </div>
+  <p>
+    <a class="ui basic positive button" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HNHJDEXE9ALNG" target="_blank">
+      <i class="paypal icon"></i>Paypal
+    </a>
+  </p>
+</div>
 {{ end }}
