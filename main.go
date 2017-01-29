@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 
 	log "github.com/Sirupsen/logrus"
@@ -10,7 +11,6 @@ import (
 	"github.com/caarlos0/watchub/internal/dto"
 	"github.com/caarlos0/watchub/internal/oauth"
 	"github.com/caarlos0/watchub/internal/scheduler"
-	"github.com/caarlos0/watchub/internal/template"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	_ "github.com/lib/pq"

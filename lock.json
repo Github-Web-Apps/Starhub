@@ -1,0 +1,192 @@
+{
+    "memo": "515264494dde97943c4122f6b4708ec8144278ccc939e25c95762609356c4c27",
+    "projects": [
+        {
+            "name": "github.com/Sirupsen/logrus",
+            "branch": "master",
+            "revision": "61e43dc76f7ee59a82bdf3d71033dc12bea4c77d",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/caarlos0/env",
+            "version": "v2.1",
+            "revision": "d0de832ed2fbc4e7bfaa30ab5cf0b3417d15f529",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/davecgh/go-spew",
+            "version": "v1.1.0",
+            "revision": "346938d642f2ec3594ed81d874461961cd0faa76",
+            "packages": [
+                "spew"
+            ]
+        },
+        {
+            "name": "github.com/golang/protobuf",
+            "branch": "master",
+            "revision": "8ee79997227bf9b34611aee7946ae64735e6fd93",
+            "packages": [
+                "proto"
+            ]
+        },
+        {
+            "name": "github.com/google/go-github",
+            "branch": "master",
+            "revision": "cec1afe99df659573e7220907135778489b4da91",
+            "packages": [
+                "github"
+            ]
+        },
+        {
+            "name": "github.com/google/go-querystring",
+            "branch": "master",
+            "revision": "53e6ce116135b80d037921a7fdd5138cf32d7a8a",
+            "packages": [
+                "query"
+            ]
+        },
+        {
+            "name": "github.com/jmoiron/sqlx",
+            "branch": "master",
+            "revision": "f980a91bdc37abef88269b8f122d7de6352102f5",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/labstack/echo",
+            "version": "v2.2.0",
+            "revision": "e08070379af60f5b9c0fb5bb2d1527ba9624fe43",
+            "packages": [
+                ".",
+                "engine/standard"
+            ]
+        },
+        {
+            "name": "github.com/labstack/gommon",
+            "version": "v0.1.0",
+            "revision": "2d272df536d051e737aea353b86c979d6e88bce0",
+            "packages": [
+                "log"
+            ]
+        },
+        {
+            "name": "github.com/lib/pq",
+            "branch": "master",
+            "revision": "67c3f2a8884c9b1aac5503c8d42ae4f73a93511c",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/mattn/go-colorable",
+            "version": "v0.0.6",
+            "revision": "ed8eb9e318d7a84ce5915b495b7d35e0cfe7b5a8",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/mattn/go-isatty",
+            "version": "v0.0.1",
+            "revision": "3a115632dcd687f9c8cd01679c83a06a0e21c1f3",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/pmezard/go-difflib",
+            "version": "v1.0.0",
+            "revision": "792786c7400a136282c1664665ae0a8db921c6c2",
+            "packages": [
+                "difflib"
+            ]
+        },
+        {
+            "name": "github.com/robfig/cron",
+            "version": "v1",
+            "revision": "b024fc5ea0e34bc3f83d9941c8d60b0622bfaca4",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/sendgrid/rest",
+            "version": "v2.3.1",
+            "revision": "3ec51b4f1754e13e92409355851a0a82e9a06461",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/sendgrid/sendgrid-go",
+            "version": "v3.3.1",
+            "revision": "aae62ebbdabd46754b041a12b9f74d2ffdfc49d7",
+            "packages": [
+                ".",
+                "helpers/mail"
+            ]
+        },
+        {
+            "name": "github.com/stretchr/testify",
+            "version": "v1.1.4",
+            "revision": "69483b4bd14f5845b5a1e55bca19e954e827f1d0",
+            "packages": [
+                "assert"
+            ]
+        },
+        {
+            "name": "github.com/valyala/bytebufferpool",
+            "branch": "master",
+            "revision": "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/valyala/fasttemplate",
+            "branch": "master",
+            "revision": "d090d65668a286d9a180d43a19dfdc5dcad8fe88",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "golang.org/x/net",
+            "branch": "master",
+            "revision": "f2499483f923065a842d38eb4c7f1927e6fc6e6d",
+            "packages": [
+                "context"
+            ]
+        },
+        {
+            "name": "golang.org/x/oauth2",
+            "branch": "master",
+            "revision": "314dd2c0bf3ebd592ec0d20847d27e79d0dbe8dd",
+            "packages": [
+                ".",
+                "github"
+            ]
+        },
+        {
+            "name": "golang.org/x/sys",
+            "branch": "master",
+            "revision": "d75a52659825e75fff6158388dddc6a5b04f9ba5",
+            "packages": [
+                "unix"
+            ]
+        },
+        {
+            "name": "google.golang.org/appengine",
+            "version": "v1.0.0",
+            "revision": "150dc57a1b433e64154302bdc40b6bb8aefa313a",
+            "packages": [
+                "urlfetch"
+            ]
+        }
+    ]
+}

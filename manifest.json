@@ -1,0 +1,22 @@
+{
+    "dependencies": {
+        "github.com/Sirupsen/logrus": {
+            "branch": "master"
+        },
+        "github.com/caarlos0/env": {
+            "version": "^2.1.0"
+        },
+        "github.com/google/go-github": {
+            "branch": "master"
+        },
+        "github.com/gorilla/mux": {
+            "version": "^1.30.0"
+        },
+        "github.com/jmoiron/sqlx": {
+            "branch": "master"
+        },
+        "github.com/lib/pq": {
+            "branch": "master"
+        }
+    }
+}
