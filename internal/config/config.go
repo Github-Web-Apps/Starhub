@@ -4,7 +4,7 @@ import "github.com/caarlos0/env"
 
 // Config of the app
 type Config struct {
-	Port           int    `env:"PORT" envDefault:"3000"`
+	Port           string `env:"PORT" envDefault:"3000"`
 	ClientID       string `env:"GITHUB_CLIENT_ID"`
 	ClientSecret   string `env:"GITHUB_CLIENT_SECRET"`
 	OauthState     string `env:"OAUTH_STATE"`
