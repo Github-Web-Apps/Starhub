@@ -1,6 +1,4 @@
-# go list -f {{.Dir}} ./... | grep -v vendor | sed "s;$PWD;\.;g"
-SOURCE_PACKAGES?=$$(go list ./... | grep -v vendor)
-SOURCE_FILES?=$$(find . -name '*.go' -not -wholename './vendor/*')
+SOURCE_FILES?=$$(glide novendor)
 TEST_PATTERN?=.
 TEST_OPTIONS?=
 
@@ -11,7 +9,7 @@ setup: ## Install all the build and lint dependencies
 	gometalinter --install
 
 test: ## Run all the tests
-	go test $(TEST_OPTIONS) -cover $(SOURCE_PACKAGES) -run $(TEST_PATTERN) -timeout=30s
+	go test $(TEST_OPTIONS) -cover $(SOURCE_FILES) -run $(TEST_PATTERN) -timeout=30s
 
 fmt: ## gofmt and goimports all go files
 	gofmt -w -s $(SOURCE_FILES)
