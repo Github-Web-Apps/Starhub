@@ -2,10 +2,12 @@ package pages
 
 import (
 	"html/template"
-	"io"
+	"net/http"
 )
 
-func Render(w io.Writer, name string, data interface{}) error {
+func Render(w http.ResponseWriter, name string, data interface{}) {
 	templates, _ := template.ParseFiles("static/layout.html", "static/"+name+".html")
-	return templates.ExecuteTemplate(w, "layout", data)
+	if err := templates.ExecuteTemplate(w, "layout", data); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }

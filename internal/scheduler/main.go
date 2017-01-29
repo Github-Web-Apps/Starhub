@@ -25,10 +25,10 @@ func New(
 	config config.Config,
 	store datastores.Datastore,
 	oauth *oauth.Oauth,
-) *cron.Cron {
+) (*cron.Cron, error) {
 	c := cron.New()
-	c.AddFunc(config.Schedule, process(config, store, oauth))
-	return c
+	err := c.AddFunc(config.Schedule, process(config, store, oauth))
+	return c, err
 }
 
 func process(
@@ -95,7 +95,7 @@ func doProcess(
 		return
 	}
 	followersLogin := toLoginArray(followers)
-	if err := store.SaveFollowers(exec.UserID, followersLogin); err != nil {
+	if err = store.SaveFollowers(exec.UserID, followersLogin); err != nil {
 		log.WithField("user_id", exec.UserID).WithError(err).
 			Println("Failed to store user followers to db")
 		return
