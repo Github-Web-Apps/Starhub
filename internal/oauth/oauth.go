@@ -1,16 +1,15 @@
 package oauth
 
 import (
-	"errors"
-	"net/http"
-
 	"context"
+	"net/http"
 
 	"github.com/caarlos0/watchub/internal/config"
 	"github.com/caarlos0/watchub/internal/datastores"
 	"github.com/caarlos0/watchub/internal/dto"
+	"github.com/caarlos0/watchub/internal/pages"
 	"github.com/google/go-github/github"
-	"github.com/labstack/echo"
+	"github.com/gorilla/mux"
 	"golang.org/x/oauth2"
 	githuboauth "golang.org/x/oauth2/github"
 )
@@ -43,39 +42,39 @@ func (o *Oauth) Client(token *oauth2.Token) *github.Client {
 	return github.NewClient(o.config.Client(context.Background(), token))
 }
 
-// Mount the routes as a group of a given echo instance
-func (o *Oauth) Mount(e *echo.Echo) *echo.Group {
-	login := e.Group("login")
-
-	login.GET("", func(c echo.Context) error {
+// Mount setup de Oauth routes
+func (o *Oauth) Mount(r *mux.Router) {
+	r.Methods("GET").Path("/login").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		url := o.config.AuthCodeURL(o.state, oauth2.AccessTypeOnline)
-		return c.Redirect(http.StatusTemporaryRedirect, url)
+		http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 	})
 
-	login.GET("/callback", func(c echo.Context) error {
-		state := c.FormValue("state")
+	r.Methods("GET").Path("/login/callback").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		var state = r.FormValue("state")
+		var code = r.FormValue("code")
 		if state != o.state {
-			return errors.New("invalid state")
+			http.Error(w, "invalid oauth state", http.StatusUnauthorized)
+			return
 		}
-		code := c.FormValue("code")
 		token, err := o.config.Exchange(context.Background(), code)
 		if err != nil {
-			return err
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			return
 		}
 		client := github.NewClient(o.config.Client(context.Background(), token))
 		u, _, err := client.Users.Get("")
 		if err != nil {
-			return err
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			return
 		}
 		if err := o.store.SaveToken(int64(*u.ID), token); err != nil {
-			return err
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
-		return c.Render(http.StatusOK, "index", dto.IndexData{
-			User: *u.Login,
-			UserID: *u.ID,
+		pages.Render(w, "index", dto.IndexData{
+			User:                  *u.Login,
+			UserID:                *u.ID,
 			ChangeSubscriptionURL: applicationsURL + o.config.ClientID,
 		})
 	})
-
-	return login
 }

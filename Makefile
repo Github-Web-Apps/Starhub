@@ -1,18 +1,24 @@
-SOURCE_FILES?=$$(glide novendor)
+# go list -f {{.Dir}} ./... | grep -v vendor | sed "s;$PWD;\.;g"
+SOURCE_PACKAGES?=$$(go list ./... | grep -v vendor)
+SOURCE_FILES?=$$(find . -name '*.go' -not -wholename './vendor/*')
 TEST_PATTERN?=.
 TEST_OPTIONS?=
 
 setup: ## Install all the build and lint dependencies
-	@go get -u github.com/alecthomas/gometalinter
-	@go get -u github.com/Masterminds/glide
-	@glide install
-	@gometalinter --install
+	go get -u github.com/alecthomas/gometalinter
+	go get -u github.com/golang/dep
+	dep ensure
+	gometalinter --install
 
 test: ## Run all the tests
-	@go test $(TEST_OPTIONS) -cover $(SOURCE_FILES) -run $(TEST_PATTERN) -timeout=30s
+	go test $(TEST_OPTIONS) -cover $(SOURCE_PACKAGES) -run $(TEST_PATTERN) -timeout=30s
+
+fmt: ## gofmt and goimports all go files
+	gofmt -w -s $(SOURCE_FILES)
+	goimports -w $(SOURCE_FILES)
 
 lint: ## Run all the linters
-	@gometalinter --vendor --disable-all \
+	gometalinter --vendor --disable-all \
 		--enable=deadcode \
 		--enable=ineffassign \
 		--enable=gosimple \
@@ -30,7 +36,7 @@ lint: ## Run all the linters
 ci: lint test ## Run all the tests and code checks
 
 build: ## Build a beta version of releaser
-	@go build
+	go build
 
 # Absolutely awesome: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help:
