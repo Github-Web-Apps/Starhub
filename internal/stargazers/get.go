@@ -7,44 +7,35 @@ import (
 	"github.com/caarlos0/watchub/internal/datastores"
 	"github.com/caarlos0/watchub/internal/repos"
 	"github.com/google/go-github/github"
+	"golang.org/x/sync/errgroup"
 )
 
 // Get the list of repos of a given user
 func Get(client *github.Client) (result []datastores.Star, err error) {
 	repos, err := repos.Get(client)
 	if err != nil {
-		return result, err
+		return
 	}
-	var wg sync.WaitGroup
-	results := make(chan datastores.Star, len(repos))
-	errors := make(chan error)
-	// TODO errgroup
+
+	var g errgroup.Group
+	var m sync.Mutex
+
 	for _, repo := range repos {
-		wg.Add(1)
-		go func(client *github.Client, repo *github.Repository) {
-			r, err := processRepo(client, repo)
-			if err != nil {
-				errors <- err
-			} else {
-				results <- r
+		repo := repo
+		g.Go(func() error {
+			r, er := processRepo(client, repo)
+			if er != nil {
+				return er
 			}
-		}(client, repo)
+			m.Lock()
+			defer m.Unlock()
+			result = append(result, r)
+			return nil
+		})
 	}
-	go func() {
-		for {
-			select {
-			case r := <-results:
-				result = append(result, r)
-				wg.Done()
-			case e := <-errors:
-				err = e
-				wg.Done()
-			}
-		}
-	}()
 	log.Println("Waiting for the goroutines to end")
-	wg.Wait()
-	return result, err
+	err = g.Wait()
+	return
 }
 
 func processRepo(

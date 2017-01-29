@@ -33,7 +33,10 @@ func main() {
 	oauth := oauth.New(store, config)
 
 	// schedulers
-	scheduler := scheduler.New(config, store, oauth)
+	scheduler, err := scheduler.New(config, store, oauth)
+	if err != nil {
+		log.Fatal(err)
+	}
 	scheduler.Start()
 	defer scheduler.Stop()
 
@@ -57,7 +60,7 @@ func main() {
 	// RUN!
 	var server = &http.Server{
 		Handler:      r,
-		Addr:         "127.0.0.1:" + config.Port,
+		Addr:         ":" + config.Port,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
