@@ -1,5 +1,5 @@
-# watchub
+# Watchub
 
-Watch for people who follow/unfollow you and start/unstar your repositories.
+Be notified of people who followed/unfollowed you and starred/unstarred your repositories.
 
 - [Running it locally/contributing/etc](/CONTRIBUTING.md)
