@@ -1,0 +1,30 @@
+package: github.com/caarlos0/watchub
+import:
+- package: github.com/Sirupsen/logrus
+  version: v0.11.5
+- package: github.com/caarlos0/env
+  version: v2.1
+- package: github.com/google/go-github
+  subpackages:
+  - github
+- package: github.com/gorilla/mux
+  version: v1.3.0
+- package: github.com/jmoiron/sqlx
+- package: github.com/lib/pq
+- package: github.com/robfig/cron
+  version: v1
+- package: github.com/sendgrid/sendgrid-go
+  version: v3.3.1
+  subpackages:
+  - helpers/mail
+- package: golang.org/x/oauth2
+  subpackages:
+  - github
+- package: golang.org/x/sync
+  subpackages:
+  - errgroup
+testImport:
+- package: github.com/stretchr/testify
+  version: v1.1.4
+  subpackages:
+  - assert
