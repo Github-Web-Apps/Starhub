@@ -1,6 +1,10 @@
 package followers
 
-import "github.com/google/go-github/github"
+import (
+	"context"
+
+	"github.com/google/go-github/github"
+)
 
 // Get the list of followers of a given user
 func Get(client *github.Client) (result []*github.User, err error) {
@@ -22,7 +26,8 @@ func Get(client *github.Client) (result []*github.User, err error) {
 func getPage(
 	opt *github.ListOptions, client *github.Client,
 ) (followers []*github.User, nextPage int, err error) {
-	followers, resp, err := client.Users.ListFollowers("", opt)
+	ctx := context.Background()
+	followers, resp, err := client.Users.ListFollowers(ctx, "", opt)
 	if err != nil {
 		return followers, 0, err
 	}

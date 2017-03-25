@@ -1,6 +1,7 @@
 package scheduler
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"time"
@@ -66,15 +67,16 @@ func doProcess(
 	url string,
 ) {
 	start := time.Now()
+	ctx := context.Background()
 
 	// user info
-	user, _, err := client.Users.Get("")
+	user, _, err := client.Users.Get(ctx, "")
 	if err != nil {
 		log.WithField("user_id", exec.UserID).WithError(err).
 			Println("Failed to get user data")
 		return
 	}
-	email, err := getEmail(client)
+	email, err := getEmail(ctx, client)
 	if err != nil {
 		log.WithField("user_id", exec.UserID).WithError(err).
 			Println("Failed to get user email addr")
@@ -166,8 +168,8 @@ func countStars(stars []datastores.Star) int {
 	return starCount
 }
 
-func getEmail(client *github.Client) (email string, err error) {
-	emails, _, err := client.Users.ListEmails(&github.ListOptions{PerPage: 10})
+func getEmail(ctx context.Context, client *github.Client) (email string, err error) {
+	emails, _, err := client.Users.ListEmails(ctx, &github.ListOptions{PerPage: 10})
 	if err != nil {
 		return email, err
 	}

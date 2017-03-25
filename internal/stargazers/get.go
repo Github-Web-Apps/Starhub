@@ -1,6 +1,7 @@
 package stargazers
 
 import (
+	"context"
 	"sync"
 
 	log "github.com/Sirupsen/logrus"
@@ -76,8 +77,9 @@ func stars(
 func getPage(
 	opt *github.ListOptions, client *github.Client, repo *github.Repository,
 ) (stars []*github.Stargazer, nextPage int, err error) {
+	ctx := context.Background()
 	stars, resp, err := client.Activity.ListStargazers(
-		*repo.Owner.Login, *repo.Name, opt,
+		ctx, *repo.Owner.Login, *repo.Name, opt,
 	)
 	if err != nil {
 		return stars, 0, err

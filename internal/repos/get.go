@@ -1,6 +1,10 @@
 package repos
 
-import "github.com/google/go-github/github"
+import (
+	"context"
+
+	"github.com/google/go-github/github"
+)
 
 // Get all user's repos
 func Get(client *github.Client) (result []*github.Repository, err error) {
@@ -23,7 +27,8 @@ func Get(client *github.Client) (result []*github.Repository, err error) {
 func getPage(
 	opt *github.RepositoryListOptions, client *github.Client,
 ) (repos []*github.Repository, nextPage int, err error) {
-	repos, resp, err := client.Repositories.List("", opt)
+	ctx := context.Background()
+	repos, resp, err := client.Repositories.List(ctx, "", opt)
 	if err != nil {
 		return repos, 0, err
 	}

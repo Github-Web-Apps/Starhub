@@ -56,13 +56,14 @@ func (o *Oauth) Mount(r *mux.Router) {
 			http.Error(w, "invalid oauth state", http.StatusUnauthorized)
 			return
 		}
-		token, err := o.config.Exchange(context.Background(), code)
+		ctx := context.Background()
+		token, err := o.config.Exchange(ctx, code)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusUnauthorized)
 			return
 		}
-		client := github.NewClient(o.config.Client(context.Background(), token))
-		u, _, err := client.Users.Get("")
+		client := github.NewClient(o.config.Client(ctx, token))
+		u, _, err := client.Users.Get(ctx, "")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusUnauthorized)
 			return
