@@ -6,15 +6,13 @@ import (
 
 	"github.com/caarlos0/watchub/config"
 	"github.com/caarlos0/watchub/datastore"
-	"github.com/caarlos0/watchub/internal/pages"
 	"github.com/caarlos0/watchub/shared/dto"
+	"github.com/caarlos0/watchub/shared/pages"
 	"github.com/google/go-github/github"
 	"github.com/gorilla/mux"
 	"golang.org/x/oauth2"
 	githuboauth "golang.org/x/oauth2/github"
 )
-
-const applicationsURL = "https://github.com/settings/connections/applications/"
 
 // Oauth info
 type Oauth struct {
@@ -37,9 +35,15 @@ func New(store datastore.Datastore, config config.Config) *Oauth {
 	}
 }
 
+// ClientFrom for a given string token
+func (o *Oauth) ClientFrom(ctx context.Context, tokenStr string) *github.Client {
+	return o.Client(ctx, token.FromJson(tokenStr))
+}
+
 // Client for a given token
-func (o *Oauth) Client(token *oauth2.Token) *github.Client {
-	return github.NewClient(o.config.Client(context.Background(), token))
+// TODO check if this will still be used
+func (o *Oauth) Client(ctx context.Context, token *oauth2.Token) *github.Client {
+	return github.NewClient(o.config.Client(ctx, token))
 }
 
 // Mount setup de Oauth routes
@@ -73,9 +77,9 @@ func (o *Oauth) Mount(r *mux.Router) {
 			return
 		}
 		pages.Render(w, "index", dto.IndexData{
-			User:                  *u.Login,
-			UserID:                *u.ID,
-			ChangeSubscriptionURL: applicationsURL + o.config.ClientID,
+			User:     *u.Login,
+			UserID:   *u.ID,
+			ClientID: o.config.ClientID,
 		})
 	})
 }

@@ -7,12 +7,15 @@ import (
 )
 
 // Get all user's repos
-func Get(client *github.Client) (result []*github.Repository, err error) {
-	opt := &github.RepositoryListOptions{
+func Get(
+	ctx context.Context,
+	client *github.Client,
+) (result []*github.Repository, err error) {
+	var opt = &github.RepositoryListOptions{
 		ListOptions: github.ListOptions{PerPage: 30},
 	}
 	for {
-		repos, nextPage, err := getPage(opt, client)
+		repos, nextPage, err := getPage(ctx, client, opt)
 		if err != nil {
 			return result, err
 		}
@@ -21,16 +24,17 @@ func Get(client *github.Client) (result []*github.Repository, err error) {
 			break
 		}
 	}
-	return result, nil
+	return
 }
 
 func getPage(
-	opt *github.RepositoryListOptions, client *github.Client,
+	ctx context.Context,
+	client *github.Client,
+	opt *github.RepositoryListOptions,
 ) (repos []*github.Repository, nextPage int, err error) {
-	ctx := context.Background()
 	repos, resp, err := client.Repositories.List(ctx, "", opt)
 	if err != nil {
-		return repos, 0, err
+		return
 	}
 	return repos, resp.NextPage, err
 }

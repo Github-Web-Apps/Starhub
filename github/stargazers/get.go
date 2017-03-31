@@ -5,26 +5,23 @@ import (
 	"sync"
 
 	"github.com/apex/log"
-	"github.com/caarlos0/watchub/internal/repos"
 	"github.com/caarlos0/watchub/shared/model"
 	"github.com/google/go-github/github"
 	"golang.org/x/sync/errgroup"
 )
 
 // Get the list of repos of a given user
-func Get(client *github.Client) (result []model.Star, err error) {
-	repos, err := repos.Get(client)
-	if err != nil {
-		return
-	}
-
+func Get(
+	ctx context.Context,
+	client *github.Client,
+	repos []*github.Repository,
+) (result []model.Star, err error) {
 	var g errgroup.Group
 	var m sync.Mutex
-
 	for _, repo := range repos {
 		repo := repo
 		g.Go(func() error {
-			r, er := processRepo(client, repo)
+			r, er := processRepo(ctx, client, repo)
 			if er != nil {
 				return er
 			}
@@ -40,9 +37,11 @@ func Get(client *github.Client) (result []model.Star, err error) {
 }
 
 func processRepo(
-	client *github.Client, repo *github.Repository,
+	ctx context.Context,
+	client *github.Client,
+	repo *github.Repository,
 ) (result model.Star, err error) {
-	stars, err := stars(client, repo)
+	stars, err := stars(ctx, client, repo)
 	if err != nil {
 		return result, err
 	}
@@ -58,11 +57,13 @@ func processRepo(
 }
 
 func stars(
-	client *github.Client, repo *github.Repository,
+	ctx context.Context,
+	client *github.Client,
+	repo *github.Repository,
 ) (result []*github.Stargazer, err error) {
-	opt := &github.ListOptions{PerPage: 30}
+	var opt = &github.ListOptions{PerPage: 30}
 	for {
-		repos, nextPage, err := getPage(opt, client, repo)
+		repos, nextPage, err := getPage(ctx, client, repo, opt)
 		if err != nil {
 			return result, err
 		}
@@ -75,14 +76,19 @@ func stars(
 }
 
 func getPage(
-	opt *github.ListOptions, client *github.Client, repo *github.Repository,
+	ctx context.Context,
+	client *github.Client,
+	repo *github.Repository,
+	opt *github.ListOptions,
 ) (stars []*github.Stargazer, nextPage int, err error) {
-	ctx := context.Background()
 	stars, resp, err := client.Activity.ListStargazers(
-		ctx, *repo.Owner.Login, *repo.Name, opt,
+		ctx,
+		*repo.Owner.Login,
+		*repo.Name,
+		opt,
 	)
 	if err != nil {
-		return stars, 0, err
+		return
 	}
 	return stars, resp.NextPage, nil
 }

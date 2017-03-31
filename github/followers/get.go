@@ -7,11 +7,13 @@ import (
 )
 
 // Get the list of followers of a given user
-func Get(client *github.Client) (result []*github.User, err error) {
-	opt := &github.ListOptions{PerPage: 30}
-
+func Get(
+	ctx context.Context,
+	client *github.Client,
+) (result []*github.User, err error) {
+	var opt = &github.ListOptions{PerPage: 30}
 	for {
-		followers, nextPage, err := getPage(opt, client)
+		followers, nextPage, err := getPage(ctx, client, opt)
 		if err != nil {
 			return result, err
 		}
@@ -24,12 +26,13 @@ func Get(client *github.Client) (result []*github.User, err error) {
 }
 
 func getPage(
-	opt *github.ListOptions, client *github.Client,
+	ctx context.Context,
+	client *github.Client,
+	opt *github.ListOptions,
 ) (followers []*github.User, nextPage int, err error) {
-	ctx := context.Background()
 	followers, resp, err := client.Users.ListFollowers(ctx, "", opt)
 	if err != nil {
-		return followers, 0, err
+		return
 	}
 	return followers, resp.NextPage, err
 }
