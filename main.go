@@ -4,24 +4,29 @@ import (
 	"net/http"
 	"time"
 
-	log "github.com/Sirupsen/logrus"
+	"github.com/apex/httplog"
+	"github.com/apex/log"
+	"github.com/apex/log/handlers/text"
 	"github.com/caarlos0/watchub/internal/config"
 	"github.com/caarlos0/watchub/internal/datastores/database"
 	"github.com/caarlos0/watchub/internal/dto"
 	"github.com/caarlos0/watchub/internal/oauth"
 	"github.com/caarlos0/watchub/internal/pages"
 	"github.com/caarlos0/watchub/internal/scheduler"
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
 )
 
 func main() {
-	log.Println("Starting up...")
+	log.SetHandler(text.Default)
+	log.SetLevel(log.InfoLevel)
+	log.Info("Starting up...")
 
 	// config
 	config, err := config.Get()
 	if err != nil {
-		log.Panicln(err)
+		log.WithError(err).Error("failed to load config")
 	}
 
 	// datastores
@@ -35,7 +40,7 @@ func main() {
 	// schedulers
 	scheduler, err := scheduler.New(config, store, oauth)
 	if err != nil {
-		log.Fatal(err)
+		log.WithError(err).Error("failed to start scheduler")
 	}
 	scheduler.Start()
 	defer scheduler.Stop()
@@ -59,10 +64,10 @@ func main() {
 
 	// RUN!
 	var server = &http.Server{
-		Handler:      r,
+		Handler:      httplog.New(handlers.CompressHandler(r)),
 		Addr:         ":" + config.Port,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
-	log.Fatal(server.ListenAndServe())
+	log.WithError(server.ListenAndServe()).Error("Failed to start up server")
 }

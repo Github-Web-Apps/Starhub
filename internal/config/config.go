@@ -14,7 +14,6 @@ type Config struct {
 }
 
 // Get the config
-func Get() (Config, error) {
-	cfg := Config{}
+func Get() (cfg Config, err error) {
 	return cfg, env.Parse(&cfg)
 }

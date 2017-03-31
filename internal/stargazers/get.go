@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	log "github.com/Sirupsen/logrus"
+	"github.com/apex/log"
 	"github.com/caarlos0/watchub/internal/datastores"
 	"github.com/caarlos0/watchub/internal/repos"
 	"github.com/google/go-github/github"
@@ -34,7 +34,7 @@ func Get(client *github.Client) (result []datastores.Star, err error) {
 			return nil
 		})
 	}
-	log.Println("Waiting for the goroutines to end")
+	log.Info("waiting for the goroutines to end")
 	err = g.Wait()
 	return
 }

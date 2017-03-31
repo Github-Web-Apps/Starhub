@@ -1,7 +1,7 @@
 package: github.com/caarlos0/watchub
 import:
-- package: github.com/Sirupsen/logrus
-  version: v0.11.5
+- package: github.com/apex/httplog
+- package: github.com/apex/log
 - package: github.com/caarlos0/env
   version: v2.1
 - package: github.com/google/go-github
@@ -9,6 +9,8 @@ import:
   - github
 - package: github.com/gorilla/mux
   version: v1.3.0
+- package: github.com/gorilla/handlers
+  version: v1.2
 - package: github.com/jmoiron/sqlx
 - package: github.com/lib/pq
 - package: github.com/robfig/cron
