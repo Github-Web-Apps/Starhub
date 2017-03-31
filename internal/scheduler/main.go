@@ -6,7 +6,7 @@ import (
 	"errors"
 	"time"
 
-	log "github.com/Sirupsen/logrus"
+	"github.com/apex/log"
 	"github.com/caarlos0/watchub/internal/config"
 	"github.com/caarlos0/watchub/internal/datastores"
 	"github.com/caarlos0/watchub/internal/diff"
@@ -41,16 +41,16 @@ func process(
 	return func() {
 		execs, err := store.Executions()
 		if err != nil {
-			log.Println(err)
+			log.WithError(err).Error("failed to get executions")
 			return
 		}
 		mailer := mail.New(config)
 		for _, exec := range execs {
-			log.WithField("user_id", exec.UserID).Println("Processing...")
+			var log = log.WithField("user_id", exec.UserID)
+			log.Info("processing...")
 			token, err := tokenFromJSON(exec.Token)
 			if err != nil {
-				log.WithField("user_id", exec.UserID).WithError(err).
-					Println("Failed to get the token")
+				log.WithError(err).Error("failed to get the token")
 				return
 			}
 			client := oauth.Client(token)
@@ -66,59 +66,52 @@ func doProcess(
 	exec datastores.Execution,
 	url string,
 ) {
+	var log = log.WithField("user_id", exec.UserID)
 	start := time.Now()
 	ctx := context.Background()
-
 	// user info
 	user, _, err := client.Users.Get(ctx, "")
 	if err != nil {
-		log.WithField("user_id", exec.UserID).WithError(err).
-			Println("Failed to get user data")
+		log.WithError(err).Error("failed to get user data")
 		return
 	}
 	email, err := getEmail(ctx, client)
 	if err != nil {
-		log.WithField("user_id", exec.UserID).WithError(err).
-			Println("Failed to get user email addr")
+		log.WithError(err).Error("failed to get user email addr")
 		return
 	}
+	log = log.WithField("email", email)
 
 	// followers
 	followers, err := followers.Get(client)
 	if err != nil {
-		log.WithField("user_id", exec.UserID).WithError(err).
-			Println("Failed to store user followers from github")
+		log.WithError(err).Error("failed to store user followers from github")
 		return
 	}
 	previousFollowers, err := store.GetFollowers(exec.UserID)
 	if err != nil {
-		log.WithField("user_id", exec.UserID).WithError(err).
-			Println("Failed to get user followers from db")
+		log.WithError(err).Error("failed to get user followers from db")
 		return
 	}
 	followersLogin := toLoginArray(followers)
 	if err = store.SaveFollowers(exec.UserID, followersLogin); err != nil {
-		log.WithField("user_id", exec.UserID).WithError(err).
-			Println("Failed to store user followers to db")
+		log.WithError(err).Error("failed to store user followers to db")
 		return
 	}
 
 	// stars
 	stars, err := stargazers.Get(client)
 	if err != nil {
-		log.WithField("user_id", exec.UserID).WithError(err).
-			Println("Failed to get user repos stargazers from github")
+		log.WithError(err).Error("failed to get user repos stargazers from github")
 		return
 	}
 	previousStars, err := store.GetStars(exec.UserID)
 	if err != nil {
-		log.WithField("user_id", exec.UserID).WithError(err).
-			Println("Failed to get user repos stargazers from db")
+		log.WithError(err).Error("failed to get user repos stargazers from db")
 		return
 	}
 	if err := store.SaveStars(exec.UserID, stars); err != nil {
-		log.WithField("user_id", exec.UserID).WithError(err).
-			Println("Failed to store user repos stargazers to db")
+		log.WithError(err).Error("failed to store user repos stargazers to db")
 		return
 	}
 
@@ -155,9 +148,7 @@ func doProcess(
 			)
 		}
 	}
-	log.WithField("user_id", exec.UserID).WithField("email", email).
-		WithField("time_taken", time.Since(start).Seconds()).
-		Println("Successfully processed")
+	log.WithField("time_taken", time.Since(start).Seconds()).Info("successfully processed")
 }
 
 func countStars(stars []datastores.Star) int {
