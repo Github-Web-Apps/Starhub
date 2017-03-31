@@ -3,7 +3,7 @@ package database
 import (
 	"encoding/json"
 
-	"github.com/caarlos0/watchub/internal/datastores"
+	"github.com/caarlos0/watchub/config/model"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
 )
@@ -38,8 +38,7 @@ func (db *Userdatastore) SaveFollowers(userID int64, followers []string) error {
 }
 
 // GetStars of a given userID
-func (db *Userdatastore) GetStars(userID int64) ([]datastores.Star, error) {
-	var result []datastores.Star
+func (db *Userdatastore) GetStars(userID int64) (result []model.Star, err error) {
 	var stars json.RawMessage
 	if err := db.QueryRow(
 		"SELECT stars FROM tokens WHERE user_id = $1",
@@ -51,7 +50,7 @@ func (db *Userdatastore) GetStars(userID int64) ([]datastores.Star, error) {
 }
 
 // SaveStars for a given userID
-func (db *Userdatastore) SaveStars(userID int64, stars []datastores.Star) error {
+func (db *Userdatastore) SaveStars(userID int64, stars []model.Star) error {
 	data, err := json.Marshal(stars)
 	if err != nil {
 		return err

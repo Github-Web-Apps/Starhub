@@ -7,8 +7,8 @@ import (
 	"github.com/apex/httplog"
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/text"
-	"github.com/caarlos0/watchub/internal/config"
-	"github.com/caarlos0/watchub/internal/datastores/database"
+	"github.com/caarlos0/watchub/config"
+	"github.com/caarlos0/watchub/datastore/database"
 	"github.com/caarlos0/watchub/internal/dto"
 	"github.com/caarlos0/watchub/internal/oauth"
 	"github.com/caarlos0/watchub/internal/pages"
@@ -23,19 +23,13 @@ func main() {
 	log.SetLevel(log.InfoLevel)
 	log.Info("Starting up...")
 
-	// config
-	config, err := config.Get()
-	if err != nil {
-		log.WithError(err).Error("failed to load config")
-	}
-
-	// datastores
-	db := database.Connect(config.DatabaseURL)
+	var config = config.Get()
+	var db = database.Connect(config.DatabaseURL)
 	defer func() { _ = db.Close() }()
-	store := database.NewDatastore(db)
+	var store = database.NewDatastore(db)
 
 	// oauth
-	oauth := oauth.New(store, config)
+	var oauth = oauth.New(store, config)
 
 	// schedulers
 	scheduler, err := scheduler.New(config, store, oauth)

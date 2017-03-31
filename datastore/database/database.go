@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/apex/log"
-	"github.com/caarlos0/watchub/internal/datastores"
+	"github.com/caarlos0/watchub/datastore"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -22,8 +22,8 @@ func Connect(url string) *sql.DB {
 }
 
 // NewDatastore returns a new Datastore
-func NewDatastore(db *sql.DB) datastores.Datastore {
-	dbx := sqlx.NewDb(db, "postgres")
+func NewDatastore(db *sql.DB) datastore.Datastore {
+	var dbx = sqlx.NewDb(db, "postgres")
 	return struct {
 		*Tokenstore
 		*Execstore

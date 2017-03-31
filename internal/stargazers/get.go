@@ -5,14 +5,14 @@ import (
 	"sync"
 
 	"github.com/apex/log"
-	"github.com/caarlos0/watchub/internal/datastores"
 	"github.com/caarlos0/watchub/internal/repos"
+	"github.com/caarlos0/watchub/shared/model"
 	"github.com/google/go-github/github"
 	"golang.org/x/sync/errgroup"
 )
 
 // Get the list of repos of a given user
-func Get(client *github.Client) (result []datastores.Star, err error) {
+func Get(client *github.Client) (result []model.Star, err error) {
 	repos, err := repos.Get(client)
 	if err != nil {
 		return
@@ -41,7 +41,7 @@ func Get(client *github.Client) (result []datastores.Star, err error) {
 
 func processRepo(
 	client *github.Client, repo *github.Repository,
-) (result datastores.Star, err error) {
+) (result model.Star, err error) {
 	stars, err := stars(client, repo)
 	if err != nil {
 		return result, err
@@ -50,7 +50,7 @@ func processRepo(
 	for _, star := range stars {
 		stargazers = append(stargazers, *star.User.Login)
 	}
-	return datastores.Star{
+	return model.Star{
 		RepoID:     int64(*repo.ID),
 		RepoName:   *repo.FullName,
 		Stargazers: stargazers,

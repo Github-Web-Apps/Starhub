@@ -1,10 +1,7 @@
-package datastores
+package model
 
+// Execution model
 type Execution struct {
 	UserID int64  `db:"user_id"`
 	Token  string `db:"token" json:"-"`
-}
-
-type Execstore interface {
-	Executions() ([]Execution, error)
 }

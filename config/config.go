@@ -1,6 +1,9 @@
 package config
 
-import "github.com/caarlos0/env"
+import (
+	"github.com/apex/log"
+	"github.com/caarlos0/env"
+)
 
 // Config of the app
 type Config struct {
@@ -14,6 +17,10 @@ type Config struct {
 }
 
 // Get the config
-func Get() (cfg Config, err error) {
-	return cfg, env.Parse(&cfg)
+func Get() (cfg Config) {
+	var err = env.Parse(&cfg)
+	if err != nil {
+		log.WithError(err).Fatal("failed to laod config")
+	}
+	return
 }

@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/caarlos0/watchub/internal/datastores"
+	"github.com/caarlos0/watchub/config/model"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -23,7 +23,6 @@ const executionsStmQuery = `
 `
 
 // Executions get the executions that should be made
-func (db *Execstore) Executions() ([]datastores.Execution, error) {
-	var executions []datastores.Execution
+func (db *Execstore) Executions() (executions []model.Execution, err error) {
 	return executions, db.Select(&executions, executionsStmQuery)
 }

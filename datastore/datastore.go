@@ -1,4 +1,4 @@
-package datastores
+package datastore
 
 // Datastore access to database
 type Datastore interface {

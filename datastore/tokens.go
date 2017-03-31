@@ -1,4 +1,4 @@
-package datastores
+package datastore
 
 import (
 	"time"

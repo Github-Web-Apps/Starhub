@@ -4,10 +4,10 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/caarlos0/watchub/internal/config"
-	"github.com/caarlos0/watchub/internal/datastores"
-	"github.com/caarlos0/watchub/internal/dto"
+	"github.com/caarlos0/watchub/config"
+	"github.com/caarlos0/watchub/datastore"
 	"github.com/caarlos0/watchub/internal/pages"
+	"github.com/caarlos0/watchub/shared/dto"
 	"github.com/google/go-github/github"
 	"github.com/gorilla/mux"
 	"golang.org/x/oauth2"
@@ -19,12 +19,12 @@ const applicationsURL = "https://github.com/settings/connections/applications/"
 // Oauth info
 type Oauth struct {
 	config *oauth2.Config
-	store  datastores.Datastore
+	store  datastore.Datastore
 	state  string
 }
 
 // New oauth
-func New(store datastores.Datastore, config config.Config) *Oauth {
+func New(store datastore.Datastore, config config.Config) *Oauth {
 	return &Oauth{
 		config: &oauth2.Config{
 			ClientID:     config.ClientID,
