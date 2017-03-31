@@ -3,7 +3,7 @@ package database
 import (
 	"encoding/json"
 
-	"github.com/caarlos0/watchub/config/model"
+	"github.com/caarlos0/watchub/shared/model"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
 )

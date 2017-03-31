@@ -8,14 +8,14 @@ type StarEmailData struct {
 
 // ChangesEmailData is the DTO passed down to the daily email
 type ChangesEmailData struct {
-	Login                 string
-	Email                 string
-	Followers             int
-	Stars                 int
-	Repos                 int
-	NewFollowers          []string
-	Unfollowers           []string
-	NewStars              []StarEmailData
-	Unstars               []StarEmailData
-	ChangeSubscriptionURL string
+	Login        string
+	Email        string
+	Followers    int
+	Stars        int
+	Repos        int
+	NewFollowers []string
+	Unfollowers  []string
+	NewStars     []StarEmailData
+	Unstars      []StarEmailData
+	ClientID     string
 }

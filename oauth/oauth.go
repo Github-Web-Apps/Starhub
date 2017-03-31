@@ -8,6 +8,7 @@ import (
 	"github.com/caarlos0/watchub/datastore"
 	"github.com/caarlos0/watchub/shared/dto"
 	"github.com/caarlos0/watchub/shared/pages"
+	"github.com/caarlos0/watchub/shared/token"
 	"github.com/google/go-github/github"
 	"github.com/gorilla/mux"
 	"golang.org/x/oauth2"
@@ -36,14 +37,12 @@ func New(store datastore.Datastore, config config.Config) *Oauth {
 }
 
 // ClientFrom for a given string token
-func (o *Oauth) ClientFrom(ctx context.Context, tokenStr string) *github.Client {
-	return o.Client(ctx, token.FromJson(tokenStr))
-}
-
-// Client for a given token
-// TODO check if this will still be used
-func (o *Oauth) Client(ctx context.Context, token *oauth2.Token) *github.Client {
-	return github.NewClient(o.config.Client(ctx, token))
+func (o *Oauth) ClientFrom(ctx context.Context, tokenStr string) (*github.Client, error) {
+	token, err := token.FromJSON(tokenStr)
+	if err != nil {
+		return nil, err
+	}
+	return github.NewClient(o.config.Client(ctx, token)), err
 }
 
 // Mount setup de Oauth routes

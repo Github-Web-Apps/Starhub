@@ -7,8 +7,11 @@ import (
 	"github.com/apex/log"
 	"github.com/caarlos0/watchub/config"
 	"github.com/caarlos0/watchub/datastore"
+	"github.com/caarlos0/watchub/github/repos"
 	"github.com/caarlos0/watchub/github/stargazers"
 	"github.com/caarlos0/watchub/github/user"
+	"github.com/caarlos0/watchub/mail"
+	"github.com/caarlos0/watchub/oauth"
 	"github.com/caarlos0/watchub/shared/diff"
 	"github.com/caarlos0/watchub/shared/dto"
 	"github.com/caarlos0/watchub/shared/model"
@@ -18,7 +21,7 @@ import (
 // New scheduler
 func New(
 	config config.Config,
-	store model.Datastore,
+	store datastore.Datastore,
 	oauth *oauth.Oauth,
 ) *cron.Cron {
 	var fn = func() {
@@ -29,7 +32,7 @@ func New(
 		}
 		for _, exec := range execs {
 			exec := exec
-			go process(exec, config, store)
+			go process(exec, config, store, oauth)
 		}
 	}
 
@@ -44,14 +47,19 @@ func process(
 	exec model.Execution,
 	config config.Config,
 	store datastore.Datastore,
+	oauth *oauth.Oauth,
 ) {
 	var start = time.Now()
 	var log = log.WithField("id", exec.UserID)
 	var ctx = context.Background()
-	var client = oauth.ClientFrom(ctx, exec.Token)
+	client, err := oauth.ClientFrom(ctx, exec.Token)
+	if err != nil {
+		log.WithError(err).Error("failed to authenticate")
+		return
+	}
 
 	log.Info("started processing...")
-	var user, err = user.Info(ctx, client)
+	user, err := user.Info(ctx, client)
 	if err != nil {
 		log.WithError(err).Error("failed to get user info")
 	}
@@ -67,10 +75,14 @@ func process(
 		return
 	}
 
-	// stars
-	stars, err := stargazers.Get(ctx, client)
+	repos, err := repos.Get(ctx, client)
 	if err != nil {
-		log.WithError(err).Error("failed to get user repos stargazers from github")
+		log.WithError(err).Error("failed to get user repos from github")
+		return
+	}
+	stars, err := stargazers.Get(ctx, client, repos)
+	if err != nil {
+		log.WithError(err).Error("failed to get stargazers from github")
 		return
 	}
 	previousStars, err := store.GetStars(exec.UserID)
@@ -84,11 +96,12 @@ func process(
 	}
 
 	// send email
+	var mailer = mail.New(config)
 	if len(followers)+len(previousStars) == 0 {
 		mailer.SendWelcome(
-			mail.WelcomeData{
-				Login:     *user.Login,
-				Email:     email,
+			dto.WelcomeEmailData{
+				Login:     user.Login,
+				Email:     user.Email,
 				Followers: len(followers),
 				Stars:     countStars(stars),
 				Repos:     len(stars),
@@ -96,14 +109,14 @@ func process(
 			},
 		)
 	} else {
-		newFollowers := diff.Of(followersLogin, followers)
-		unfollowers := diff.Of(previousFollowers, followersLogin)
+		newFollowers := diff.Of(user.Followers, followers)
+		unfollowers := diff.Of(followers, user.Followers)
 		newStars, unstars := stargazerStatistics(stars, previousStars)
 		if len(newFollowers)+len(unfollowers)+len(newStars)+len(unstars) > 0 {
 			mailer.SendChanges(
-				mail.ChangesData{
-					Login:        *user.Login,
-					Email:        email,
+				dto.ChangesEmailData{
+					Login:        user.Login,
+					Email:        user.Email,
 					Followers:    len(followers),
 					Stars:        countStars(stars),
 					Repos:        len(stars),
@@ -119,12 +132,11 @@ func process(
 	log.WithField("time_taken", time.Since(start).Seconds()).Info("successfully processed")
 }
 
-func countStars(stars []model.Star) int {
-	starCount := 0
+func countStars(stars []model.Star) (count int) {
 	for _, star := range stars {
-		starCount += len(star.Stargazers)
+		count += len(star.Stargazers)
 	}
-	return starCount
+	return
 }
 
 func stargazerStatistics(stars, previousStars []model.Star) (newStars, unstars []dto.StarEmailData) {
@@ -148,7 +160,7 @@ func stargazerStatistics(stars, previousStars []model.Star) (newStars, unstars [
 func getDiff(name string, x, xs []string) *dto.StarEmailData {
 	var d = diff.Of(x, xs)
 	if len(d) > 0 {
-		return &mail.StarData{
+		return &dto.StarEmailData{
 			Repo:  name,
 			Users: d,
 		}

@@ -9,10 +9,10 @@ import (
 	"github.com/apex/log/handlers/text"
 	"github.com/caarlos0/watchub/config"
 	"github.com/caarlos0/watchub/datastore/database"
-	"github.com/caarlos0/watchub/internal/dto"
-	"github.com/caarlos0/watchub/internal/oauth"
-	"github.com/caarlos0/watchub/internal/pages"
-	"github.com/caarlos0/watchub/internal/scheduler"
+	"github.com/caarlos0/watchub/oauth"
+	"github.com/caarlos0/watchub/scheduler"
+	"github.com/caarlos0/watchub/shared/dto"
+	"github.com/caarlos0/watchub/shared/pages"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
@@ -32,10 +32,7 @@ func main() {
 	var oauth = oauth.New(store, config)
 
 	// schedulers
-	scheduler, err := scheduler.New(config, store, oauth)
-	if err != nil {
-		log.WithError(err).Error("failed to start scheduler")
-	}
+	var scheduler = scheduler.New(config, store, oauth)
 	scheduler.Start()
 	defer scheduler.Stop()
 
