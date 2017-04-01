@@ -6,6 +6,7 @@ import (
 
 	"github.com/caarlos0/watchub/config"
 	"github.com/caarlos0/watchub/shared/dto"
+	"github.com/gorilla/sessions"
 )
 
 func Render(w http.ResponseWriter, name string, data interface{}) {
@@ -16,8 +17,9 @@ func Render(w http.ResponseWriter, name string, data interface{}) {
 }
 
 type GenericPage struct {
-	config config.Config
-	name   string
+	session sessions.Store
+	config  config.Config
+	name    string
 }
 
 func New(config config.Config, name string) *GenericPage {
@@ -28,10 +30,14 @@ func New(config config.Config, name string) *GenericPage {
 }
 
 func (gp *GenericPage) Handler(w http.ResponseWriter, r *http.Request) {
+	session, _ := gp.session.Get(r, o.config.SessionName)
+	var user = dto.User
+	if !session.IsNew {
+		user.ID, _ := session.Values["user_id"].(id)
+		user.Login, _ := session.Values["user_login"].(string)
+	}
 	Render(w, gp.name, dto.IndexData{
-		User: dto.User{
-			Login: "moises",
-		},
+		User: user,
 		ClientID: gp.config.ClientID,
 	})
 }
