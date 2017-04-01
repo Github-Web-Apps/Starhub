@@ -12,6 +12,7 @@ import (
 	"github.com/caarlos0/watchub/oauth"
 	"github.com/caarlos0/watchub/scheduler"
 	"github.com/caarlos0/watchub/shared/pages"
+	"github.com/gorilla/context"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
@@ -50,13 +51,19 @@ func main() {
 	loginMux.Path("").HandlerFunc(oauth.LoginHandler())
 	loginMux.Path("/callback").HandlerFunc(oauth.LoginCallbackHandler())
 
-	// RUN!
+	var handler = context.ClearHandler(
+		httplog.New(
+			handlers.CompressHandler(
+				mux,
+			),
+		),
+	)
 	var server = &http.Server{
-		Handler:      httplog.New(handlers.CompressHandler(mux)),
+		Handler:      handler,
 		Addr:         ":" + config.Port,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
-	log.WithField("port", config.Port).Info("started")
+	log.WithField("addr", server.Addr).Info("started")
 	log.WithError(server.ListenAndServe()).Error("failed to start up server")
 }
