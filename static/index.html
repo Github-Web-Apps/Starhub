@@ -10,12 +10,23 @@
     <img src="https://avatars3.githubusercontent.com/u/{{ .ID }}?v=3&s=144" class="ui circular image">
     Houdy, {{.Login}}!
   </h2>
-  <p>
-    <b>We're are all set!</b>
-    You should receive a welcome email soon <i class="mail icon"></i>
-  </p>
-  <p>
-    <a target="blank" class="ui secondary basic small button" href="https://github.com/settings/connections/applications/{{ .ClientID }}">Change settings</a>
-  </p>
+  {{ if .ShowWelcome }}
+    <p>
+      <b>We're are all set!</b>
+      You should receive a welcome email soon <i class="mail icon"></i>
+      <a target="blank" class="ui secondary basic small button" href="https://github.com/settings/connections/applications/{{ .ClientID }}">
+        Change settings
+      </a>
+    </p>
+  {{ else }}
+    <p>
+      <a target="blank" class="ui green basic small button" href="/check">
+        Check now
+      </a>
+      <a target="blank" class="ui secondary basic small button" href="https://github.com/settings/connections/applications/{{ .ClientID }}">
+        Change settings
+      </a>
+    </p>
+  {{ end }}
 {{end}}
 {{end}}

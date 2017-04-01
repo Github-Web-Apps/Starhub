@@ -3,5 +3,6 @@ package dto
 // IndexData DTO
 type IndexData struct {
 	User
-	ClientID string
+	ClientID    string
+	ShowWelcome bool
 }

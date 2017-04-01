@@ -56,7 +56,8 @@ func (o *Oauth) LoginCallbackHandler() http.HandlerFunc {
 				ID:    *u.ID,
 				Login: *u.Login,
 			},
-			ClientID: o.config.ClientID,
+			ShowWelcome: true,
+			ClientID:    o.config.ClientID,
 		})
 	}
 }
