@@ -34,7 +34,7 @@ func main() {
 	var oauth = oauth.New(store, session, config)
 
 	// schedulers
-	var scheduler = scheduler.New(config, store, oauth)
+	var scheduler = scheduler.New(config, store, oauth, session)
 	scheduler.Start()
 	defer scheduler.Stop()
 
@@ -43,15 +43,16 @@ func main() {
 	mux.PathPrefix("/static/").
 		Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	mux.Methods("GET").Path("/").
-		HandlerFunc(pages.New(config, session, "index").Handler)
+		HandlerFunc(pages.New(config, session).IndexHandler)
 	mux.Methods("GET").Path("/donate").
-		HandlerFunc(pages.New(config, session, "donate").Handler)
+		HandlerFunc(pages.New(config, session).DonateHandler)
 	mux.Methods("GET").Path("/support").
-		HandlerFunc(pages.New(config, session, "support").Handler)
+		HandlerFunc(pages.New(config, session).SupportHandler)
 
 	var loginMux = mux.Methods("GET").PathPrefix("/login").Subrouter()
 	loginMux.Path("").HandlerFunc(oauth.LoginHandler())
 	loginMux.Path("/callback").HandlerFunc(oauth.LoginCallbackHandler())
+	mux.Path("/check").HandlerFunc(scheduler.ScheduleHandler())
 
 	var handler = context.ClearHandler(
 		httplog.New(

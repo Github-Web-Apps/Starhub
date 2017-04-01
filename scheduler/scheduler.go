@@ -15,34 +15,59 @@ import (
 	"github.com/caarlos0/watchub/shared/diff"
 	"github.com/caarlos0/watchub/shared/dto"
 	"github.com/caarlos0/watchub/shared/model"
+	"github.com/gorilla/sessions"
 	"github.com/robfig/cron"
 )
 
 // TODO this file still need to be cleaned up
+
+// Scheduler type
+type Scheduler struct {
+	cron    *cron.Cron
+	config  config.Config
+	store   datastore.Datastore
+	oauth   *oauth.Oauth
+	session sessions.Store
+}
 
 // New scheduler
 func New(
 	config config.Config,
 	store datastore.Datastore,
 	oauth *oauth.Oauth,
-) *cron.Cron {
+	session sessions.Store,
+) *Scheduler {
+	return &Scheduler{
+		cron:    cron.New(),
+		config:  config,
+		store:   store,
+		oauth:   oauth,
+		session: session,
+	}
+}
+
+// Start the scheduler
+func (s *Scheduler) Start() {
 	var fn = func() {
-		execs, err := store.Executions()
+		execs, err := s.store.Executions()
 		if err != nil {
 			log.WithError(err).Error("failed to get executions")
 			return
 		}
 		for _, exec := range execs {
 			exec := exec
-			go process(exec, config, store, oauth)
+			go process(exec, s.config, s.store, s.oauth)
 		}
 	}
-
-	var cron = cron.New()
-	if err := cron.AddFunc(config.Schedule, fn); err != nil {
+	if err := s.cron.AddFunc(s.config.Schedule, fn); err != nil {
 		log.WithError(err).Fatal("failed to start cron service")
 	}
-	return cron
+	s.cron.Start()
+}
+
+// Stop the scheduler
+func (s *Scheduler) Stop() {
+	s.cron.Stop()
 }
 
 func process(
