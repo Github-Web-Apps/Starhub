@@ -4,7 +4,6 @@ import (
 	"context"
 	"sync"
 
-	"github.com/apex/log"
 	"github.com/caarlos0/watchub/shared/model"
 	"github.com/google/go-github/github"
 	"golang.org/x/sync/errgroup"
@@ -31,7 +30,6 @@ func Get(
 			return nil
 		})
 	}
-	log.Info("waiting for the goroutines to end")
 	err = g.Wait()
 	return
 }
