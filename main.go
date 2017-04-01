@@ -11,7 +11,6 @@ import (
 	"github.com/caarlos0/watchub/datastore/database"
 	"github.com/caarlos0/watchub/oauth"
 	"github.com/caarlos0/watchub/scheduler"
-	"github.com/caarlos0/watchub/shared/dto"
 	"github.com/caarlos0/watchub/shared/pages"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -37,26 +36,23 @@ func main() {
 	defer scheduler.Stop()
 
 	// routes
-	var r = mux.NewRouter()
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	var mux = mux.NewRouter()
+	mux.PathPrefix("/static/").
+		Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	mux.Methods("GET").Path("/").
+		HandlerFunc(pages.GenericPageHandler("index"))
+	mux.Methods("GET").Path("/donate").
+		HandlerFunc(pages.GenericPageHandler("donate"))
+	mux.Methods("GET").Path("/support").
+		HandlerFunc(pages.GenericPageHandler("support"))
 
-	r.Methods("GET").Path("/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		pages.Render(w, "index", dto.IndexData{})
-	})
-	r.Methods("GET").Path("/donate").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		pages.Render(w, "donate", dto.IndexData{})
-	})
-	r.Methods("GET").Path("/support").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		pages.Render(w, "support", dto.IndexData{})
-	})
-
-	var loginMux = r.Methods("GET").PathPrefix("/login").Subrouter()
+	var loginMux = mux.Methods("GET").PathPrefix("/login").Subrouter()
 	loginMux.Path("").HandlerFunc(oauth.LoginHandler())
 	loginMux.Path("/callback").HandlerFunc(oauth.LoginCallbackHandler())
 
 	// RUN!
 	var server = &http.Server{
-		Handler:      httplog.New(handlers.CompressHandler(r)),
+		Handler:      httplog.New(handlers.CompressHandler(mux)),
 		Addr:         ":" + config.Port,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
