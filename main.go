@@ -15,6 +15,7 @@ import (
 	"github.com/gorilla/context"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/gorilla/sessions"
 	_ "github.com/lib/pq"
 )
 
@@ -29,7 +30,8 @@ func main() {
 	var store = database.NewDatastore(db)
 
 	// oauth
-	var oauth = oauth.New(store, config)
+	var session = sessions.NewCookieStore([]byte(config.SessionSecret))
+	var oauth = oauth.New(store, session, config)
 
 	// schedulers
 	var scheduler = scheduler.New(config, store, oauth)
@@ -41,11 +43,11 @@ func main() {
 	mux.PathPrefix("/static/").
 		Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	mux.Methods("GET").Path("/").
-		HandlerFunc(pages.New(config, "index").Handler)
+		HandlerFunc(pages.New(config, session, "index").Handler)
 	mux.Methods("GET").Path("/donate").
-		HandlerFunc(pages.New(config, "donate").Handler)
+		HandlerFunc(pages.New(config, session, "donate").Handler)
 	mux.Methods("GET").Path("/support").
-		HandlerFunc(pages.New(config, "support").Handler)
+		HandlerFunc(pages.New(config, session, "support").Handler)
 
 	var loginMux = mux.Methods("GET").PathPrefix("/login").Subrouter()
 	loginMux.Path("").HandlerFunc(oauth.LoginHandler())

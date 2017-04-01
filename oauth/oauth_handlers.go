@@ -43,6 +43,14 @@ func (o *Oauth) LoginCallbackHandler() http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
+
+		session, _ := o.session.Get(r, o.sessionName)
+		session.Values["user_id"] = *u.ID
+		session.Values["user_login"] = *u.Login
+		if err := session.Save(r, w); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 		pages.Render(w, "index", dto.IndexData{
 			User: dto.User{
 				ID:    *u.ID,

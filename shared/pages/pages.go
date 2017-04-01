@@ -22,22 +22,27 @@ type GenericPage struct {
 	name    string
 }
 
-func New(config config.Config, name string) *GenericPage {
+func New(
+	config config.Config,
+	session sessions.Store,
+	page string,
+) *GenericPage {
 	return &GenericPage{
-		config: config,
-		name:   name,
+		config:  config,
+		session: session,
+		name:    page,
 	}
 }
 
-func (gp *GenericPage) Handler(w http.ResponseWriter, r *http.Request) {
-	session, _ := gp.session.Get(r, o.config.SessionName)
-	var user = dto.User
+func (page *GenericPage) Handler(w http.ResponseWriter, r *http.Request) {
+	session, _ := page.session.Get(r, page.config.SessionName)
+	var user dto.User
 	if !session.IsNew {
-		user.ID, _ := session.Values["user_id"].(id)
-		user.Login, _ := session.Values["user_login"].(string)
+		user.ID, _ = session.Values["user_id"].(int)
+		user.Login, _ = session.Values["user_login"].(string)
 	}
-	Render(w, gp.name, dto.IndexData{
-		User: user,
-		ClientID: gp.config.ClientID,
+	Render(w, page.name, dto.IndexData{
+		User:     user,
+		ClientID: page.config.ClientID,
 	})
 }
