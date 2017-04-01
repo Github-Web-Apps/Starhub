@@ -21,7 +21,7 @@ import (
 func main() {
 	log.SetHandler(text.Default)
 	log.SetLevel(log.InfoLevel)
-	log.Info("Starting up...")
+	log.Info("starting up...")
 
 	var config = config.Get()
 	var db = database.Connect(config.DatabaseURL)
@@ -37,7 +37,7 @@ func main() {
 	defer scheduler.Stop()
 
 	// routes
-	r := mux.NewRouter()
+	var r = mux.NewRouter()
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	r.Methods("GET").Path("/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -50,8 +50,9 @@ func main() {
 		pages.Render(w, "support", dto.IndexData{})
 	})
 
-	// mount oauth routes
-	oauth.Mount(r)
+	var loginMux = r.Methods("GET").PathPrefix("/login").Subrouter()
+	loginMux.Path("").HandlerFunc(oauth.LoginHandler())
+	loginMux.Path("/callback").HandlerFunc(oauth.LoginCallbackHandler())
 
 	// RUN!
 	var server = &http.Server{
@@ -60,5 +61,6 @@ func main() {
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
-	log.WithError(server.ListenAndServe()).Error("Failed to start up server")
+	log.WithField("port", config.Port).Info("started")
+	log.WithError(server.ListenAndServe()).Error("failed to start up server")
 }
