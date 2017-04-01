@@ -1,5 +1,5 @@
 {{ define "content" }}
-{{if eq .User ""}}
+{{if eq .ID 0}}
   <h3 class="ui header">Login</h3>
   <p>
     In order to continue, we need to authorize with GitHub.
@@ -7,8 +7,8 @@
   <a href="/login" class="ui large positive button"><i class="github icon"></i> Login</a>
 {{else}}
   <h2 class="ui header">
-    <img src="https://avatars3.githubusercontent.com/u/{{ .UserID }}?v=3&s=144" class="ui circular image">
-    Houdy, {{.User}}!
+    <img src="https://avatars3.githubusercontent.com/u/{{ .ID }}?v=3&s=144" class="ui circular image">
+    Houdy, {{.Login}}!
   </h2>
   <p>
     <b>We're are all set!</b>

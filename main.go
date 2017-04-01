@@ -40,11 +40,11 @@ func main() {
 	mux.PathPrefix("/static/").
 		Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	mux.Methods("GET").Path("/").
-		HandlerFunc(pages.GenericPageHandler("index"))
+		HandlerFunc(pages.New(config, "index").Handler)
 	mux.Methods("GET").Path("/donate").
-		HandlerFunc(pages.GenericPageHandler("donate"))
+		HandlerFunc(pages.New(config, "donate").Handler)
 	mux.Methods("GET").Path("/support").
-		HandlerFunc(pages.GenericPageHandler("support"))
+		HandlerFunc(pages.New(config, "support").Handler)
 
 	var loginMux = mux.Methods("GET").PathPrefix("/login").Subrouter()
 	loginMux.Path("").HandlerFunc(oauth.LoginHandler())

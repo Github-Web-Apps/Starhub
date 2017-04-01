@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"net/http"
 
+	"github.com/caarlos0/watchub/config"
 	"github.com/caarlos0/watchub/shared/dto"
 )
 
@@ -14,8 +15,23 @@ func Render(w http.ResponseWriter, name string, data interface{}) {
 	}
 }
 
-func GenericPageHandler(page string) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		Render(w, page, dto.IndexData{})
+type GenericPage struct {
+	config config.Config
+	name   string
+}
+
+func New(config config.Config, name string) *GenericPage {
+	return &GenericPage{
+		config: config,
+		name:   name,
 	}
+}
+
+func (gp *GenericPage) Handler(w http.ResponseWriter, r *http.Request) {
+	Render(w, gp.name, dto.IndexData{
+		User: dto.User{
+			Login: "moises",
+		},
+		ClientID: gp.config.ClientID,
+	})
 }

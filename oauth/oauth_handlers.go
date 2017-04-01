@@ -44,8 +44,10 @@ func (o *Oauth) LoginCallbackHandler() http.HandlerFunc {
 			return
 		}
 		pages.Render(w, "index", dto.IndexData{
-			User:     *u.Login,
-			UserID:   *u.ID,
+			User: dto.User{
+				ID:    *u.ID,
+				Login: *u.Login,
+			},
 			ClientID: o.config.ClientID,
 		})
 	}
