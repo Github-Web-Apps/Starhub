@@ -18,6 +18,8 @@ import (
 	"github.com/robfig/cron"
 )
 
+// TODO this file still need to be cleaned up
+
 // New scheduler
 func New(
 	config config.Config,
