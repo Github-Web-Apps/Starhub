@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" href="/static/favicon-16x16.png" sizes="16x16" />
   <title>Watchub</title>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css">
 </head>
 <body>
   <div class="ui inverted vertical masthead center aligned segment">
@@ -20,12 +20,14 @@
         <a class="item" href="/">Home</a>
         <a class="item" href="/support">Support</a>
         <a class="item" href="/donate">Donate</a>
-        <div class="right item">
+        <div class="right menu">
           {{ if eq .User.ID 0 }}
-            <a class="ui inverted button" href="/login">Login</a>
+            <a class="ui inverted button item" href="/login">Login</a>
           {{ else }}
-            <div class="header item">Welcome, {{ .User.Login }}!</div>
-            <a class="item" href="/logout">Logout</a>
+            <span class="item">{{ .User.Login }}</span>
+            <a class="item" href="/logout" title="Logout">
+              <i class="power icon"></i>
+            </a>
           {{ end }}
         </div>
       </div>
