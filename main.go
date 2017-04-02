@@ -46,11 +46,12 @@ func main() {
 	mux.Methods("GET").Path("/").HandlerFunc(pages.IndexHandler)
 	mux.Methods("GET").Path("/donate").HandlerFunc(pages.DonateHandler)
 	mux.Methods("GET").Path("/support").HandlerFunc(pages.SupportHandler)
+	mux.Path("/check").HandlerFunc(scheduler.ScheduleHandler())
 
 	var loginMux = mux.Methods("GET").PathPrefix("/login").Subrouter()
 	loginMux.Path("").HandlerFunc(oauth.LoginHandler())
 	loginMux.Path("/callback").HandlerFunc(oauth.LoginCallbackHandler())
-	mux.Path("/check").HandlerFunc(scheduler.ScheduleHandler())
+	mux.Path("/logout").HandlerFunc(oauth.LogoutHandler())
 
 	var handler = context.ClearHandler(
 		httplog.New(

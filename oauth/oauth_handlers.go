@@ -17,6 +17,19 @@ func (o *Oauth) LoginHandler() http.HandlerFunc {
 	}
 }
 
+// LogoutHandler logouts current user
+func (o *Oauth) LogoutHandler() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		session, _ := o.session.Get(r, o.sessionName)
+		session.Values = map[interface{}]interface{}{}
+		if err := session.Save(r, w); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		http.Redirect(w, r, "", http.StatusTemporaryRedirect)
+	}
+}
+
 // LoginCallbackHandler deals with the login callback from github
 func (o *Oauth) LoginCallbackHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {

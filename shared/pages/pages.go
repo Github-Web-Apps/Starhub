@@ -49,29 +49,29 @@ func (page *Page) data(r *http.Request) PageData {
 
 // IndexHandler handles /
 func (page *Page) IndexHandler(w http.ResponseWriter, r *http.Request) {
-	var data = page.data(r)
-	var id = int64(data.User.ID)
-	stars, err := page.store.StarCount(id)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+	var data = IndexData{
+		PageData: page.data(r),
 	}
-	followers, err := page.store.FollowerCount(id)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+	if data.User.ID > 0 {
+		var err error
+		var id = int64(data.User.ID)
+		data.StarCount, err = page.store.StarCount(id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		data.FollowerCount, err = page.store.FollowerCount(id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		data.RepositoryCount, err = page.store.RepositoryCount(id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 	}
-	repos, err := page.store.RepositoryCount(id)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	Render(w, "index", IndexData{
-		PageData:        data,
-		StarCount:       stars,
-		FollowerCount:   followers,
-		RepositoryCount: repos,
-	})
+	Render(w, "index", data)
 }
 
 // SupportHandler handles /support
