@@ -38,16 +38,14 @@ func main() {
 	scheduler.Start()
 	defer scheduler.Stop()
 
+	var pages = pages.New(config, store, session)
+
 	// routes
 	var mux = mux.NewRouter()
-	mux.PathPrefix("/static/").
-		Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	mux.Methods("GET").Path("/").
-		HandlerFunc(pages.New(config, session).IndexHandler)
-	mux.Methods("GET").Path("/donate").
-		HandlerFunc(pages.New(config, session).DonateHandler)
-	mux.Methods("GET").Path("/support").
-		HandlerFunc(pages.New(config, session).SupportHandler)
+	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	mux.Methods("GET").Path("/").HandlerFunc(pages.IndexHandler)
+	mux.Methods("GET").Path("/donate").HandlerFunc(pages.DonateHandler)
+	mux.Methods("GET").Path("/support").HandlerFunc(pages.SupportHandler)
 
 	var loginMux = mux.Methods("GET").PathPrefix("/login").Subrouter()
 	loginMux.Path("").HandlerFunc(oauth.LoginHandler())

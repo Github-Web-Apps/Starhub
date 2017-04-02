@@ -1,15 +1,15 @@
 {{ define "content" }}
-{{if eq .ID 0}}
+{{ if eq .User.ID 0 }}
   <h3 class="ui header">Login</h3>
   <p>
     In order to continue, we need to authorize with GitHub.
   </p>
   <a href="/login" class="ui large positive button"><i class="github icon"></i> Login</a>
-{{else}}
+{{ else }}
   <div class="ui very padded segment">
     <h2 class="ui header">
-      <img src="https://avatars3.githubusercontent.com/u/{{ .ID }}?v=3&s=144" class="ui circular image">
-      Hello {{.Login}}!
+      <img src="https://avatars3.githubusercontent.com/u/{{ .User.ID }}?v=3&s=144" class="ui circular image">
+      Hello {{ .User.Login}}!
     </h2>
     {{ if .ShowWelcome }}
       <p>
@@ -32,6 +32,14 @@
         </div>
         <div class="statistic">
           <div class="value">
+            {{ .RepositoryCount }}
+          </div>
+          <div class="label">
+            Repositories
+          </div>
+        </div>
+        <div class="statistic">
+          <div class="value">
             {{ .StarCount }}
           </div>
           <div class="label">
@@ -41,7 +49,7 @@
       </div>
       <br>
       <div class="ui two buttons">
-        <a target="blank" class="ui primary small button" href="/check">
+        <a class="ui primary small button" href="/check">
           Check now
         </a>
         <a target="blank" class="ui small button" href="https://github.com/settings/connections/applications/{{ .ClientID }}">
@@ -50,5 +58,5 @@
       </div>
     {{ end }}
   </div>
-{{end}}
-{{end}}
+{{ end }}
+{{ end }}

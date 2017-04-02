@@ -62,3 +62,34 @@ func (db *Userdatastore) SaveStars(userID int64, stars []model.Star) error {
 	)
 	return err
 }
+
+// FollowerCount returns the amount of followers stored for a given userID
+func (db *Userdatastore) FollowerCount(userID int64) (count int, err error) {
+	err = db.QueryRow(
+		"SELECT array_length(followers, 1) FROM tokens WHERE user_id = $1",
+		userID,
+	).Scan(&count)
+	return
+}
+
+const starCountQuery = `
+	SELECT SUM( json_array_length( (repo->>'stargazers')::json ) )
+	FROM tokens t
+	CROSS JOIN json_array_elements(t.stars) repo
+	WHERE t.user_id = $1
+`
+
+// StarCount returns the amount of stargazers of all the user's repositories
+func (db *Userdatastore) StarCount(userID int64) (count int, err error) {
+	err = db.QueryRow(starCountQuery, userID).Scan(&count)
+	return
+}
+
+// RepositoryCount returns the amount of followers stored for a given userID
+func (db *Userdatastore) RepositoryCount(userID int64) (count int, err error) {
+	err = db.QueryRow(
+		"SELECT json_array_length(stars) FROM tokens WHERE user_id = $1",
+		userID,
+	).Scan(&count)
+	return
+}

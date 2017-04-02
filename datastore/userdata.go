@@ -7,4 +7,7 @@ type Userdatastore interface {
 	SaveFollowers(userID int64, followers []string) error
 	GetStars(userID int64) ([]model.Star, error)
 	SaveStars(userID int64, stars []model.Star) error
+	FollowerCount(userID int64) (int, error)
+	StarCount(userID int64) (int, error)
+	RepositoryCount(userID int64) (int, error)
 }

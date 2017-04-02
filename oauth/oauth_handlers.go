@@ -4,7 +4,6 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/caarlos0/watchub/shared/dto"
 	"github.com/caarlos0/watchub/shared/pages"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
@@ -51,9 +50,9 @@ func (o *Oauth) LoginCallbackHandler() http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		pages.Render(w, "index", dto.IndexData{
-			PageData: dto.PageData{
-				User: dto.User{
+		pages.Render(w, "index", pages.IndexData{
+			PageData: pages.PageData{
+				User: pages.User{
 					ID:    *u.ID,
 					Login: *u.Login,
 				},

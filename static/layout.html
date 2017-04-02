@@ -21,10 +21,10 @@
         <a class="item" href="/support">Support</a>
         <a class="item" href="/donate">Donate</a>
         <div class="right item">
-          {{ if eq .ID 0 }}
+          {{ if eq .User.ID 0 }}
             <a class="ui inverted button" href="/login">Login</a>
           {{ else }}
-            <div class="header item">Welcome, {{ .Login }}!</div>
+            <div class="header item">Welcome, {{ .User.Login }}!</div>
             <a class="item" href="/logout">Logout</a>
           {{ end }}
         </div>

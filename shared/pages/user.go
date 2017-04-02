@@ -1,4 +1,4 @@
-package dto
+package pages
 
 type User struct {
 	ID    int

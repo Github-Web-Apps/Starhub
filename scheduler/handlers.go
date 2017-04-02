@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/caarlos0/watchub/shared/dto"
 	"github.com/caarlos0/watchub/shared/pages"
 )
 
@@ -22,8 +21,8 @@ func (s *Scheduler) ScheduleHandler() http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		pages.Render(w, "checking", dto.PageData{
-			User: dto.User{
+		pages.Render(w, "checking", pages.PageData{
+			User: pages.User{
 				ID:    id,
 				Login: login,
 			},
