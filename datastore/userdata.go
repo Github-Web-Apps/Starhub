@@ -10,4 +10,5 @@ type Userdatastore interface {
 	FollowerCount(userID int64) (int, error)
 	StarCount(userID int64) (int, error)
 	RepositoryCount(userID int64) (int, error)
+	UserExist(userID int64) (bool, error)
 }

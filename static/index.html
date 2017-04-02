@@ -11,7 +11,7 @@
       <img src="https://avatars3.githubusercontent.com/u/{{ .User.ID }}?v=3&s=144" class="ui circular image">
       Hello {{ .User.Login}}!
     </h2>
-    {{ if .ShowWelcome }}
+    {{ if .User.IsNew }}
       <p>
         <b>We're are all set!</b>
         You should receive a welcome email soon <i class="mail icon"></i>

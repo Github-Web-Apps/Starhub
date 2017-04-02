@@ -4,7 +4,6 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/caarlos0/watchub/shared/pages"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 )
@@ -51,6 +50,8 @@ func (o *Oauth) LoginCallbackHandler() http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusUnauthorized)
 			return
 		}
+
+		exists, _ := o.store.UserExist(int64(*u.ID))
 		if err := o.store.SaveToken(int64(*u.ID), token); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -59,19 +60,11 @@ func (o *Oauth) LoginCallbackHandler() http.HandlerFunc {
 		session, _ := o.session.Get(r, o.sessionName)
 		session.Values["user_id"] = *u.ID
 		session.Values["user_login"] = *u.Login
+		session.Values["new_user"] = !exists
 		if err := session.Save(r, w); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		pages.Render(w, "index", pages.IndexData{
-			PageData: pages.PageData{
-				User: pages.User{
-					ID:    *u.ID,
-					Login: *u.Login,
-				},
-				ClientID: o.config.ClientID,
-			},
-			ShowWelcome: true,
-		})
+		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 	}
 }

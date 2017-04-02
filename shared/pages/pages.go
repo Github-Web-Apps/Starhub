@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"net/http"
 
+	"github.com/apex/log"
 	"github.com/caarlos0/watchub/config"
 	"github.com/caarlos0/watchub/datastore"
 	"github.com/gorilla/sessions"
@@ -34,12 +35,17 @@ func New(
 	}
 }
 
-func (page *Page) data(r *http.Request) PageData {
+func (page *Page) data(w http.ResponseWriter, r *http.Request) PageData {
 	var user User
 	session, _ := page.session.Get(r, page.config.SessionName)
 	if !session.IsNew {
 		user.ID, _ = session.Values["user_id"].(int)
 		user.Login, _ = session.Values["user_login"].(string)
+		user.IsNew, _ = session.Values["new_user"].(bool)
+		delete(session.Values, "new_user")
+		if err := session.Save(r, w); err != nil {
+			log.WithError(err).Error("failed to update session")
+		}
 	}
 	return PageData{
 		User:     user,
@@ -50,7 +56,7 @@ func (page *Page) data(r *http.Request) PageData {
 // IndexHandler handles /
 func (page *Page) IndexHandler(w http.ResponseWriter, r *http.Request) {
 	var data = IndexData{
-		PageData: page.data(r),
+		PageData: page.data(w, r),
 	}
 	if data.User.ID > 0 {
 		var err error
@@ -76,10 +82,10 @@ func (page *Page) IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 // SupportHandler handles /support
 func (page *Page) SupportHandler(w http.ResponseWriter, r *http.Request) {
-	Render(w, "support", page.data(r))
+	Render(w, "support", page.data(w, r))
 }
 
 // DonateHandler handles /donate
 func (page *Page) DonateHandler(w http.ResponseWriter, r *http.Request) {
-	Render(w, "donate", page.data(r))
+	Render(w, "donate", page.data(w, r))
 }
