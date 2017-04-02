@@ -3,6 +3,7 @@ package oauth
 import (
 	"context"
 	"net/http"
+	"time"
 
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
@@ -56,7 +57,12 @@ func (o *Oauth) LoginCallbackHandler() http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-
+		if !exists {
+			if err := o.store.Schedule(int64(*u.ID), time.Now()); err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+		}
 		session, _ := o.session.Get(r, o.sessionName)
 		session.Values["user_id"] = *u.ID
 		session.Values["user_login"] = *u.Login

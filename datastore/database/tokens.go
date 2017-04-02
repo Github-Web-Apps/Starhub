@@ -19,10 +19,10 @@ func NewTokenstore(db *sqlx.DB) *Tokenstore {
 }
 
 const insertTokenStm = `
-	INSERT INTO tokens(user_id, token, next)
-	VALUES($1, $2, now())
+	INSERT INTO tokens(user_id, token)
+	VALUES($1, $2)
 	ON CONFLICT(user_id)
-		DO UPDATE SET token = $2, updated_at = now(), next = now();
+		DO UPDATE SET token = $2, updated_at = now();
 `
 
 // SaveToken saves a token
