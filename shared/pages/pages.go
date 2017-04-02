@@ -89,3 +89,8 @@ func (page *Page) SupportHandler(w http.ResponseWriter, r *http.Request) {
 func (page *Page) DonateHandler(w http.ResponseWriter, r *http.Request) {
 	Render(w, "donate", page.data(w, r))
 }
+
+// ScheduledHandler handles /scheduled
+func (page *Page) ScheduledHandler(w http.ResponseWriter, r *http.Request) {
+	Render(w, "scheduled", page.data(w, r))
+}
