@@ -144,7 +144,7 @@ func process(
 				dto.ChangesEmailData{
 					Login:        user.Login,
 					Email:        user.Email,
-					Followers:    len(followers),
+					Followers:    len(user.Followers),
 					Stars:        countStars(stars),
 					Repos:        len(stars),
 					NewFollowers: newFollowers,
