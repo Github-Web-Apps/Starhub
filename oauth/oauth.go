@@ -7,19 +7,26 @@ import (
 	"github.com/caarlos0/watchub/datastore"
 	"github.com/caarlos0/watchub/shared/token"
 	"github.com/google/go-github/github"
+	"github.com/gorilla/sessions"
 	"golang.org/x/oauth2"
 	githuboauth "golang.org/x/oauth2/github"
 )
 
 // Oauth info
 type Oauth struct {
-	config *oauth2.Config
-	store  datastore.Datastore
-	state  string
+	config      *oauth2.Config
+	store       datastore.Datastore
+	session     sessions.Store
+	sessionName string
+	state       string
 }
 
 // New oauth
-func New(store datastore.Datastore, config config.Config) *Oauth {
+func New(
+	store datastore.Datastore,
+	session sessions.Store,
+	config config.Config,
+) *Oauth {
 	return &Oauth{
 		config: &oauth2.Config{
 			ClientID:     config.ClientID,
@@ -27,8 +34,10 @@ func New(store datastore.Datastore, config config.Config) *Oauth {
 			Scopes:       []string{"user:email,public_repo"},
 			Endpoint:     githuboauth.Endpoint,
 		},
-		store: store,
-		state: config.OauthState,
+		store:       store,
+		session:     session,
+		state:       config.OauthState,
+		sessionName: config.SessionName,
 	}
 }
 

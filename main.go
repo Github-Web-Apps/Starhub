@@ -12,8 +12,10 @@ import (
 	"github.com/caarlos0/watchub/oauth"
 	"github.com/caarlos0/watchub/scheduler"
 	"github.com/caarlos0/watchub/shared/pages"
+	"github.com/gorilla/context"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/gorilla/sessions"
 	_ "github.com/lib/pq"
 )
 
@@ -28,35 +30,43 @@ func main() {
 	var store = database.NewDatastore(db)
 
 	// oauth
-	var oauth = oauth.New(store, config)
+	var session = sessions.NewCookieStore([]byte(config.SessionSecret))
+	var oauth = oauth.New(store, session, config)
 
 	// schedulers
-	var scheduler = scheduler.New(config, store, oauth)
+	var scheduler = scheduler.New(config, store, oauth, session)
 	scheduler.Start()
 	defer scheduler.Stop()
 
+	var pages = pages.New(config, store, session)
+
 	// routes
 	var mux = mux.NewRouter()
-	mux.PathPrefix("/static/").
-		Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	mux.Methods("GET").Path("/").
-		HandlerFunc(pages.GenericPageHandler("index"))
-	mux.Methods("GET").Path("/donate").
-		HandlerFunc(pages.GenericPageHandler("donate"))
-	mux.Methods("GET").Path("/support").
-		HandlerFunc(pages.GenericPageHandler("support"))
+	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	mux.Methods("GET").Path("/").HandlerFunc(pages.IndexHandler)
+	mux.Methods("GET").Path("/donate").HandlerFunc(pages.DonateHandler)
+	mux.Methods("GET").Path("/support").HandlerFunc(pages.SupportHandler)
+	mux.Path("/schedule").HandlerFunc(scheduler.ScheduleHandler())
+	mux.Path("/scheduled").HandlerFunc(pages.ScheduledHandler)
 
 	var loginMux = mux.Methods("GET").PathPrefix("/login").Subrouter()
 	loginMux.Path("").HandlerFunc(oauth.LoginHandler())
 	loginMux.Path("/callback").HandlerFunc(oauth.LoginCallbackHandler())
+	mux.Path("/logout").HandlerFunc(oauth.LogoutHandler())
 
-	// RUN!
+	var handler = context.ClearHandler(
+		httplog.New(
+			handlers.CompressHandler(
+				mux,
+			),
+		),
+	)
 	var server = &http.Server{
-		Handler:      httplog.New(handlers.CompressHandler(mux)),
+		Handler:      handler,
 		Addr:         ":" + config.Port,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
-	log.WithField("port", config.Port).Info("started")
+	log.WithField("addr", server.Addr).Info("started")
 	log.WithError(server.ListenAndServe()).Error("failed to start up server")
 }

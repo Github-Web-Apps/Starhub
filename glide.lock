@@ -1,5 +1,5 @@
-hash: b5e8d8d3c8b144af5e4c0aed302a8bec544a32cacbb3522329dc2d90c490acc2
-updated: 2017-03-31T18:30:59.339267835-03:00
+hash: 3bf4a04221f5011a7f25458c396e76c07444037afb2d95f04218d416e8442383
+updated: 2017-04-01T18:17:45.046773678-03:00
 imports:
 - name: github.com/apex/httplog
   version: d677fdf2ae1fa75d8111faf17f2d6fcf46dd9af7
@@ -14,7 +14,7 @@ imports:
   subpackages:
   - proto
 - name: github.com/google/go-github
-  version: e96a1efec3efbfec63cf32984b21bf98933042a2
+  version: 12363ffc10018c93407ebf303040586d55957271
   subpackages:
   - github
 - name: github.com/google/go-querystring
@@ -27,6 +27,10 @@ imports:
   version: 3a5767ca75ece5f7f1440b1d16975247f8d8b221
 - name: github.com/gorilla/mux
   version: 392c28fe23e1c45ddba891b0320b3b5df220beea
+- name: github.com/gorilla/securecookie
+  version: e59506cc896acb7f7bf732d4fdf5e25f7ccd8983
+- name: github.com/gorilla/sessions
+  version: ca9ada44574153444b00d3fd9c8559e4cc95f896
 - name: github.com/jmoiron/sqlx
   version: 8ed836a8adb659e8492bcaa49e0880bb84075fe2
   subpackages:

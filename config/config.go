@@ -14,6 +14,8 @@ type Config struct {
 	DatabaseURL    string `env:"DATABASE_URL" envDefault:"postgres://localhost:5432/watchub?sslmode=disable"`
 	SendgridAPIKey string `env:"SENDGRID_API_KEY"`
 	Schedule       string `env:"SCHEDULE" envDefault:"@every 1m"`
+	SessionSecret  string `env:"SESSION_SECRET" envDefault:"super-secret-session-secret"`
+	SessionName    string `env:"SESSION_NAME" envDefault:"JSESSIONID"`
 }
 
 // Get the config

@@ -19,8 +19,14 @@
       <div class="ui large secondary inverted pointing menu">
         <a class="item" href="/">Home</a>
         <a class="item" href="/support">Support</a>
+        <a class="item" href="/donate">Donate</a>
         <div class="right item">
-          <a class="ui inverted button" href="/donate">Donate</a>
+          {{ if eq .User.ID 0 }}
+            <a class="ui inverted button" href="/login">Login</a>
+          {{ else }}
+            <div class="header item">Welcome, {{ .User.Login }}!</div>
+            <a class="item" href="/logout">Logout</a>
+          {{ end }}
         </div>
       </div>
     </div>

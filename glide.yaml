@@ -25,6 +25,8 @@ import:
 - package: golang.org/x/sync
   subpackages:
   - errgroup
+- package: github.com/gorilla/sessions
+  version: v1.1
 testImport:
 - package: github.com/stretchr/testify
   version: v1.1.4

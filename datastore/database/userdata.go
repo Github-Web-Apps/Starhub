@@ -62,3 +62,49 @@ func (db *Userdatastore) SaveStars(userID int64, stars []model.Star) error {
 	)
 	return err
 }
+
+const followerCountQuery = `
+	SELECT COALESCE(array_length(followers, 1), 0)
+	FROM tokens
+	WHERE user_id = $1
+`
+
+// FollowerCount returns the amount of followers stored for a given userID
+func (db *Userdatastore) FollowerCount(userID int64) (count int, err error) {
+	err = db.QueryRow(followerCountQuery, userID).Scan(&count)
+	return
+}
+
+const starCountQuery = `
+	SELECT COALESCE(SUM(json_array_length((repo->>'stargazers')::json)), 0)
+	FROM tokens t
+	CROSS JOIN json_array_elements(t.stars) repo
+	WHERE t.user_id = $1
+`
+
+// StarCount returns the amount of stargazers of all the user's repositories
+func (db *Userdatastore) StarCount(userID int64) (count int, err error) {
+	err = db.QueryRow(starCountQuery, userID).Scan(&count)
+	return
+}
+
+var repositoryCountQuery = `
+	SELECT COALESCE(json_array_length(stars), 0)
+	FROM tokens
+	WHERE user_id = $1
+`
+
+// RepositoryCount returns the amount of followers stored for a given userID
+func (db *Userdatastore) RepositoryCount(userID int64) (count int, err error) {
+	err = db.QueryRow(repositoryCountQuery, userID).Scan(&count)
+	return
+}
+
+// UserExist returns true if an user is already registered in the db
+func (db *Userdatastore) UserExist(userID int64) (result bool, err error) {
+	err = db.QueryRow(
+		"SELECT EXISTS(SELECT 1 FROM tokens WHERE user_id = $1)",
+		userID,
+	).Scan(&result)
+	return
+}

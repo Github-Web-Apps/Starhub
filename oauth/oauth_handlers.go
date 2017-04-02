@@ -3,9 +3,8 @@ package oauth
 import (
 	"context"
 	"net/http"
+	"time"
 
-	"github.com/caarlos0/watchub/shared/dto"
-	"github.com/caarlos0/watchub/shared/pages"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 )
@@ -15,6 +14,19 @@ func (o *Oauth) LoginHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var url = o.config.AuthCodeURL(o.state, oauth2.AccessTypeOnline)
 		http.Redirect(w, r, url, http.StatusTemporaryRedirect)
+	}
+}
+
+// LogoutHandler logouts current user
+func (o *Oauth) LogoutHandler() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		session, _ := o.session.Get(r, o.sessionName)
+		session.Values = map[interface{}]interface{}{}
+		if err := session.Save(r, w); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		http.Redirect(w, r, "", http.StatusTemporaryRedirect)
 	}
 }
 
@@ -39,14 +51,26 @@ func (o *Oauth) LoginCallbackHandler() http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusUnauthorized)
 			return
 		}
+
+		exists, _ := o.store.UserExist(int64(*u.ID))
 		if err := o.store.SaveToken(int64(*u.ID), token); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		pages.Render(w, "index", dto.IndexData{
-			User:     *u.Login,
-			UserID:   *u.ID,
-			ClientID: o.config.ClientID,
-		})
+		if !exists {
+			if err := o.store.Schedule(int64(*u.ID), time.Now()); err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+		}
+		session, _ := o.session.Get(r, o.sessionName)
+		session.Values["user_id"] = *u.ID
+		session.Values["user_login"] = *u.Login
+		session.Values["new_user"] = !exists
+		if err := session.Save(r, w); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 	}
 }
