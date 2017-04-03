@@ -24,10 +24,12 @@
           {{ if eq .User.ID 0 }}
             <a class="ui inverted button item" href="/login">Login</a>
           {{ else }}
-            <span class="item">{{ .User.Login }}</span>
-            <a class="item" href="/logout" title="Logout">
-              <i class="power icon"></i>
-            </a>
+            <div class="horizontally fitted item">
+              {{ .User.Login }}
+              <a class="" href="/logout" title="Logout" style="margin-left: 3px">
+                <i class="power icon"></i>
+              </a>
+            </div>
           {{ end }}
         </div>
       </div>
