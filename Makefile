@@ -4,9 +4,9 @@ TEST_OPTIONS?=
 
 setup: ## Install all the build and lint dependencies
 	go get -u github.com/alecthomas/gometalinter
-	go get -u github.com/golang/dep
-	dep ensure
-	gometalinter --install
+	go get -u github.com/Masterminds/glide
+	glide install
+	gometalinter --install --update
 
 test: ## Run all the tests
 	go test $(TEST_OPTIONS) -cover $(SOURCE_FILES) -run $(TEST_PATTERN) -timeout=30s
@@ -28,7 +28,7 @@ lint: ## Run all the linters
 		--enable=errcheck \
 		--enable=vet \
 		--enable=vetshadow \
-		--deadline=1m \
+		--deadline=10m \
 		./...
 
 ci: lint test ## Run all the tests and code checks
