@@ -4,27 +4,20 @@ import (
 	"context"
 
 	"github.com/caarlos0/watchub/config"
-	"github.com/caarlos0/watchub/datastore"
 	"github.com/caarlos0/watchub/shared/token"
 	"github.com/google/go-github/github"
-	"github.com/gorilla/sessions"
 	"golang.org/x/oauth2"
 	githuboauth "golang.org/x/oauth2/github"
 )
 
 // Oauth info
 type Oauth struct {
-	config      *oauth2.Config
-	store       datastore.Datastore
-	session     sessions.Store
-	sessionName string
-	state       string
+	config *oauth2.Config
+	state  string
 }
 
 // New oauth
 func New(
-	store datastore.Datastore,
-	session sessions.Store,
 	config config.Config,
 ) *Oauth {
 	return &Oauth{
@@ -34,11 +27,13 @@ func New(
 			Scopes:       []string{"user:email,public_repo"},
 			Endpoint:     githuboauth.Endpoint,
 		},
-		store:       store,
-		session:     session,
-		state:       config.OauthState,
-		sessionName: config.SessionName,
+		state: config.OauthState,
 	}
+}
+
+// Client for a given token
+func (o *Oauth) Client(ctx context.Context, token *oauth2.Token) *github.Client {
+	return github.NewClient(o.config.Client(ctx, token))
 }
 
 // ClientFrom for a given string token
@@ -47,5 +42,20 @@ func (o *Oauth) ClientFrom(ctx context.Context, tokenStr string) (*github.Client
 	if err != nil {
 		return nil, err
 	}
-	return github.NewClient(o.config.Client(ctx, token)), err
+	return o.Client(ctx, token), nil
+}
+
+// AuthCodeURL URL to OAuth 2.0 provider's consent page
+func (o *Oauth) AuthCodeURL() string {
+	return o.config.AuthCodeURL(o.state, oauth2.AccessTypeOnline)
+}
+
+// IsStateValid true if state is valid
+func (o *Oauth) IsStateValid(state string) bool {
+	return o.state == state
+}
+
+// Exchange oauth code
+func (o *Oauth) Exchange(ctx context.Context, code string) (*oauth2.Token, error) {
+	return o.config.Exchange(ctx, code)
 }

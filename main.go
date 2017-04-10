@@ -31,7 +31,7 @@ func main() {
 
 	// oauth
 	var session = sessions.NewCookieStore([]byte(config.SessionSecret))
-	var oauth = oauth.New(store, session, config)
+	var oauth = oauth.New(config)
 
 	// schedulers
 	var scheduler = scheduler.New(config, store, oauth, session)
@@ -54,10 +54,16 @@ func main() {
 		controllers.NewSchedule(config, session, store).Handler,
 	)
 
-	var loginMux = mux.Methods("GET").PathPrefix("/login").Subrouter()
-	loginMux.Path("").HandlerFunc(oauth.LoginHandler())
-	loginMux.Path("/callback").HandlerFunc(oauth.LoginCallbackHandler())
-	mux.Path("/logout").HandlerFunc(oauth.LogoutHandler())
+	var loginCtrl = controllers.NewLogin(config, session, oauth, store)
+	mux.Methods("GET").Path("/login").HandlerFunc(
+		loginCtrl.Handler,
+	)
+	mux.Methods("GET").Path("/login/callback").HandlerFunc(
+		loginCtrl.CallbackHandler,
+	)
+	mux.Path("/logout").HandlerFunc(
+		controllers.NewLogout(config, session).Handler,
+	)
 
 	var handler = context.ClearHandler(
 		httplog.New(
