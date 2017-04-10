@@ -1,0 +1,22 @@
+{{ define "layout" }}
+<h2>Hi @{{.Login}}!</h2>
+
+{{ template "content" . }}
+
+<p>
+  We will continue to watch for changes and let you know!
+</p>
+<hr>
+<p>
+  Change your subscription on <a target="blank" href="https://github.com/settings/connections/applications/{{ .ClientID }}">GitHub</a>.
+</p>
+<p>
+  Liking our service?
+  Maybe you'll consider <a href="http://watchub.pw/donate">donating</a>.
+</p>
+<p style="color: #666">
+  Sincerely,<br/>
+  The Watchub Team<br/>
+  <a href="http://watchub.pw">watchub.pw</a>
+<p>
+{{ end }}
