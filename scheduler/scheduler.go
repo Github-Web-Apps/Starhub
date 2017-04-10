@@ -85,7 +85,7 @@ func process(
 		return
 	}
 
-	log.Info("started processing...")
+	log.Info("started processing")
 	user, err := user.Info(ctx, client)
 	if err != nil {
 		log.WithError(err).Error("failed to get user info")
