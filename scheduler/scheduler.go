@@ -129,7 +129,7 @@ func process(
 			dto.WelcomeEmailData{
 				Login:     user.Login,
 				Email:     user.Email,
-				Followers: len(followers),
+				Followers: len(user.Followers),
 				Stars:     countStars(stars),
 				Repos:     len(stars),
 				ClientID:  config.ClientID,

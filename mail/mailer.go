@@ -49,12 +49,12 @@ func (mailer *Mailer) SendWelcome(data dto.WelcomeEmailData) {
 }
 
 func (mailer *Mailer) send(name, email, subject, templateName string, data interface{}) {
-	var content bytes.Buffer
 	var log = log.WithField("email", email).WithField("template", templateName)
 	var from = mail.NewEmail("Watchub", mailer.from)
 	var to = mail.NewEmail(name, email)
-	if err := executeTemplate(&content, templateName, data); err != nil {
-		log.WithError(err).Error("failed parse email template")
+	var content, err = executeTemplate(templateName, data)
+	if err != nil {
+		log.WithError(err).Error("failed execute email template")
 		return
 	}
 	var request = sendgrid.GetRequest(
@@ -71,17 +71,19 @@ func (mailer *Mailer) send(name, email, subject, templateName string, data inter
 			mail.NewContent("text/html", content.String()),
 		),
 	)
-	if _, err := sendgrid.API(request); err != nil {
+	resp, err := sendgrid.API(request)
+	if err != nil {
 		log.WithError(err).Error("failed to send email")
 		return
 	}
-	log.Info("mail sent")
+	log.WithField("status", resp.StatusCode).Info("email request posted")
 }
 
-func executeTemplate(content *bytes.Buffer, name string, data interface{}) error {
+func executeTemplate(name string, data interface{}) (bytes.Buffer, error) {
+	var content bytes.Buffer
 	templates, _ := template.ParseFiles(
 		"static/mail/layout.html",
 		"static/mail/"+name+".html",
 	)
-	return templates.ExecuteTemplate(content, "layout", data)
+	return content, templates.ExecuteTemplate(&content, "layout", data)
 }
