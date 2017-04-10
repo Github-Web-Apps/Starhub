@@ -8,10 +8,10 @@ import (
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/text"
 	"github.com/caarlos0/watchub/config"
+	"github.com/caarlos0/watchub/controllers"
 	"github.com/caarlos0/watchub/datastore/database"
 	"github.com/caarlos0/watchub/oauth"
 	"github.com/caarlos0/watchub/scheduler"
-	"github.com/caarlos0/watchub/shared/pages"
 	"github.com/gorilla/context"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -38,16 +38,21 @@ func main() {
 	scheduler.Start()
 	defer scheduler.Stop()
 
-	var pages = pages.New(config, store, session)
-
 	// routes
 	var mux = mux.NewRouter()
 	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	mux.Methods("GET").Path("/").HandlerFunc(pages.IndexHandler)
-	mux.Methods("GET").Path("/donate").HandlerFunc(pages.DonateHandler)
-	mux.Methods("GET").Path("/support").HandlerFunc(pages.SupportHandler)
-	mux.Path("/schedule").HandlerFunc(scheduler.ScheduleHandler())
-	mux.Path("/scheduled").HandlerFunc(pages.ScheduledHandler)
+	mux.Methods("GET").Path("/").HandlerFunc(
+		controllers.NewIndex(config, session, store).Handler,
+	)
+	mux.Methods("GET").Path("/donate").HandlerFunc(
+		controllers.NewDonate(config, session).Handler,
+	)
+	mux.Methods("GET").Path("/support").HandlerFunc(
+		controllers.NewSupport(config, session).Handler,
+	)
+	mux.Methods("GET").Path("/schedule").HandlerFunc(
+		controllers.NewSchedule(config, session, store).Handler,
+	)
 
 	var loginMux = mux.Methods("GET").PathPrefix("/login").Subrouter()
 	loginMux.Path("").HandlerFunc(oauth.LoginHandler())
