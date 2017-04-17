@@ -8,10 +8,10 @@ import (
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/text"
 	"github.com/caarlos0/watchub/config"
+	"github.com/caarlos0/watchub/controllers"
 	"github.com/caarlos0/watchub/datastore/database"
 	"github.com/caarlos0/watchub/oauth"
 	"github.com/caarlos0/watchub/scheduler"
-	"github.com/caarlos0/watchub/shared/pages"
 	"github.com/gorilla/context"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -31,28 +31,39 @@ func main() {
 
 	// oauth
 	var session = sessions.NewCookieStore([]byte(config.SessionSecret))
-	var oauth = oauth.New(store, session, config)
+	var oauth = oauth.New(config)
 
 	// schedulers
 	var scheduler = scheduler.New(config, store, oauth, session)
 	scheduler.Start()
 	defer scheduler.Stop()
 
-	var pages = pages.New(config, store, session)
-
 	// routes
 	var mux = mux.NewRouter()
 	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	mux.Methods("GET").Path("/").HandlerFunc(pages.IndexHandler)
-	mux.Methods("GET").Path("/donate").HandlerFunc(pages.DonateHandler)
-	mux.Methods("GET").Path("/support").HandlerFunc(pages.SupportHandler)
-	mux.Path("/schedule").HandlerFunc(scheduler.ScheduleHandler())
-	mux.Path("/scheduled").HandlerFunc(pages.ScheduledHandler)
+	mux.Methods("GET").Path("/").HandlerFunc(
+		controllers.NewIndex(config, session, store).Handler,
+	)
+	mux.Methods("GET").Path("/donate").HandlerFunc(
+		controllers.NewDonate(config, session).Handler,
+	)
+	mux.Methods("GET").Path("/support").HandlerFunc(
+		controllers.NewSupport(config, session).Handler,
+	)
+	mux.Methods("GET").Path("/schedule").HandlerFunc(
+		controllers.NewSchedule(config, session, store).Handler,
+	)
 
-	var loginMux = mux.Methods("GET").PathPrefix("/login").Subrouter()
-	loginMux.Path("").HandlerFunc(oauth.LoginHandler())
-	loginMux.Path("/callback").HandlerFunc(oauth.LoginCallbackHandler())
-	mux.Path("/logout").HandlerFunc(oauth.LogoutHandler())
+	var loginCtrl = controllers.NewLogin(config, session, oauth, store)
+	mux.Methods("GET").Path("/login").HandlerFunc(
+		loginCtrl.Handler,
+	)
+	mux.Methods("GET").Path("/login/callback").HandlerFunc(
+		loginCtrl.CallbackHandler,
+	)
+	mux.Path("/logout").HandlerFunc(
+		controllers.NewLogout(config, session).Handler,
+	)
 
 	var handler = context.ClearHandler(
 		httplog.New(

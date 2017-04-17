@@ -1,7 +1,7 @@
-package pages
+package dto
 
 // PageData DTO
 type PageData struct {
-	User     User
+	User     PageUserData
 	ClientID string
 }

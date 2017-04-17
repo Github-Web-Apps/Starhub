@@ -1,7 +1,7 @@
-package pages
+package dto
 
-// IndexData DTO
-type IndexData struct {
+// IndexPageData DTO
+type IndexPageData struct {
 	PageData
 	FollowerCount   int
 	StarCount       int

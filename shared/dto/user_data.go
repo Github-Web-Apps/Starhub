@@ -1,6 +1,6 @@
-package pages
+package dto
 
-type User struct {
+type PageUserData struct {
 	ID    int
 	Login string
 	IsNew bool
