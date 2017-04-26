@@ -3,7 +3,7 @@
   <h3 align="center">Watchub</h3>
   <p align="center">Be notified of people who followed/unfollowed you and starred/unstarred your repositories.</p>
   <p align="center">
-    <a href="/blob/master/LICENSE.md">
+    <a href="/LICENSE.md">
       <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
     </a>
     <a href="https://travis-ci.org/caarlos0/watchub">
@@ -26,6 +26,19 @@
 
 ---
 
-<!-- TODO -->
 
-- [Running it locally/contributing/etc](/CONTRIBUTING.md)
+Watchub watches your account and notify you via email of the following events:
+
+- someone followed you
+- someone unfollowed you
+- someone starred a repository you have access to
+- someone unstarred a repository you have access to
+
+It will send you at most one email/day. The idea is not to flood your
+inbox with these things.
+
+This project adheres to the Contributor Covenant
+[code of conduct](CODE_OF_CONDUCT.md). By participating, you are expected to
+uphold this code.
+We appreciate your contribution. Please refer to our
+[contributing guidelines](CONTRIBUTING.md) for further information.
