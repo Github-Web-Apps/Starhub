@@ -5,7 +5,7 @@ TEST_OPTIONS?=
 setup: ## Install all the build and lint dependencies
 	go get -u github.com/alecthomas/gometalinter
 	go get -u github.com/Masterminds/glide
-  go get -u github.com/pierrre/gotestcover
+	go get -u github.com/pierrre/gotestcover
 	go get -u golang.org/x/tools/cmd/cover
 	glide install
 	gometalinter --install --update
