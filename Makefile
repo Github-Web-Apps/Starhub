@@ -5,14 +5,16 @@ TEST_OPTIONS?=
 setup: ## Install all the build and lint dependencies
 	go get -u github.com/alecthomas/gometalinter
 	go get -u github.com/Masterminds/glide
+  go get -u github.com/pierrre/gotestcover
+	go get -u golang.org/x/tools/cmd/cover
 	glide install
 	gometalinter --install --update
 
 test: ## Run all the tests
-	go test $(TEST_OPTIONS) -cover $(SOURCE_FILES) -run $(TEST_PATTERN) -timeout=30s
+	gotestcover $(TEST_OPTIONS) -covermode=atomic -coverprofile=coverage.txt $(SOURCE_FILES) -run $(TEST_PATTERN) -timeout=30s
 
 cover: test ## Run all the tests and opens the coverage report
-	go tool cover -html=coverage.out
+	go tool cover -html=coverage.txt
 
 fmt: ## gofmt and goimports all go files
 	gofmt -w -s $(SOURCE_FILES)
