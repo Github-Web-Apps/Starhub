@@ -19,7 +19,12 @@ func Get(
 		if err != nil {
 			return result, err
 		}
-		result = append(result, repos...)
+		for _, repo := range repos {
+			if repo.GetFork() || repo.GetPrivate() {
+				continue
+			}
+			result = append(result, repo)
+		}
 		if opt.Page = nextPage; nextPage == 0 {
 			break
 		}
