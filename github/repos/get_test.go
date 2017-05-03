@@ -1,25 +1,28 @@
+// +build integration
+
 package repos_test
 
-// import (
-// 	"os"
-// 	"testing"
+import (
+	"os"
+	"testing"
 
-// 	"github.com/caarlos0/watchub/internal/repos"
-// 	"github.com/google/go-github/github"
-// 	"github.com/stretchr/testify/assert"
-// 	"golang.org/x/oauth2"
-// )
+	"github.com/caarlos0/watchub/github/repos"
+	"github.com/google/go-github/github"
+	"github.com/stretchr/testify/assert"
+	"golang.org/x/oauth2"
+)
 
-// func TestGet(t *testing.T) {
-// 	ts := oauth2.StaticTokenSource(
-// 		&oauth2.Token{AccessToken: os.Getenv("GITHUB_TOKEN")},
-// 	)
-// 	tc := oauth2.NewClient(oauth2.NoContext, ts)
-// 	client := github.NewClient(tc)
+func TestGet(t *testing.T) {
+	var ctx = oauth2.NoContext
+	ts := oauth2.StaticTokenSource(
+		&oauth2.Token{AccessToken: os.Getenv("GITHUB_TOKEN")},
+	)
+	tc := oauth2.NewClient(ctx, ts)
+	client := github.NewClient(tc)
 
-// 	assert := assert.New(t)
+	assert := assert.New(t)
 
-// 	repos, err := repos.Get(client)
-// 	assert.NotEmpty(repos)
-// 	assert.NoError(err)
-// }
+	repos, err := repos.Get(ctx, client)
+	assert.NotEmpty(repos)
+	assert.NoError(err)
+}
