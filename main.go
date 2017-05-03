@@ -32,6 +32,7 @@ func main() {
 	// oauth
 	var session = sessions.NewCookieStore([]byte(config.SessionSecret))
 	var oauth = oauth.New(config)
+	var loginCtrl = controllers.NewLogin(config, session, oauth, store)
 
 	// schedulers
 	var scheduler = scheduler.New(config, store, oauth, session)
@@ -40,25 +41,25 @@ func main() {
 
 	// routes
 	var mux = mux.NewRouter()
-	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	mux.Methods("GET").Path("/").HandlerFunc(
+	mux.PathPrefix("/static/").Handler(
+		http.StripPrefix("/static/", http.FileServer(http.Dir("static"))),
+	)
+	mux.Methods(http.MethodGet).Path("/").HandlerFunc(
 		controllers.NewIndex(config, session, store).Handler,
 	)
-	mux.Methods("GET").Path("/donate").HandlerFunc(
+	mux.Methods(http.MethodGet).Path("/donate").HandlerFunc(
 		controllers.NewDonate(config, session).Handler,
 	)
-	mux.Methods("GET").Path("/support").HandlerFunc(
+	mux.Methods(http.MethodGet).Path("/support").HandlerFunc(
 		controllers.NewSupport(config, session).Handler,
 	)
-	mux.Methods("GET").Path("/schedule").HandlerFunc(
+	mux.Methods(http.MethodGet).Path("/schedule").HandlerFunc(
 		controllers.NewSchedule(config, session, store).Handler,
 	)
-
-	var loginCtrl = controllers.NewLogin(config, session, oauth, store)
-	mux.Methods("GET").Path("/login").HandlerFunc(
+	mux.Methods(http.MethodGet).Path("/login").HandlerFunc(
 		loginCtrl.Handler,
 	)
-	mux.Methods("GET").Path("/login/callback").HandlerFunc(
+	mux.Methods(http.MethodGet).Path("/login/callback").HandlerFunc(
 		loginCtrl.CallbackHandler,
 	)
 	mux.Path("/logout").HandlerFunc(
