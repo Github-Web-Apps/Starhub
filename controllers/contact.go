@@ -8,17 +8,17 @@ import (
 	"github.com/gorilla/sessions"
 )
 
-// Support ctrl
-type Support struct {
+// Contact ctrl
+type Contact struct {
 	Base
 }
 
-// NewSupport ctrl
-func NewSupport(
+// NewContact ctrl
+func NewContact(
 	config config.Config,
 	session sessions.Store,
-) *Support {
-	return &Support{
+) *Contact {
+	return &Contact{
 		Base: Base{
 			config:  config,
 			session: session,
@@ -26,7 +26,7 @@ func NewSupport(
 	}
 }
 
-// Handler handles /support
-func (ctrl *Support) Handler(w http.ResponseWriter, r *http.Request) {
-	pages.Render(w, "support", ctrl.sessionData(w, r))
+// Handler handles /Contact
+func (ctrl *Contact) Handler(w http.ResponseWriter, r *http.Request) {
+	pages.Render(w, "Contact", ctrl.sessionData(w, r))
 }

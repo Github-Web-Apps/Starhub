@@ -50,8 +50,8 @@ func main() {
 	mux.Methods(http.MethodGet).Path("/donate").HandlerFunc(
 		controllers.NewDonate(config, session).Handler,
 	)
-	mux.Methods(http.MethodGet).Path("/support").HandlerFunc(
-		controllers.NewSupport(config, session).Handler,
+	mux.Methods(http.MethodGet).Path("/contact").HandlerFunc(
+		controllers.NewContact(config, session).Handler,
 	)
 	mux.Methods(http.MethodGet).Path("/schedule").HandlerFunc(
 		controllers.NewSchedule(config, session, store).Handler,
