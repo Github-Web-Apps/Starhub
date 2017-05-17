@@ -1,5 +1,5 @@
-hash: 3bf4a04221f5011a7f25458c396e76c07444037afb2d95f04218d416e8442383
-updated: 2017-05-17T11:46:26.551663218-03:00
+hash: 44cae7a7480a7852c5b5345ffde194af792c07434f9a7b913d6eb36415a89435
+updated: 2017-05-17T12:43:50.881207905-03:00
 imports:
 - name: github.com/apex/httplog
   version: d677fdf2ae1fa75d8111faf17f2d6fcf46dd9af7
@@ -44,7 +44,7 @@ imports:
   subpackages:
   - oid
 - name: github.com/pkg/errors
-  version: ff09b135c25aae272398c51a07235b90a75aa4f0
+  version: 645ef00459ed84a119197bfb8d8205042c6df63d
 - name: github.com/robfig/cron
   version: b024fc5ea0e34bc3f83d9941c8d60b0622bfaca4
 - name: github.com/sendgrid/rest

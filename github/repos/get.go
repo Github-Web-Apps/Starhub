@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/google/go-github/github"
+	"github.com/pkg/errors"
 )
 
 // Get all user's repos
@@ -17,7 +18,7 @@ func Get(
 	for {
 		repos, nextPage, err := getPage(ctx, client, opt)
 		if err != nil {
-			return result, err
+			return result, errors.Wrap(err, "failed to get repositories")
 		}
 		for _, repo := range repos {
 			if repo.GetFork() || repo.GetPrivate() {

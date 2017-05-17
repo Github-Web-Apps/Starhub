@@ -80,5 +80,7 @@ func main() {
 		ReadTimeout:  15 * time.Second,
 	}
 	log.WithField("addr", server.Addr).Info("started")
-	log.WithError(server.ListenAndServe()).Error("failed to start up server")
+	if err := server.ListenAndServe(); err != nil {
+		log.WithError(err).Fatal("failed to start up server")
+	}
 }

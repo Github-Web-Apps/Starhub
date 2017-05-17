@@ -27,6 +27,8 @@ import:
   - errgroup
 - package: github.com/gorilla/sessions
   version: v1.1
+- package: github.com/pkg/errors
+  version: ~0.8.0
 testImport:
 - package: github.com/stretchr/testify
   version: v1.1.4

@@ -20,9 +20,8 @@ type Config struct {
 
 // Get the config
 func Get() (cfg Config) {
-	var err = env.Parse(&cfg)
-	if err != nil {
-		log.WithError(err).Fatal("failed to laod config")
+	if err := env.Parse(&cfg); err != nil {
+		log.WithError(err).Fatal("failed to load config")
 	}
 	return
 }

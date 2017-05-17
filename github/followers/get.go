@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/google/go-github/github"
+	"github.com/pkg/errors"
 )
 
 // Get the list of followers of a given user
@@ -15,7 +16,7 @@ func Get(
 	for {
 		followers, nextPage, err := getPage(ctx, client, opt)
 		if err != nil {
-			return result, err
+			return result, errors.Wrap(err, "failed to get followers")
 		}
 		result = append(result, followers...)
 		if opt.Page = nextPage; nextPage == 0 {

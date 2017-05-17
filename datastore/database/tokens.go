@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/jmoiron/sqlx"
+	"github.com/pkg/errors"
 	"golang.org/x/oauth2"
 )
 
@@ -48,7 +49,7 @@ func (db *Tokenstore) Schedule(userID int64, date time.Time) error {
 func tokenToJSON(token *oauth2.Token) (string, error) {
 	d, err := json.Marshal(token)
 	if err != nil {
-		return "", err
+		return "", errors.Wrap(err, "failed to marshall json token")
 	}
 	return string(d), nil
 }

@@ -6,6 +6,7 @@ import (
 
 	"github.com/caarlos0/watchub/shared/model"
 	"github.com/google/go-github/github"
+	"github.com/pkg/errors"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -22,7 +23,7 @@ func Get(
 		g.Go(func() error {
 			r, er := processRepo(ctx, client, repo)
 			if er != nil {
-				return er
+				return errors.Wrap(er, "failed to get repository stars")
 			}
 			m.Lock()
 			defer m.Unlock()
