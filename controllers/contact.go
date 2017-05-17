@@ -28,5 +28,5 @@ func NewContact(
 
 // Handler handles /Contact
 func (ctrl *Contact) Handler(w http.ResponseWriter, r *http.Request) {
-	pages.Render(w, "Contact", ctrl.sessionData(w, r))
+	pages.Render(w, "contact", ctrl.sessionData(w, r))
 }
