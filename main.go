@@ -6,7 +6,7 @@ import (
 
 	"github.com/apex/httplog"
 	"github.com/apex/log"
-	"github.com/apex/log/handlers/text"
+	"github.com/apex/log/handlers/logfmt"
 	"github.com/caarlos0/watchub/config"
 	"github.com/caarlos0/watchub/controllers"
 	"github.com/caarlos0/watchub/datastore/database"
@@ -20,7 +20,7 @@ import (
 )
 
 func main() {
-	log.SetHandler(text.Default)
+	log.SetHandler(logfmt.Default)
 	log.SetLevel(log.InfoLevel)
 	log.Info("starting up...")
 
