@@ -18,9 +18,14 @@ func Get(
 ) (result []model.Star, err error) {
 	var g errgroup.Group
 	var m sync.Mutex
+	var pool = make(chan bool, 5)
 	for _, repo := range repos {
 		repo := repo
+		pool <- true
 		g.Go(func() error {
+			defer func() {
+				<-pool
+			}()
 			r, er := processRepo(ctx, client, repo)
 			if er != nil {
 				return errors.Wrap(er, "failed to get repository stars")
