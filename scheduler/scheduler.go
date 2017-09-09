@@ -2,6 +2,7 @@ package scheduler
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/apex/log"
@@ -16,10 +17,29 @@ import (
 	"github.com/caarlos0/watchub/shared/dto"
 	"github.com/caarlos0/watchub/shared/model"
 	"github.com/gorilla/sessions"
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/robfig/cron"
 )
 
 // TODO this file still need to be cleaned up
+
+var TimeGauge = prometheus.NewGaugeVec(
+	prometheus.GaugeOpts{
+		Subsystem: "schedule",
+		Name:      "time_taken_seconds",
+		Help:      "Time taken to scan the user",
+	},
+	[]string{"id"},
+)
+
+var ErrorGauge = prometheus.NewGaugeVec(
+	prometheus.GaugeOpts{
+		Subsystem: "schedule",
+		Name:      "error_count",
+		Help:      "errors trying to process an user",
+	},
+	[]string{"id"},
+)
 
 // Scheduler type
 type Scheduler struct {
@@ -81,6 +101,7 @@ func process(
 	var ctx = context.Background()
 	client, err := oauth.ClientFrom(ctx, exec.Token)
 	if err != nil {
+		ErrorGauge.WithLabelValues(fmt.Sprintf("%d", exec.UserID)).Inc()
 		log.WithError(err).Error("failed to authenticate")
 		return
 	}
@@ -88,36 +109,44 @@ func process(
 	log.Info("started processing")
 	user, err := user.Info(ctx, client)
 	if err != nil {
+		ErrorGauge.WithLabelValues(fmt.Sprintf("%d", exec.UserID)).Inc()
 		log.WithError(err).Error("failed to get user info")
+		return
 	}
 	log = log.WithField("email", user.Email)
 
 	followers, err := store.GetFollowers(exec.UserID)
 	if err != nil {
+		ErrorGauge.WithLabelValues(fmt.Sprintf("%d", exec.UserID)).Inc()
 		log.WithError(err).Error("failed to get user followers from db")
 		return
 	}
 	if err = store.SaveFollowers(exec.UserID, user.Followers); err != nil {
+		ErrorGauge.WithLabelValues(fmt.Sprintf("%d", exec.UserID)).Inc()
 		log.WithError(err).Error("failed to store user followers to db")
 		return
 	}
 
 	repos, err := repos.Get(ctx, client)
 	if err != nil {
+		ErrorGauge.WithLabelValues(fmt.Sprintf("%d", exec.UserID)).Inc()
 		log.WithError(err).Error("failed to get user repos from github")
 		return
 	}
 	stars, err := stargazers.Get(ctx, client, repos)
 	if err != nil {
+		ErrorGauge.WithLabelValues(fmt.Sprintf("%d", exec.UserID)).Inc()
 		log.WithError(err).Error("failed to get stargazers from github")
 		return
 	}
 	previousStars, err := store.GetStars(exec.UserID)
 	if err != nil {
+		ErrorGauge.WithLabelValues(fmt.Sprintf("%d", exec.UserID)).Inc()
 		log.WithError(err).Error("failed to get user repos stargazers from db")
 		return
 	}
 	if err := store.SaveStars(exec.UserID, stars); err != nil {
+		ErrorGauge.WithLabelValues(fmt.Sprintf("%d", exec.UserID)).Inc()
 		log.WithError(err).Error("failed to store user repos stargazers to db")
 		return
 	}
@@ -156,6 +185,7 @@ func process(
 			)
 		}
 	}
+	TimeGauge.WithLabelValues(fmt.Sprintf("%d", exec.UserID)).Set(time.Since(start).Seconds())
 	log.WithField("time_taken", time.Since(start).Seconds()).Info("successfully processed")
 }
 

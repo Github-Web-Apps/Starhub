@@ -13,10 +13,11 @@ import (
 	"github.com/caarlos0/watchub/oauth"
 	"github.com/caarlos0/watchub/scheduler"
 	"github.com/gorilla/context"
-	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
 	_ "github.com/lib/pq"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func main() {
@@ -35,9 +36,9 @@ func main() {
 	var loginCtrl = controllers.NewLogin(config, session, oauth, store)
 
 	// schedulers
-	var scheduler = scheduler.New(config, store, oauth, session)
-	scheduler.Start()
-	defer scheduler.Stop()
+	var sch = scheduler.New(config, store, oauth, session)
+	sch.Start()
+	defer sch.Stop()
 
 	// routes
 	var mux = mux.NewRouter()
@@ -66,13 +67,17 @@ func main() {
 		controllers.NewLogout(config, session).Handler,
 	)
 
+	// prometheus stuff
+	prometheus.MustRegister(scheduler.TimeGauge)
+	prometheus.MustRegister(scheduler.ErrorGauge)
+	mux.Handle("/metrics", promhttp.Handler())
+
 	var handler = context.ClearHandler(
 		httplog.New(
-			handlers.CompressHandler(
-				mux,
-			),
+			mux,
 		),
 	)
+
 	var server = &http.Server{
 		Handler:      handler,
 		Addr:         ":" + config.Port,
