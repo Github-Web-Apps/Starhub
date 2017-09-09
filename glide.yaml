@@ -30,7 +30,6 @@ import:
 - package: github.com/pkg/errors
   version: ~0.8.0
 - package: github.com/prometheus/client_golang
-  version: ^0.9.0-pre1
 testImport:
 - package: github.com/stretchr/testify
   version: v1.1.4
