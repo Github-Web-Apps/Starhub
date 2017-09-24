@@ -4,18 +4,24 @@ import (
 	"net/http"
 	"time"
 
+	_ "net/http/pprof"
+
+	_ "github.com/lib/pq"
+
 	"github.com/apex/httplog"
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/logfmt"
+
 	"github.com/caarlos0/watchub/config"
 	"github.com/caarlos0/watchub/controllers"
 	"github.com/caarlos0/watchub/datastore/database"
 	"github.com/caarlos0/watchub/oauth"
 	"github.com/caarlos0/watchub/scheduler"
+
 	"github.com/gorilla/context"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
-	_ "github.com/lib/pq"
+
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
@@ -71,6 +77,8 @@ func main() {
 	prometheus.MustRegister(scheduler.TimeGauge)
 	prometheus.MustRegister(scheduler.ErrorGauge)
 	mux.Handle("/metrics", promhttp.Handler())
+
+	mux.PathPrefix("/debug").Handler(http.DefaultServeMux)
 
 	var handler = context.ClearHandler(
 		httplog.New(
