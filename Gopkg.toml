@@ -20,6 +20,10 @@
 #  name = "github.com/x/y"
 #  version = "2.4.0"
 
+[metadata.heroku]
+  root-package = "github.com/caarlos0/watchub"
+  go-version = "go1.9.2"
+  install = [ "./..." ]
 
 [[constraint]]
   name = "github.com/apex/httplog"
