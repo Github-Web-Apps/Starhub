@@ -1,6 +1,8 @@
 hash: d4fc7ffcb53641c9c99dd59b3013d8a26cc1b608b3e10d3d8bdfb767bece06b5
-updated: 2017-09-09T09:47:59.381456221-03:00
+updated: 2017-11-11T15:10:50.133744-02:00
 imports:
+- name: github.com/aokoli/goutils
+  version: 3391d3790d23d03408670993e957e8f408993c34
 - name: github.com/apex/httplog
   version: d677fdf2ae1fa75d8111faf17f2d6fcf46dd9af7
 - name: github.com/apex/log
@@ -37,6 +39,12 @@ imports:
   version: e59506cc896acb7f7bf732d4fdf5e25f7ccd8983
 - name: github.com/gorilla/sessions
   version: ca9ada44574153444b00d3fd9c8559e4cc95f896
+- name: github.com/huandu/xstrings
+  version: d6590c0c31d16526217fa60fbd2067f7afcd78c5
+- name: github.com/imdario/mergo
+  version: 7fe0c75c13abdee74b09fcacef5ea1c6bba6a874
+- name: github.com/jaytaylor/html2text
+  version: 0ee88d3006305456b84cad14a24b2576f9411965
 - name: github.com/jmoiron/sqlx
   version: 8ed836a8adb659e8492bcaa49e0880bb84075fe2
   subpackages:
@@ -47,10 +55,20 @@ imports:
   version: 2704adc878c21e1329f46f6e56a1c387d788ff94
   subpackages:
   - oid
+- name: github.com/Masterminds/semver
+  version: 59c29afe1a994eacb71c833025ca7acf874bb1da
+- name: github.com/Masterminds/sprig
+  version: 82f6f19d47b416d27ae039939b44afaa0575860e
+- name: github.com/matcornic/hermes
+  version: f72fbfe860d779262ed6119515bf01d546af7794
+- name: github.com/mattn/go-runewidth
+  version: 97311d9f7767e3d6f422ea06661bc2c7a19e8a5d
 - name: github.com/matttproud/golang_protobuf_extensions
   version: c12348ce28de40eed0136aa2b644d0ee0650e56c
   subpackages:
   - pbutil
+- name: github.com/olekukonko/tablewriter
+  version: a7a4c189eb47ed33ce7b35f2880070a0c82a67d4
 - name: github.com/pkg/errors
   version: 645ef00459ed84a119197bfb8d8205042c6df63d
 - name: github.com/prometheus/client_golang
@@ -74,16 +92,29 @@ imports:
   - xfs
 - name: github.com/robfig/cron
   version: b024fc5ea0e34bc3f83d9941c8d60b0622bfaca4
+- name: github.com/russross/blackfriday
+  version: 6d1ef893fcb01b4f50cb6e57ed7df3e2e627b6b2
+- name: github.com/satori/go.uuid
+  version: 879c5887cd475cd7864858769793b2ceb0d44feb
 - name: github.com/sendgrid/rest
   version: 3ec51b4f1754e13e92409355851a0a82e9a06461
 - name: github.com/sendgrid/sendgrid-go
   version: aae62ebbdabd46754b041a12b9f74d2ffdfc49d7
   subpackages:
   - helpers/mail
+- name: github.com/ssor/bom
+  version: 6386211fdfcf24c0bfbdaceafd02849ed9a8a509
+- name: golang.org/x/crypto
+  version: 6a293f2d4b14b8e6d3f0539e383f6d0d30fce3fd
+  subpackages:
+  - pbkdf2
+  - scrypt
 - name: golang.org/x/net
   version: ffcf1bedda3b04ebb15a168a59800a73d6dc0f4d
   subpackages:
   - context
+  - html
+  - html/atom
 - name: golang.org/x/oauth2
   version: 7fdf09982454086d5570c7db3e11f360194830ca
   subpackages:
