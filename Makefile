@@ -1,13 +1,13 @@
-SOURCE_FILES?=$$(glide novendor)
+SOURCE_FILES?=./...
 TEST_PATTERN?=.
 TEST_OPTIONS?=
 
 setup: ## Install all the build and lint dependencies
 	go get -u github.com/alecthomas/gometalinter
-	go get -u github.com/Masterminds/glide
+	go get -u github.com/golang/dep/cmd/dep
 	go get -u github.com/pierrre/gotestcover
 	go get -u golang.org/x/tools/cmd/cover
-	glide install
+	dep ensure
 	gometalinter --install --update
 
 test: ## Run all the tests
