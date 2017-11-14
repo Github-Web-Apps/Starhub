@@ -3,7 +3,7 @@
 
 <ul>
 {{ range $index, $element := .NewFollowers }}
-<li><a href="http://github.com/{{ . }})">@{{ . }}</a></li>
+<li><a href="http://github.com/{{ . }}">@{{ . }}</a></li>
 {{ end }}
 </ul>
 {{ end }}
@@ -13,7 +13,7 @@
 
 <ul>
 {{ range $index, $element := .Unfollowers }}
-<li><a href="http://github.com/{{ . }})">@{{ . }}</a></li>
+<li><a href="http://github.com/{{ . }}">@{{ . }}</a></li>
 {{ end }}
 </ul>
 {{ end }}
@@ -26,7 +26,7 @@
 
 <ul>
 {{ range $index, $element := .Users }}
-<li><a href="http://github.com/{{ . }})">@{{ . }}</a></li>
+<li><a href="http://github.com/{{ . }}">@{{ . }}</a></li>
 {{ end }}
 </ul>
 {{ end }}
@@ -40,7 +40,7 @@
 
 <ul>
 {{ range $index, $element := .Users }}
-<li><a href="http://github.com/{{ . }})">@{{ . }}</a></li>
+<li><a href="http://github.com/{{ . }}">@{{ . }}</a></li>
 {{ end }}
 </ul>
 {{ end }}
