@@ -49,7 +49,7 @@ func processRepo(
 	if err != nil {
 		return result, err
 	}
-	var stargazers []string
+	var stargazers = make([]string, len(stars))
 	for _, star := range stars {
 		stargazers = append(stargazers, *star.User.Login)
 	}

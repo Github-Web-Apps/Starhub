@@ -88,7 +88,7 @@ func (db *Userdatastore) StarCount(userID int64) (count int, err error) {
 	return
 }
 
-var repositoryCountQuery = `
+const repositoryCountQuery = `
 	SELECT COALESCE(json_array_length(stars), 0)
 	FROM tokens
 	WHERE user_id = $1

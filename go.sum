@@ -14,6 +14,7 @@ github.com/caarlos0/env v0.0.0-20161013201842-d0de832ed2fb h1:ni/b7kgTXx5DzmC8TD
 github.com/caarlos0/env v0.0.0-20161013201842-d0de832ed2fb/go.mod h1:tdCsowwCzMLdkqRYDlHpZCp2UooDD3MspDBjZ2AD02Y=
 github.com/davecgh/go-spew v0.0.0-20160907170601-6d212800a42e h1:PuhFC+IBoXcNHhkaUTRc+kNN0MtTMPFoWWBXyNMw7ww=
 github.com/davecgh/go-spew v0.0.0-20160907170601-6d212800a42e/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/go-logfmt/logfmt v0.3.0 h1:8HUsc87TaSWLKwrnumgC8/YconD2fJQsRJAsWaPg2ic=
 github.com/go-logfmt/logfmt v0.3.0/go.mod h1:Qt1PoO58o5twSAckw1HlFXLmHsOX5/0LbT9GBnD5lWE=
 github.com/go-sql-driver/mysql v1.4.1 h1:g24URVg0OFbNUTx9qqY1IRZ9D9z3iPyi5zKhQZpNwpA=
 github.com/go-sql-driver/mysql v1.4.1/go.mod h1:zAC/RDZ24gD3HViQzih4MyKcchzm+sOG5ZlKdlhCg5w=
@@ -39,6 +40,7 @@ github.com/jaytaylor/html2text v0.0.0-20170918155622-0ee88d300630 h1:S9BtFz0PeTn
 github.com/jaytaylor/html2text v0.0.0-20170918155622-0ee88d300630/go.mod h1:CVKlgaMiht+LXvHG173ujK6JUhZXKb2u/BQtjPDIvyk=
 github.com/jmoiron/sqlx v0.0.0-20170308171622-8ed836a8adb6 h1:S+KxiRJQxqQ+sQ3uTIdIi4Puu193OxwGntCU4QEiE3g=
 github.com/jmoiron/sqlx v0.0.0-20170308171622-8ed836a8adb6/go.mod h1:IiEW3SEiiErVyFdH8NTuWjSifiEQKUoyK3LNqr2kCHU=
+github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515 h1:T+h1c/A9Gawja4Y9mFVWj2vyii2bbUNDw3kt9VxK2EY=
 github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515/go.mod h1:+0opPa2QZZtGFBFZlji/RkVcI2GknAs/DXo4wKdlNEc=
 github.com/lib/pq v0.0.0-20170324204654-2704adc878c2 h1:2imqQk4oITdu2OSQcxO1A/yR6vftxSUI8iCQo8Ra4Jw=
 github.com/lib/pq v0.0.0-20170324204654-2704adc878c2/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=

@@ -9,20 +9,13 @@ Let's assume `~/Code/Go` as our default Go projects folder.
 So:
 
 ```sh
-mkdir -p ~/Code/Go
-echo 'GOPATH="$HOME/Code/Go"' >> ~/.bashrc # or ~/.zshrc
-echo 'PATH="$GOPATH/bin":$PATH' >> ~/.bashrc # or ~/.zshrc
-mkdir -p $GOPATH/src/github.com/caarlos0
-cd $GOPATH/src/github.com/caarlos0
 git clone git@github.com:caarlos0/watchub.git
 cd watchub
 ```
 
 ## Dependencies
 
-Now, install Go 1.7.4+.
-
-Then, run:
+Now, install Go 1.11+ and run:
 
 ```sh
 make setup

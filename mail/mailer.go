@@ -15,6 +15,7 @@ import (
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )
 
+// nolint: gochecknoglobals
 var emailConfig = hermes.Hermes{
 	Product: hermes.Product{
 		Name:      "Watchub",
@@ -25,17 +26,19 @@ var emailConfig = hermes.Hermes{
 	Theme: new(hermes.Flat),
 }
 
+// nolint: gochecknoglobals
 var welcomeIntro = []string{
 	"Welcome to Watchub!",
 	"We're very excited to have you on board.",
 }
 
+// nolint: gochecknoglobals
 var changesIntro = []string{
 	"Here is what changed in your account recently:",
 }
 
-func New(config config.Config) *MailSvc {
-	return &MailSvc{
+func New(config config.Config) *Service {
+	return &Service{
 		hermes:  emailConfig,
 		changes: template.Must(template.ParseFiles("static/mail/changes.md")),
 		welcome: template.Must(template.ParseFiles("static/mail/welcome.md")),
@@ -43,14 +46,14 @@ func New(config config.Config) *MailSvc {
 	}
 }
 
-type MailSvc struct {
+type Service struct {
 	hermes  hermes.Hermes
 	config  config.Config
 	changes *template.Template
 	welcome *template.Template
 }
 
-func (s *MailSvc) SendWelcome(data dto.WelcomeEmailData) {
+func (s *Service) SendWelcome(data dto.WelcomeEmailData) {
 	html, err := s.generate(data.Login, data, s.welcome, welcomeIntro)
 	if err != nil {
 		log.WithError(err).Error("failed to generate welcome email")
@@ -59,7 +62,7 @@ func (s *MailSvc) SendWelcome(data dto.WelcomeEmailData) {
 	s.send(data.Login, data.Email, "Welcome to Watchub!", html)
 }
 
-func (s *MailSvc) SendChanges(data dto.ChangesEmailData) {
+func (s *Service) SendChanges(data dto.ChangesEmailData) {
 	html, err := s.generate(data.Login, data, s.changes, changesIntro)
 	if err != nil {
 		log.WithError(err).Error("failed to generate changes email")
@@ -68,7 +71,7 @@ func (s *MailSvc) SendChanges(data dto.ChangesEmailData) {
 	s.send(data.Login, data.Email, "Your report from Watchub!", html)
 }
 
-func (s *MailSvc) generate(login string, data interface{}, tmpl *template.Template, intros []string) (string, error) {
+func (s *Service) generate(login string, data interface{}, tmpl *template.Template, intros []string) (string, error) {
 	var wr bytes.Buffer
 	if err := tmpl.Execute(&wr, data); err != nil {
 		return "", err
@@ -101,7 +104,7 @@ func (s *MailSvc) generate(login string, data interface{}, tmpl *template.Templa
 	)
 }
 
-func (s *MailSvc) send(name, email, subject, html string) {
+func (s *Service) send(name, email, subject, html string) {
 	var log = log.WithField("email", email)
 	var from = mail.NewEmail("Watchub", "noreply@watchub.pw")
 	var to = mail.NewEmail(name, email)

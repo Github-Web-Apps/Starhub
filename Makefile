@@ -2,47 +2,44 @@ SOURCE_FILES?=./...
 TEST_PATTERN?=.
 TEST_OPTIONS?=
 
-setup: ## Install all the build and lint dependencies
-	go get -u github.com/alecthomas/gometalinter
-	go get -u github.com/golang/dep/cmd/dep
-	go get -u github.com/pierrre/gotestcover
-	go get -u golang.org/x/tools/cmd/cover
-	dep ensure
-	gometalinter --install --update
+export PATH := ./bin:$(PATH)
+export GO111MODULE := on
 
-test: ## Run all the tests
-	gotestcover $(TEST_OPTIONS) -covermode=atomic -coverprofile=coverage.txt $(SOURCE_FILES) -run $(TEST_PATTERN) -timeout=30s
+# Install all the build and lint dependencies
+setup:
+	curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh
+	curl -sfL https://install.goreleaser.com/github.com/gohugoio/hugo.sh | sh
+	go mod download
+.PHONY: setup
 
-cover: test ## Run all the tests and opens the coverage report
+# Run all the tests
+test:
+	go test $(TEST_OPTIONS) -failfast -race -coverpkg=./... -covermode=atomic -coverprofile=coverage.txt $(SOURCE_FILES) -run $(TEST_PATTERN) -timeout=2m
+.PHONY: test
+
+# Run all the tests and opens the coverage report
+cover: test
 	go tool cover -html=coverage.txt
+.PHONY: cover
 
-fmt: ## gofmt and goimports all go files
+# gofmt and goimports all go files
+fmt:
 	gofmt -w -s $(SOURCE_FILES)
 	goimports -w $(SOURCE_FILES)
+.PHONY: fmt
 
-lint: ## Run all the linters
-	gometalinter --vendor --disable-all \
-		--enable=deadcode \
-		--enable=ineffassign \
-		--enable=gosimple \
-		--enable=staticcheck \
-		--enable=gofmt \
-		--enable=goimports \
-		--enable=dupl \
-		--enable=misspell \
-		--enable=errcheck \
-		--enable=vet \
-		--enable=vetshadow \
-		--deadline=10m \
-		./...
+# Run all the linters
+lint:
+	./bin/golangci-lint run --tests=false --enable-all ./...
+.PHONY: lint
 
-ci: lint test ## Run all the tests and code checks
+# Run all the tests and code checks
+ci: lint test
+.PHONY: ci
 
-build: ## Build a beta version of releaser
+# Build a beta version of releaser
+build:
 	go build
-
-# Absolutely awesome: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
-help:
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+.PHONY: build
 
 .DEFAULT_GOAL := build

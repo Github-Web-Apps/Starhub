@@ -11,7 +11,7 @@ import (
 )
 
 func TestWelcomeMail(t *testing.T) {
-	s := MailSvc{
+	s := Service{
 		hermes: emailConfig,
 		config: config.Config{
 			ClientID: "1",
@@ -35,7 +35,7 @@ func TestWelcomeMail(t *testing.T) {
 }
 
 func TestChangesMail(t *testing.T) {
-	s := MailSvc{
+	s := Service{
 		hermes: emailConfig,
 		config: config.Config{
 			ClientID: "1",

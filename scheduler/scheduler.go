@@ -23,6 +23,8 @@ import (
 
 // TODO this file still need to be cleaned up
 
+// TimeGauge is the time_taken metric for prometheus
+// nolint: gochecknoglobals
 var TimeGauge = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Subsystem: "schedule",
@@ -32,6 +34,8 @@ var TimeGauge = prometheus.NewGaugeVec(
 	[]string{"id"},
 )
 
+// ErrorGauge is the error count for prometheus
+// nolint: gochecknoglobals
 var ErrorGauge = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Subsystem: "schedule",
