@@ -21,7 +21,7 @@ var emailConfig = hermes.Hermes{
 		Name:      "Watchub",
 		Link:      "http://watchub.pw",
 		Logo:      "https://raw.githubusercontent.com/caarlos0/watchub/master/static/apple-touch-icon-144x144.png",
-		Copyright: "Copyright © 2016-2017 Watchub.",
+		Copyright: "Copyright © 2016-2019 Watchub.",
 	},
 	Theme: new(hermes.Flat),
 }
