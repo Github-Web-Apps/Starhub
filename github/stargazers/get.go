@@ -49,9 +49,9 @@ func processRepo(
 	if err != nil {
 		return result, err
 	}
-	var stargazers = make([]string, len(stars))
-	for i, star := range stars {
-		stargazers[i] = *star.User.Login
+	var stargazers []string
+	for _, star := range stars {
+		stargazers = append(stargazers, star.User.GetLogin())
 	}
 	return model.Star{
 		RepoID:     int64(*repo.ID),
