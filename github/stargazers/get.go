@@ -49,6 +49,7 @@ func processRepo(
 	if err != nil {
 		return result, err
 	}
+	// nolint: prealloc
 	var stargazers []string
 	for _, star := range stars {
 		stargazers = append(stargazers, star.User.GetLogin())
