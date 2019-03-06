@@ -20,12 +20,7 @@ func Get(
 		if err != nil {
 			return result, errors.Wrap(err, "failed to get repositories")
 		}
-		for _, repo := range repos {
-			if repo.GetFork() || repo.GetPrivate() {
-				continue
-			}
-			result = append(result, repo)
-		}
+		result = append(result, repos...)
 		if opt.Page = nextPage; nextPage == 0 {
 			break
 		}
