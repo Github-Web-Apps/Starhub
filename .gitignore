@@ -2,6 +2,6 @@ vendor
 .env
 coverage.txt
 bin
-watchub
+Watchub-Mirror
 watchub.service
 run.sh
