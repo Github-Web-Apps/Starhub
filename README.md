@@ -12,7 +12,7 @@
     <a href="https://travis-ci.org/caarlos0/watchub"><img alt="Travis" src="https://img.shields.io/travis/caarlos0/watchub.svg?style=flat-square"></a>
     <a href="https://codecov.io/gh/caarlos0/watchub"><img alt="Codecov branch master" src="https://img.shields.io/codecov/c/github/caarlos0/watchub/master.svg?style=flat-square"></a>
     <a href="https://goreportcard.com/report/github.com/caarlos0/watchub"><img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/caarlos0/watchub?style=flat-square"></a>
-    <a href="http://godoc.org/github.com/caarlos0/watchub"><img alt="Go Doc" src="https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square"></a>
+    <a href="https://godoc.org/github.com/caarlos0/watchub"><img alt="Go Doc" src="https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square"></a>
     <a href="https://saythanks.io/to/caarlos0"><img alt="SayThanks.io" src="https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg?style=flat-square"></a>
   </p>
 </p>

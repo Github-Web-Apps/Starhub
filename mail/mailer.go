@@ -19,7 +19,7 @@ import (
 var emailConfig = hermes.Hermes{
 	Product: hermes.Product{
 		Name:      "Watchub",
-		Link:      "http://watchub.pw",
+		Link:      "https://watchub.pw",
 		Logo:      "https://raw.githubusercontent.com/caarlos0/watchub/master/static/apple-touch-icon-144x144.png",
 		Copyright: "Copyright © 2016-2019 Watchub.",
 	},
@@ -89,7 +89,7 @@ func (s *Service) generate(login string, data interface{}, tmpl *template.Templa
 							"We will continue to watch for changes and let you know!",
 							"\n\n---\n\n",
 							"<small>",
-							`Liking our service? Maybe you'll consider [make a donation](http://watchub.pw/donate).`,
+							`Liking our service? Maybe you'll consider [make a donation](https://watchub.pw/donate).`,
 							fmt.Sprintf(
 								`You might also want to change [your settings](%s).`,
 								"https://github.com/settings/connections/applications/"+s.config.ClientID,

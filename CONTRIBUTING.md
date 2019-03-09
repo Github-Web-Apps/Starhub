@@ -63,10 +63,10 @@ Then, create an application on [github](https://github.com/settings/applications
 Fill it like this:
 
 1. Application name: `Watchub dev`
-1. Homepage URL: the ngrok http forwarding URL, e.g. `http://6f7ca783.ngrok.io`
+1. Homepage URL: the ngrok http forwarding URL, e.g. `https://6f7ca783.ngrok.io`
 1. Application description: empty
 1. Authorization callback URL: same as homepage url, but with a `/login/callback`
-suffix. e.g.: `http://6f7ca783.ngrok.io/login/callback`
+suffix. e.g.: `https://6f7ca783.ngrok.io/login/callback`
 
 GitHub will then give you a Client ID and a Client Secret.
 
