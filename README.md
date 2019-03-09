@@ -2,10 +2,6 @@
   <img alt="Watchub Logo" src="https://github.com/caarlos0/watchub/raw/master/static/apple-touch-icon-144x144.png" />
   <h3 align="center">Watchub - Mirror</h3>
   <h3 align="center">https://watchub.duckdns.org/</h3>
-  <p align="center">Differences from mainstream project:</p>
-  <p align="center">- Watch all repos (forked one as well)</p>
-  <p align="center">- No write access required</p>
-  <p align="center">- SSL HTTPS</p>
   <p align="center">Be notified of people who followed/unfollowed you and starred/unstarred your repositories.</p>
   <p align="center">
     <a href="/LICENSE.md"><img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
@@ -19,16 +15,18 @@
 
 ---
 
+**Watchub-Mirro:** This is a mirror of the upstream project with these key differences:
 
-Watchub watches your account and notify you via email of the following events:
+- Watch all repos (forked one as well)
+- No write access required
+- SSL HTTPS
 
-- someone followed you
-- someone unfollowed you
-- someone starred a repository you have access to
-- someone unstarred a repository you have access to
+**Watchub:** watches your account and notify you via email (at most one email/day) of the following events:
 
-It will send you at most one email/day. The idea is not to flood your
-inbox with these things.
+- Someone followed you
+- Someone unfollowed you
+- Someone starred a repository you have access to
+- Someone unstarred a repository you have access to
 
 # Running it locally
 
