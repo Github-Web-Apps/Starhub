@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/caarlos0/watchub/config"
-	"github.com/caarlos0/watchub/datastore"
-	"github.com/caarlos0/watchub/oauth"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/config"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/datastore"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/oauth"
 	"github.com/gorilla/sessions"
 )
 

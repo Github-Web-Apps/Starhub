@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/caarlos0/watchub/config"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/config"
 	"github.com/gorilla/sessions"
 )
 

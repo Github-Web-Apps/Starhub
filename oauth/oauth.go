@@ -3,8 +3,8 @@ package oauth
 import (
 	"context"
 
-	"github.com/caarlos0/watchub/config"
-	"github.com/caarlos0/watchub/shared/token"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/config"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/shared/token"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 	githuboauth "golang.org/x/oauth2/github"

@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/caarlos0/watchub/github/repos"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/github/repos"
 	"github.com/google/go-github/github"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/oauth2"

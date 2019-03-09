@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/apex/log"
-	"github.com/caarlos0/watchub/config"
-	"github.com/caarlos0/watchub/shared/dto"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/config"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/shared/dto"
 	"github.com/matcornic/hermes"
 	sendgrid "github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
@@ -20,7 +20,7 @@ var emailConfig = hermes.Hermes{
 	Product: hermes.Product{
 		Name:      "Watchub",
 		Link:      "https://watchub.pw",
-		Logo:      "https://raw.githubusercontent.com/caarlos0/watchub/master/static/apple-touch-icon-144x144.png",
+		Logo:      "https://raw.githubusercontent.com/Intika-Web-Apps/Watchub-Mirror/master/static/apple-touch-icon-144x144.png",
 		Copyright: "Copyright © 2016-2019 Watchub.",
 	},
 	Theme: new(hermes.Flat),

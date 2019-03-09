@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/caarlos0/watchub/shared/model"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/shared/model"
 	"github.com/jmoiron/sqlx"
 )
 

@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/apex/log"
-	"github.com/caarlos0/watchub/config"
-	"github.com/caarlos0/watchub/shared/dto"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/config"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/shared/dto"
 	"github.com/gorilla/sessions"
 )
 

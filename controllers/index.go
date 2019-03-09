@@ -3,10 +3,10 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/caarlos0/watchub/config"
-	"github.com/caarlos0/watchub/datastore"
-	"github.com/caarlos0/watchub/shared/dto"
-	"github.com/caarlos0/watchub/shared/pages"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/config"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/datastore"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/shared/dto"
+	"github.com/Intika-Web-Apps/Watchub-Mirror/shared/pages"
 	"github.com/gorilla/sessions"
 )
 

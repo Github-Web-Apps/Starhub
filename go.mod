@@ -1,4 +1,4 @@
-module github.com/caarlos0/watchub
+module github.com/Intika-Web-Apps/Watchub-Mirror
 
 require (
 	github.com/Masterminds/semver v1.2.2 // indirect
