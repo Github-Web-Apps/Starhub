@@ -19,7 +19,7 @@ import (
 var emailConfig = hermes.Hermes{
 	Product: hermes.Product{
 		Name:      "Watchub",
-		Link:      "https://watchub.pw",
+		Link:      "https://watchub.duckdns.org",
 		Logo:      "https://raw.githubusercontent.com/Intika-Web-Apps/Watchub-Mirror/master/static/apple-touch-icon-144x144.png",
 		Copyright: "Copyright © 2016-2019 Watchub.",
 	},
@@ -89,7 +89,7 @@ func (s *Service) generate(login string, data interface{}, tmpl *template.Templa
 							"We will continue to watch for changes and let you know!",
 							"\n\n---\n\n",
 							"<small>",
-							`Liking our service? Maybe you'll consider [make a donation](https://watchub.pw/donate).`,
+							`Liking our service? Maybe you'll consider [make a donation](https://watchub.duckdns.org/donate).`,
 							fmt.Sprintf(
 								`You might also want to change [your settings](%s).`,
 								"https://github.com/settings/connections/applications/"+s.config.ClientID,
@@ -106,7 +106,7 @@ func (s *Service) generate(login string, data interface{}, tmpl *template.Templa
 
 func (s *Service) send(name, email, subject, html string) {
 	var log = log.WithField("email", email)
-	var from = mail.NewEmail("Watchub", "noreply@watchub.pw")
+	var from = mail.NewEmail("Watchub", "noreply@watchub.duckdns.org")
 	var to = mail.NewEmail(name, email)
 	var request = sendgrid.GetRequest(
 		s.config.SendgridAPIKey,
