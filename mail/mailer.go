@@ -20,7 +20,7 @@ var emailConfig = hermes.Hermes{
 	Product: hermes.Product{
 		Name:      "Starhub Notifier",
 		Link:      "https://starhub-notifier.duckdns.org/",
-		Logo:      "https://raw.githubusercontent.com/Intika-Web-Apps/Starhub-Notifier/master/static/apple-touch-icon-144x144.png",
+		Logo:      "https://raw.githubusercontent.com/Intika-Web-Apps/Starhub-Notifier/master/static/logo/logo-144.png",
 		Copyright: "Copyright © 2019 Starhub Notifier.",
 	},
 	Theme: new(hermes.Flat),
