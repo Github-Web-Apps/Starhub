@@ -3,10 +3,17 @@
 {{ end }}
 {{ define "content-naked" }}
 
+<div class="container">
+
 	<script type="text/javascript" src="static/resources/downloads/third-party/jquery/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="static/resources/downloads/third-party/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="static/resources/downloads/third-party/typahead/bootstrap3-typeahead.min.js"></script>
 	<script type="text/javascript" src="static/resources/downloads/js/main.js"></script>
+
+    <script>
+		$("h4.what-is-it").text("Downloads-Track: Get the latest release stats of any project on Github");
+    </script>
+
 	    
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Get the latest release stats like download counts, release dates, author on any Github project">
@@ -15,6 +22,8 @@
 	<link rel="stylesheet" href="static/resources/downloads/third-party/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="static/resources/downloads/css/main.css">
 
+	</br>
+	
     <div class="container">
         <div class="row" id="search">
             <div class="col-md-4 col-md-offset-4">
@@ -43,5 +52,7 @@
             <img src="static/logo/gif-load.gif">
         </div>
     </div>
+
+</div>
 
 {{ end }}
