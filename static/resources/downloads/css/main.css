@@ -1,5 +1,4 @@
 html * {
-    font-family: 'Roboto', sans-serif;
 }
 
 a, a:hover {
@@ -7,7 +6,7 @@ a, a:hover {
 }
 
 code {
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Roboto Mono', monospace
     background-color: rgba(127, 140, 141, 0.1);
     color: inherit;
     white-space: nowrap;
