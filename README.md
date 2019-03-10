@@ -21,6 +21,20 @@
 - Notify for new starred repository
 - Notify for new unstarred repository
 
+# Screenshot
+
+<div align="center">
+    <img src="https://raw.githubusercontent.com/Intika-Web-Apps/Starhub-Notifier/screenshot/1.png" width="400px"></img> 
+</div>
+
+<div align="center">
+    <img src="https://raw.githubusercontent.com/Intika-Web-Apps/Starhub-Notifier/screenshot/2.png" width="400px"></img> 
+</div>
+
+<div align="center">
+    <img src="https://raw.githubusercontent.com/Intika-Web-Apps/Starhub-Notifier/screenshot/3.png" width="400px"></img> 
+</div>
+
 # Running it locally
 
 **Cloning**
