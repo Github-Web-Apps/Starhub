@@ -5,3 +5,4 @@ bin
 Watchub-Mirror
 watchub.service
 run.sh
+run.direct.sh
