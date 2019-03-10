@@ -13,7 +13,10 @@
 - No github write access required
 - SSL HTTPS - Encrypted Requests
 - Analyze starts over time with a graph
+- Stars analytics
 - Display total stars for all repository
+- Display total public repos
+- Release downloads couter & stats 
 - Notify for new followers
 - Notify for new unfollower 
 - Notify for new starred repository
