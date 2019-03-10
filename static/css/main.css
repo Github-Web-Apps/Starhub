@@ -1,0 +1,150 @@
+html * {
+    font-family: 'Roboto', sans-serif;
+}
+
+a, a:hover {
+    color: rgba(66, 139, 202, 1);
+}
+
+code {
+    font-family: 'Roboto Mono', monospace;
+    background-color: rgba(127, 140, 141, 0.1);
+    color: inherit;
+    white-space: nowrap;
+}
+
+.form-group {
+    width: 100%;
+}
+#username, #repository, #get-stats-button {
+    margin-top: 10px;
+    width: 100%;
+}
+
+#stats-result {
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.alert.output {
+    font-size: 18px;
+    text-align: center;
+}
+
+.total-downloads {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.total-downloads h1 {
+    display: inline;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.release {
+    background-color: rgba(127, 140, 141, 0.1);
+    border: solid 1px rgba(127, 140, 141, 0.4);
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.release h3 .glyphicon {
+    cursor: default;
+    color: rgba(66, 139, 202, 1);
+}
+
+.release h3 .badge {
+    cursor: default;
+    background-color: rgba(66, 139, 202, 1);
+    color: #fff;
+}
+
+.release-hr {
+    border-top-color: rgba(127, 140, 141, 0.4);
+}
+
+.latest-release {
+    background-color: rgba(92, 184, 92, 0.2);
+    border-color: rgba(92, 184, 92, 0.4);
+}
+
+.latest-release h3, .latest-release h3 .glyphicon, .latest-release h3 a {
+    color: rgba(92, 184, 92, 1);
+}
+
+.latest-release h3 .badge {
+    background-color: rgba(92, 184, 92, 1);
+}
+
+.latest-release .release-hr {
+    border-color: rgba(92, 184, 92, 0.4);
+}
+
+.pre-release {
+    background-color: rgba(240, 173, 78, 0.05);
+    border-color: rgba(240, 173, 78, 0.4);
+}
+
+.pre-release h3, .pre-release h3 .glyphicon, .pre-release h3 a {
+    color: rgba(240, 173, 78, 1);
+}
+
+.pre-release h3 .badge {
+    background-color: rgba(240, 173, 78, 1);
+}
+
+.pre-release .release-hr {
+    border-color: rgba(240, 173, 78, 0.4);
+}
+
+#loader-gif {
+    position: absolute;
+    bottom: 15%;
+    left: 47%;
+}
+
+#description {
+    text-align: center;
+}
+
+#title {
+    display: none;
+    margin: 20px 0 10px 0;
+    text-align: center;
+}
+
+#title > h1 {
+    display: inline;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+#title > span {
+    font-size: 24px;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin-bottom: 40px;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background-color: rgba(210, 210, 210, 0.2);
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid rgba(210, 210, 210, 0.4);
+}
+
+#ads {
+    margin-top: 20px;
+}
+
