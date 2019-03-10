@@ -25,7 +25,6 @@ func New(
 			ClientID:     config.ClientID,
 			ClientSecret: config.ClientSecret,
 			Scopes:       []string{"user:email, read:org"},
-            //Scopes:       []string{"user:email,public_repo"}, //old scopes
 			Endpoint:     githuboauth.Endpoint,
 		},
 		state: config.OauthState,
