@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/Intika-Web-Apps/Watchub-Mirror/shared/model"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/model"
 	"github.com/jmoiron/sqlx"
 )
 

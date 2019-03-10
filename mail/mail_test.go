@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/Intika-Web-Apps/Watchub-Mirror/config"
-	"github.com/Intika-Web-Apps/Watchub-Mirror/shared/dto"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/config"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/dto"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -19,9 +19,9 @@ func TestWelcomeMail(t *testing.T) {
 		welcome: template.Must(template.ParseFiles("../static/mail/welcome.md")),
 	}
 	data := dto.WelcomeEmailData{
-		Email:     "caarlos0@gmail.com",
+		Email:     "yourmail@gmail.com",
 		Followers: 10,
-		Login:     "caarlos0",
+		Login:     "yourmail",
 		Repos:     5,
 		Stars:     1,
 	}
@@ -43,9 +43,9 @@ func TestChangesMail(t *testing.T) {
 		changes: template.Must(template.ParseFiles("../static/mail/changes.md")),
 	}
 	data := dto.ChangesEmailData{
-		Email:        "caarlos0@gmail.com",
+		Email:        "yourmail@gmail.com",
 		Followers:    10,
-		Login:        "caarlos0",
+		Login:        "yourmail",
 		Repos:        5,
 		Stars:        1,
 		NewFollowers: []string{"juvenal", "moises"},

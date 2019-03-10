@@ -1,24 +1,23 @@
 <p align="center">
-  <img alt="Watchub Logo" src="https://github.com/Intika-Web-Apps/Watchub-Mirror/raw/master/static/apple-touch-icon-144x144.png" />
-  <h3 align="center">Watchub - Mirror</h3>
-  <h3 align="center">https://watchub.duckdns.org/</h3>
-  <p align="center">Be notified of people who followed/unfollowed you and starred/unstarred your repositories.</p>
+  <img alt="Starhub Logo" src="https://github.com/Intika-Web-Apps/Starhub-Notifier/raw/master/static/logo/logo-512.png" />
+  <h3 align="center">Starhub Notifier</h3>
+  <h3 align="center">https://starhub-notifier.duckdns.org/</h3>
+  <p align="center">Watch and notify who followed/unfollowed you and starred/unstarred your github repositories</p>
 </p>
 
 ---
 
-**Watchub-Mirro:** This is a mirror of the upstream project with these key differences:
+**Starhub-Notifier Features:**
 
 - Watch all repos (forked one as well)
-- No write access required
-- SSL HTTPS
-
-**Watchub:** watches your account and notify you via email (at most one email/day) of the following events:
-
-- Someone followed you
-- Someone unfollowed you
-- Someone starred a repository you have access to
-- Someone unstarred a repository you have access to
+- No github write access required
+- SSL HTTPS - Encrypted Requests
+- Analyze starts over time with a graph
+- Display total stars for all repository
+- Notify for new followers
+- Notify for new unfollower 
+- Notify for new starred repository
+- Notify for new unstarred repository
 
 # Running it locally
 
@@ -31,8 +30,8 @@ Let's assume `~/Code/Go` as our default Go projects folder.
 So:
 
 ```sh
-git clone git@github.com:Intika-Web-Apps/Watchub-Mirror.git
-cd watchub
+git clone git@github.com:Intika-Web-Apps/Starhub-Notifier.git
+cd Starhub-Notifier
 ```
 
 ## Dependencies
@@ -84,7 +83,7 @@ Then, create an application on [github](https://github.com/settings/applications
 
 Fill it like this:
 
-1. Application name: `Watchub dev`
+1. Application name: `Starhub-Notifier-Dev-Username`
 1. Homepage URL: the ngrok http forwarding URL, e.g. `https://6f7ca783.ngrok.io`
 1. Application description: empty
 1. Authorization callback URL: same as homepage url, but with a `/login/callback`

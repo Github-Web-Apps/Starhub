@@ -1,4 +1,4 @@
-module github.com/Intika-Web-Apps/Watchub-Mirror
+module github.com/Intika-Web-Apps/Starhub-Notifier
 
 require (
 	github.com/Masterminds/semver v1.2.2 // indirect

@@ -2,7 +2,7 @@ vendor
 .env
 coverage.txt
 bin
-Watchub-Mirror
+Starhub-Notifier
 watchub.service
 run.sh
 run.direct.sh

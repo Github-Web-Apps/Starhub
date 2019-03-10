@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/apex/log"
-	"github.com/Intika-Web-Apps/Watchub-Mirror/config"
-	"github.com/Intika-Web-Apps/Watchub-Mirror/shared/dto"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/config"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/dto"
 	"github.com/matcornic/hermes"
 	sendgrid "github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
@@ -18,17 +18,17 @@ import (
 // nolint: gochecknoglobals
 var emailConfig = hermes.Hermes{
 	Product: hermes.Product{
-		Name:      "Watchub",
-		Link:      "https://watchub.duckdns.org",
-		Logo:      "https://raw.githubusercontent.com/Intika-Web-Apps/Watchub-Mirror/master/static/apple-touch-icon-144x144.png",
-		Copyright: "Copyright © 2016-2019 Watchub.",
+		Name:      "Starhub Notifier",
+		Link:      "https://starhub-notifier.duckdns.org/",
+		Logo:      "https://raw.githubusercontent.com/Intika-Web-Apps/Starhub-Notifier/master/static/apple-touch-icon-144x144.png",
+		Copyright: "Copyright © 2019 Starhub Notifier.",
 	},
 	Theme: new(hermes.Flat),
 }
 
 // nolint: gochecknoglobals
 var welcomeIntro = []string{
-	"Welcome to Watchub!",
+	"Welcome To Starhub Notifier!",
 	"We're very excited to have you on board.",
 }
 
@@ -59,7 +59,7 @@ func (s *Service) SendWelcome(data dto.WelcomeEmailData) {
 		log.WithError(err).Error("failed to generate welcome email")
 		return
 	}
-	s.send(data.Login, data.Email, "Welcome to Watchub!", html)
+	s.send(data.Login, data.Email, "Welcome To Starhub Notifier!", html)
 }
 
 func (s *Service) SendChanges(data dto.ChangesEmailData) {
@@ -68,7 +68,7 @@ func (s *Service) SendChanges(data dto.ChangesEmailData) {
 		log.WithError(err).Error("failed to generate changes email")
 		return
 	}
-	s.send(data.Login, data.Email, "Your report from Watchub!", html)
+	s.send(data.Login, data.Email, "Your Report From Starhub Notifier!", html)
 }
 
 func (s *Service) generate(login string, data interface{}, tmpl *template.Template, intros []string) (string, error) {
@@ -89,7 +89,7 @@ func (s *Service) generate(login string, data interface{}, tmpl *template.Templa
 							"We will continue to watch for changes and let you know!",
 							"\n\n---\n\n",
 							"<small>",
-							`Liking our service? Maybe you'll consider [make a donation](https://watchub.duckdns.org/donate).`,
+							`Liking our service? Maybe you'll consider [make a donation](https://starhub-notifier.duckdns.org/donate) to help with the server fees.`,
 							fmt.Sprintf(
 								`You might also want to change [your settings](%s).`,
 								"https://github.com/settings/connections/applications/"+s.config.ClientID,
@@ -106,7 +106,7 @@ func (s *Service) generate(login string, data interface{}, tmpl *template.Templa
 
 func (s *Service) send(name, email, subject, html string) {
 	var log = log.WithField("email", email)
-	var from = mail.NewEmail("Watchub", "noreply@watchub.duckdns.org")
+	var from = mail.NewEmail("Starhub-Notifier", "noreply@starhub-notifier.duckdns.org")
 	var to = mail.NewEmail(name, email)
 	var request = sendgrid.GetRequest(
 		s.config.SendgridAPIKey,
@@ -114,7 +114,7 @@ func (s *Service) send(name, email, subject, html string) {
 		"https://api.sendgrid.com",
 	)
 	// prevent grouping in gmail
-	request.Headers["X-Entity-Ref-ID"] = "watchub-" + time.Now().String()
+	request.Headers["X-Entity-Ref-ID"] = "starhub-" + time.Now().String()
 	request.Method = "POST"
 	request.Body = mail.GetRequestBody(
 		mail.NewV3MailInit(

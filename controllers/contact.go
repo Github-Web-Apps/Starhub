@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/Intika-Web-Apps/Watchub-Mirror/config"
-	"github.com/Intika-Web-Apps/Watchub-Mirror/shared/pages"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/config"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/pages"
 	"github.com/gorilla/sessions"
 )
 

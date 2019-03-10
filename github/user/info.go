@@ -3,9 +3,9 @@ package user
 import (
 	"context"
 
-	"github.com/Intika-Web-Apps/Watchub-Mirror/github/email"
-	"github.com/Intika-Web-Apps/Watchub-Mirror/github/followers"
-	"github.com/Intika-Web-Apps/Watchub-Mirror/shared/dto"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/github/email"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/github/followers"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/dto"
 	"github.com/google/go-github/github"
 )
 

@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Intika-Web-Apps/Watchub-Mirror/config"
-	"github.com/Intika-Web-Apps/Watchub-Mirror/datastore"
-	"github.com/Intika-Web-Apps/Watchub-Mirror/shared/pages"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/config"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/datastore"
+	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/pages"
 	"github.com/gorilla/sessions"
 )
 
