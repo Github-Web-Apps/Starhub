@@ -52,7 +52,7 @@ To install the other project's dependencies.
 Just run:
 
 ```sh
-make lint
+make build
 ```
 
 ## Running the tests
