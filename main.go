@@ -60,9 +60,12 @@ func main() {
 	mux.Methods(http.MethodGet).Path("/contact").HandlerFunc(
 		controllers.NewContact(config, session).Handler,
 	)
-        mux.Methods(http.MethodGet).Path("/startrack").HandlerFunc(
-                controllers.NewStartrack(config, session).Handler,
-        )
+    mux.Methods(http.MethodGet).Path("/startrack").HandlerFunc(
+            controllers.NewStartrack(config, session).Handler,
+    )
+    mux.Methods(http.MethodGet).Path("/downloads").HandlerFunc(
+            controllers.NewDownloads(config, session).Handler,
+    )
 	mux.Methods(http.MethodGet).Path("/schedule").HandlerFunc(
 		controllers.NewSchedule(config, session, store).Handler,
 	)
