@@ -12,8 +12,7 @@
 - Watch all repos (forked one as well)
 - No github write access required
 - SSL HTTPS - Encrypted Requests
-- Analyze starts over time with a graph
-- Stars analytics
+- Starts analytics over time with a graph
 - Display total stars for all repository
 - Display total public repos
 - Release downloads couter & stats 
