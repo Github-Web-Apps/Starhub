@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Starhub Logo" src="https://github.com/Intika-Web-Apps/Starhub-Notifier/raw/master/static/logo/logo-512.png" />
+  <img alt="Starhub Logo" src="https://github.com/Intika-Web-Apps/Starhub-Notifier/raw/master/static/logo/logo-128.png" />
   <h3 align="center">Starhub Notifier</h3>
   <h3 align="center">https://starhub-notifier.duckdns.org/</h3>
   <p align="center">Watch and notify who followed/unfollowed you and starred/unstarred your github repositories</p>
