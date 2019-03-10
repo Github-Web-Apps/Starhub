@@ -7,7 +7,7 @@
 
 ---
 
-**Starhub-Notifier Features:**
+# Starhub-Notifier Features:
 
 - Watch all repos (forked one as well)
 - No github write access required
