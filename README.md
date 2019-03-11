@@ -1,7 +1,7 @@
 <p align="center">
   <img alt="Starhub Logo" src="https://github.com/Intika-Web-Apps/Starhub-Notifier/raw/master/static/logo/logo-128.png" />
   <h1 align="center">Starhub Notifier</h1>
-  <h3 align="center">https://starhub-notifier.duckdns.org/</h3>
+  <h3 align="center">https://starhub.mywire.org/</h3>
   <p align="center">Analytics about: stars, release download count, who followed/unfollowed and starred/unstarred your Github repositories plus watch and notify by email.</p>
 </p>
 
