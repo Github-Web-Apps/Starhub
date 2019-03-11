@@ -20,6 +20,9 @@
 - Notify for new unfollower 
 - Notify for new starred repository
 - Notify for new unstarred repository
+- Tools: user mail finder
+- Tools: username converter
+- Tools: user-id converter
 
 # Screenshot
 
