@@ -1,0 +1,120 @@
+{{ define "content-naked" }}
+{{ end }}
+{{ define "content" }}
+
+<script type="text/javascript" src="static/resources/downloads/third-party/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="static/resources/downloads/third-party/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/resources/downloads/third-party/typahead/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript" src="static/resources/downloads/js/main.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Get the latest release stats like download counts, release dates, author on any Github project">
+<meta name="keywords" content="Github, release, download, count">
+<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="static/resources/downloads/third-party/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="static/resources/downloads/css/main.css">
+
+<script>
+ 	$("h4.what-is-it").text("Downloads-Track: Get stats like download counts, release dates, authors for any Github project");
+</script>
+
+<script type="text/javascript" charset="utf-8">
+	function getUserName () {
+		var idNew = $("#username3").val()
+        getUserNameFor(idNew, function(funcID, usernameRes) {
+          document.getElementById("result-content3").style.visibility= "visible"
+          $('#results3').val(usernameRes)
+        })
+	}	
+	function getUserID () {
+		var name = $("#username2").val()
+        getIdFor(name, function(username, id) {
+          document.getElementById("result-content2").style.visibility= "visible"
+          $('#results2').val(id)
+        })
+	}	
+    function getIdFor (username, callback) {
+      $.getJSON('https://api.github.com/users/' + username + "?callback=?", {},
+       function(json){
+         var id = json["data"]["id"]
+         if (id) {callback(username, id)}
+         return false
+      });
+    }
+    function getUserNameFor (funcID, callback2) {
+      $.getJSON('https://api.github.com/user/' + funcID + "?callback=?", {},
+       function(json){
+         var usernameRes = json["data"]["login"]
+         if (usernameRes) {callback2(funcID, usernameRes)}
+         return false
+      });
+    }
+    function showMail () {
+    	document.getElementById('result-content').style.visibility= 'visible';
+    }
+</script>
+
+<h3 class="ui header">
+  Github user mail finder 
+</h3>
+<div class="ui very padded segment">
+	<p>Search and extract the email address from commits</p>
+		<div class="form form-inline">
+			<div class="form-group">
+				<input type="text" class="form-control" id="username" placeholder="Github username or repo link">
+			</div>
+
+			</br></br>
+
+			<button class="btn btn-primary" id="get-infos" onclick="showMail();fetch(`https://api.github.com/users/${username.value.replace(/^.*com[/]([^/]*).*$/,'$1')}/events/public`).then(e=> e.json()).then(e => [...new Set([].concat.apply([],e.filter(x => x.type==='PushEvent').map(x => x.payload.commits.map(c => c.author.email)))).values()]).then(x => results.value = x);">Get the email!</button>
+
+			<div class="form-group" id="result-content" style="visibility: hidden;">
+				<input type="text" class="form-control" id="results" placeholder="Search result">
+			</div>
+
+		</div>
+</div>
+
+<h3 class="ui header">
+  	Github username converter
+</h3>
+<div class="ui very padded segment">
+	<p>Search and extract the user-id from the username</p>
+		<div class="form form-inline">
+			<div class="form-group">
+				<input type="text" class="form-control" id="username2" placeholder="Github username">
+			</div>
+
+			</br></br>
+
+			<button class="btn btn-primary" id="get-infos" onclick="getUserID();">Get the id</button>
+
+			<div class="form-group" id="result-content2" style="visibility: hidden;">
+				<input type="text" class="form-control" id="results2" placeholder="Search result">
+			</div>
+
+		</div>
+</div>
+
+<h3 class="ui header">
+  	Github user-id converter
+</h3>
+<div class="ui very padded segment">
+	<p>Search and extract the username from the user-id</p>
+		<div class="form form-inline">
+			<div class="form-group">
+				<input type="text" class="form-control" id="username3" placeholder="Github user id">
+			</div>
+
+			</br></br>
+
+			<button class="btn btn-primary" id="get-infos" onclick="getUserName()">Get the email!</button>
+
+			<div class="form-group" id="result-content3" style="visibility: hidden;">
+				<input type="text" class="form-control" id="results3" placeholder="Search result">
+			</div>
+
+		</div>
+</div>
+
+{{ end }}

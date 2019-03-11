@@ -66,6 +66,9 @@ func main() {
     mux.Methods(http.MethodGet).Path("/downloads").HandlerFunc(
             controllers.NewDownloads(config, session).Handler,
     )
+    mux.Methods(http.MethodGet).Path("/tools").HandlerFunc(
+            controllers.NewTools(config, session).Handler,
+    )
 	mux.Methods(http.MethodGet).Path("/schedule").HandlerFunc(
 		controllers.NewSchedule(config, session, store).Handler,
 	)

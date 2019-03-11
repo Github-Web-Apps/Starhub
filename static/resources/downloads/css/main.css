@@ -15,7 +15,7 @@ code {
 .form-group {
     width: 100%;
 }
-#username, #repository, #get-stats-button {
+#username, #username2, #username3, #username4, #repository, #get-stats-button, #results, #results2, #results3, #results4, #get-infos {
     margin-top: 10px;
     width: 100%;
 }
