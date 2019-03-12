@@ -66,7 +66,7 @@
 
 			</br></br>
 
-			<button class="btn btn-primary" id="get-infos" onclick="showMail();fetch(`https://api.github.com/users/${username.value.replace(/^.*com[/]([^/]*).*$/,'$1')}/events/public`).then(e=> e.json()).then(e => [...new Set([].concat.apply([],e.filter(x => x.type==='PushEvent').map(x => x.payload.commits.map(c => c.author.email)))).values()]).then(x => results.value = x);">Get the email!</button>
+			<button class="btn btn-primary" id="get-infos" onclick="showMail();fetch(`https://api.github.com/users/${username.value.replace(/^.*com[/]([^/]*).*$/,'$1')}/events/public`).then(e=> e.json()).then(e => [...new Set([].concat.apply([],e.filter(x => x.type==='PushEvent').map(x => x.payload.commits.map(c => c.author.email)))).values()]).then(x => results.value = x);">Get the user email!</button>
 
 			<div class="form-group" id="result-content" style="visibility: hidden;">
 				<input type="text" class="form-control" id="results" placeholder="Search result">
@@ -87,7 +87,7 @@
 
 			</br></br>
 
-			<button class="btn btn-primary" id="get-infos" onclick="getUserID();">Get the id</button>
+			<button class="btn btn-primary" id="get-infos" onclick="getUserID();">Get the user id!</button>
 
 			<div class="form-group" id="result-content2" style="visibility: hidden;">
 				<input type="text" class="form-control" id="results2" placeholder="Search result">
@@ -108,7 +108,7 @@
 
 			</br></br>
 
-			<button class="btn btn-primary" id="get-infos" onclick="getUserName()">Get the email!</button>
+			<button class="btn btn-primary" id="get-infos" onclick="getUserName()">Get the username!</button>
 
 			<div class="form-group" id="result-content3" style="visibility: hidden;">
 				<input type="text" class="form-control" id="results3" placeholder="Search result">

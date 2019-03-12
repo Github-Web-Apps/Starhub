@@ -19,7 +19,7 @@ import (
 var emailConfig = hermes.Hermes{
 	Product: hermes.Product{
 		Name:      "Starhub Notifier",
-		Link:      "https://starhub-notifier.duckdns.org/",
+		Link:      "https://starhub.mywire.org/",
 		Logo:      "https://raw.githubusercontent.com/Intika-Web-Apps/Starhub-Notifier/master/static/logo/logo-144.png",
 		Copyright: "Copyright © 2019 Starhub Notifier.",
 	},
@@ -89,7 +89,7 @@ func (s *Service) generate(login string, data interface{}, tmpl *template.Templa
 							"We will continue to watch for changes and let you know!",
 							"\n\n---\n\n",
 							"<small>",
-							`Liking our service? Maybe you'll consider [make a donation](https://starhub-notifier.duckdns.org/donate) to help with the server fees.`,
+							`Liking our service? Maybe you'll consider [make a donation](https://starhub.mywire.org/donate) to help with the server fees.`,
 							fmt.Sprintf(
 								`You might also want to change [your settings](%s).`,
 								"https://github.com/settings/connections/applications/"+s.config.ClientID,
