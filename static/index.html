@@ -2,21 +2,35 @@
 {{ end }}
 {{ define "content" }}
 {{ if eq .User.ID 0 }}
+
   <h3 class="ui header">Login</h3>
   <p>
     In order to continue, we need to authorize with GitHub.
   </p>
   <a href="/login" class="ui large positive button"><i class="github icon"></i> Login</a>
+  
 {{ else }}
+
   <div class="ui very padded segment">
     <h2 class="ui header">
       <img src="https://avatars3.githubusercontent.com/u/{{ .User.ID }}?v=3&s=144" class="ui circular image">
       Hello {{ .User.Login}}!
     </h2>
     {{ if .User.IsNew }}
+  
       <p>
         <b>We're are all set!</b>
-        You should receive a welcome email soon <i class="mail icon"></i>
+        You should receive a welcome email soon <i class="mail icon"></i></br></br>
+        
+        <b>The profile creation process takes 3-10 min to be completed.</b></br></br>
+        
+        This will trigger a welcome mail to your <b>main github email address.</b></br></br>
+        
+        <b>Changes</b> to your account are checked once a day, you'll only receive an email if there were changes since the last notification email.</br></br>
+        
+  		Refresh the home page after the profile creation needed delay to see the changes, or wait for the notification/welcome email.</br></br>
+
+  		Thank you for using our service, <b>if you like it please consider a <a href="donate">donation</a> to help us with the server fees</b>
       </p>
       <p>
         <a class="ui blue basic small button" href="/">
@@ -26,7 +40,9 @@
           Change settings
         </a>
       </p>
+      
     {{ else }}
+    
       <h3>Your profile looks good!</h3>
       <div class="ui statistics">
         <div class="statistic">
@@ -63,7 +79,14 @@
           Change settings
         </a>
       </div>
+
+      <p>
+        </br>
+        Thank you for using Starhub, <b>if you like it please consider a <a href="donate">donation</a> to help us with the server fees.</b>
+      </p>
+      
     {{ end }}
+    
   </div>
 {{ end }}
 {{ end }}
