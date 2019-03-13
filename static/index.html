@@ -3,12 +3,53 @@
 {{ define "content" }}
 {{ if eq .User.ID 0 }}
 
-  <h3 class="ui header">Login</h3>
-  <p>
-    In order to continue, we need to authorize with GitHub.
-  </p>
-  <a href="/login" class="ui large positive button"><i class="github icon"></i> Login</a>
-  
+	<p align="center">
+		<img alt="Starhub Logo" src="https://github.com/Intika-Web-Apps/Starhub-Notifier/raw/master/static/logo/logo-128.png" />
+	</p>
+
+	<div class="ui very padded segment">
+		<h3 class="ui header">Starhub:</h3>
+		<p>
+		Analytics about your Github account: public and private activity, stars count, release download count, who followed/unfollowed and starred/unstarred your Github repositories plus daily email notification about changes.</br>
+
+		<h3 class="ui header">Features:</h3>
+
+		- Watch all repos (forked one as well)</br>
+		- No github write access required</br>
+		- SSL HTTPS - Encrypted Requests</br>
+		- Starts analytics over time with a graph</br>
+		- Display total stars for all repository</br>
+		- Display total public repos</br>
+		- Release downloads couter & stats</br>
+		- Daily email notifciation <b>(only on changes)</b></br>
+		- Notify for new followers</br>
+		- Notify for new unfollower</br>
+		- Notify for new starred repository</br>
+		- Notify for new unstarred repository</br>
+		- Tools: user mail finder</br>
+		- Tools: username converter</br>
+		- Tools: user-id converter</br>
+		- And much more...
+		</p>
+
+		<h3 class="ui header">Capture:</h3>
+
+		<div align="center">
+		    <img src="https://raw.githubusercontent.com/Intika-Web-Apps/Starhub-Notifier/master/screenshot/1.png" width="500px"></img> 
+		</div>
+
+	</div>
+
+	<div class="ui very padded segment">
+		<div align="center">
+			<h3 class="ui header">Login</h3>
+			<p>
+			In order to continue, you need to authenticate with GitHub.
+			</p>
+			<a href="/login" class="ui large positive button"><i class="github icon"></i> Login</a>
+		</div>
+	</div>
+	
 {{ else }}
 
   <div class="ui very padded segment">
@@ -21,15 +62,10 @@
       <p>
         <b>We're are all set!</b>
         You should receive a welcome email soon <i class="mail icon"></i></br></br>
-        
         <b>The profile creation process takes 3-10 min to be completed.</b></br></br>
-        
         This will trigger a welcome mail to your <b>main github email address.</b></br></br>
-        
         <b>Changes</b> to your account are checked once a day, you'll only receive an email if there were changes since the last notification email.</br></br>
-        
   		Refresh the home page after the profile creation needed delay to see the changes, or wait for the notification/welcome email.</br></br>
-
   		Thank you for using our service, <b>if you like it please consider a <a href="donate">donation</a> to help us with the server fees</b>
       </p>
       <p>

@@ -2,7 +2,7 @@
   <img alt="Starhub Logo" src="https://github.com/Intika-Web-Apps/Starhub-Notifier/raw/master/static/logo/logo-128.png" />
   <h1 align="center">Starhub Notifier</h1>
   <h3 align="center">https://starhub.mywire.org/</h3>
-  <p align="center">Analytics about: stars, release download count, who followed/unfollowed and starred/unstarred your Github repositories plus watch and notify by email.</p>
+  <p align="center">Analytics about your Github account: public and private activity, stars count, release download count, who followed/unfollowed and starred/unstarred your Github repositories plus daily email notification about changes.</p>
 </p>
 
 ---
@@ -15,7 +15,8 @@
 - Starts analytics over time with a graph
 - Display total stars for all repository
 - Display total public repos
-- Release downloads couter & stats 
+- Release downloads couter & stats
+- Daily email notifciation (only on changes)
 - Notify for new followers
 - Notify for new unfollower 
 - Notify for new starred repository
