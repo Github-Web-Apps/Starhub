@@ -1,5 +1,9 @@
+{{ define "title" }}
+     <h4 class="what-is-it" style="font-weight: bold; margin-bottom: 0px;">
+     Stars Statistics</br>
+     GitHub graphical star history and stats</h4>
+{{ end }}
 {{ define "content" }}
-
 {{ end }}
 {{ define "content-naked" }}
 
@@ -10,7 +14,7 @@
     <script src="static/resources/startrack/StarTrack.js"></script>
 
     <script>
-		$("h4.what-is-it").text("Star-Track: GitHub graphical star history and stats");
+		//$("h4.what-is-it").text("GitHub star history and stats");
     </script>
 
     <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
@@ -112,4 +116,3 @@
     </div>
 
 {{ end }}
-

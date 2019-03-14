@@ -1,3 +1,9 @@
+{{ define "title" }}
+    <h4 class="what-is-it" style="font-weight: bold; margin-bottom: unset;">
+        Github Tools</br>
+        Get email, user-id, username informations for any Github user
+    </h4>
+{{ end }}
 {{ define "content-naked" }}
 {{ end }}
 {{ define "content" }}
@@ -15,7 +21,7 @@
 <link rel="stylesheet" href="static/resources/downloads/css/main.css">
 
 <script>
- 	$("h4.what-is-it").text("Tools: Get email, user-id, username informations for any Github user");
+ 	//$("h4.what-is-it").text("Get email, user-id, username informations for any Github user");
 </script>
 
 <script type="text/javascript" charset="utf-8">
@@ -61,12 +67,12 @@
 	<p>Search and extract the email address from commits</p>
 		<div class="form form-inline">
 			<div class="form-group">
-				<input type="text" class="form-control" id="username" placeholder="Github username or repo link">
+				<input type="text" class="form-control" id="username" placeholder="Github username or repo link" onkeydown = "if (event.keyCode == 13) document.getElementById('get-infos-1').click()">
 			</div>
 
 			</br></br>
 
-			<button class="btn btn-primary" id="get-infos" onclick="showMail();fetch(`https://api.github.com/users/${username.value.replace(/^.*com[/]([^/]*).*$/,'$1')}/events/public`).then(e=> e.json()).then(e => [...new Set([].concat.apply([],e.filter(x => x.type==='PushEvent').map(x => x.payload.commits.map(c => c.author.email)))).values()]).then(x => results.value = x);">Get the user email!</button>
+			<button class="btn btn-primary" id="get-infos-1" onclick="showMail();fetch(`https://api.github.com/users/${username.value.replace(/^.*com[/]([^/]*).*$/,'$1')}/events/public`).then(e=> e.json()).then(e => [...new Set([].concat.apply([],e.filter(x => x.type==='PushEvent').map(x => x.payload.commits.map(c => c.author.email)))).values()]).then(x => results.value = x);">Get the user email!</button>
 
 			<div class="form-group" id="result-content" style="visibility: hidden;">
 				<input type="text" class="form-control" id="results" placeholder="Search result">
@@ -82,12 +88,12 @@
 	<p>Search and extract the user-id from the username</p>
 		<div class="form form-inline">
 			<div class="form-group">
-				<input type="text" class="form-control" id="username2" placeholder="Github username">
+				<input type="text" class="form-control" id="username2" placeholder="Github username" onkeydown = "if (event.keyCode == 13) document.getElementById('get-infos-2').click()">
 			</div>
 
 			</br></br>
 
-			<button class="btn btn-primary" id="get-infos" onclick="getUserID();">Get the user id!</button>
+			<button class="btn btn-primary" id="get-infos-2" onclick="getUserID();">Get the user id!</button>
 
 			<div class="form-group" id="result-content2" style="visibility: hidden;">
 				<input type="text" class="form-control" id="results2" placeholder="Search result">
@@ -103,12 +109,12 @@
 	<p>Search and extract the username from the user-id</p>
 		<div class="form form-inline">
 			<div class="form-group">
-				<input type="text" class="form-control" id="username3" placeholder="Github user id">
+				<input type="text" class="form-control" id="username3" placeholder="Github user id" onkeydown = "if (event.keyCode == 13) document.getElementById('get-infos-3').click()">
 			</div>
 
 			</br></br>
 
-			<button class="btn btn-primary" id="get-infos" onclick="getUserName()">Get the username!</button>
+			<button class="btn btn-primary" id="get-infos-3" onclick="getUserName()">Get the username!</button>
 
 			<div class="form-group" id="result-content3" style="visibility: hidden;">
 				<input type="text" class="form-control" id="results3" placeholder="Search result">
