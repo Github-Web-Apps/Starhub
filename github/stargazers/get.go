@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/model"
+	"github.com/Github-Web-Apps/Starhub/shared/model"
 	"github.com/google/go-github/github"
 	"github.com/pkg/errors"
 	"golang.org/x/sync/errgroup"

@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/apex/log"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/config"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/dto"
+	"github.com/Github-Web-Apps/Starhub/config"
+	"github.com/Github-Web-Apps/Starhub/shared/dto"
 	"github.com/matcornic/hermes"
 	sendgrid "github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
@@ -18,17 +18,17 @@ import (
 // nolint: gochecknoglobals
 var emailConfig = hermes.Hermes{
 	Product: hermes.Product{
-		Name:      "Starhub Notifier",
+		Name:      "Starhub",
 		Link:      "https://starhub.mywire.org/",
-		Logo:      "https://raw.githubusercontent.com/Intika-Web-Apps/Starhub-Notifier/master/static/logo/logo-144.png",
-		Copyright: "Copyright © 2019 Starhub Notifier.",
+		Logo:      "https://raw.githubusercontent.com/Github-Web-Apps/Starhub/master/static/logo/logo-144.png",
+		Copyright: "Copyright © 2019 Starhub.",
 	},
 	Theme: new(hermes.Flat),
 }
 
 // nolint: gochecknoglobals
 var welcomeIntro = []string{
-	"Welcome To Starhub Notifier!",
+	"Welcome To Starhub!",
 	"We're very excited to have you on board.",
 }
 
@@ -59,7 +59,7 @@ func (s *Service) SendWelcome(data dto.WelcomeEmailData) {
 		log.WithError(err).Error("failed to generate welcome email")
 		return
 	}
-	s.send(data.Login, data.Email, "Welcome To Starhub Notifier!", html)
+	s.send(data.Login, data.Email, "Welcome To Starhub!", html)
 }
 
 func (s *Service) SendChanges(data dto.ChangesEmailData) {
@@ -68,7 +68,7 @@ func (s *Service) SendChanges(data dto.ChangesEmailData) {
 		log.WithError(err).Error("failed to generate changes email")
 		return
 	}
-	s.send(data.Login, data.Email, "Your Report From Starhub Notifier!", html)
+	s.send(data.Login, data.Email, "Your Report From Starhub!", html)
 }
 
 func (s *Service) generate(login string, data interface{}, tmpl *template.Template, intros []string) (string, error) {
@@ -106,7 +106,7 @@ func (s *Service) generate(login string, data interface{}, tmpl *template.Templa
 
 func (s *Service) send(name, email, subject, html string) {
 	var log = log.WithField("email", email)
-	var from = mail.NewEmail("Starhub-Notifier", "noreply@starhub-notifier.duckdns.org")
+	var from = mail.NewEmail("Starhub", "noreply@starhub.mywire.org")
 	var to = mail.NewEmail(name, email)
 	var request = sendgrid.GetRequest(
 		s.config.SendgridAPIKey,

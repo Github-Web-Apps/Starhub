@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Intika-Web-Apps/Starhub-Notifier/config"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/datastore"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/oauth"
+	"github.com/Github-Web-Apps/Starhub/config"
+	"github.com/Github-Web-Apps/Starhub/datastore"
+	"github.com/Github-Web-Apps/Starhub/oauth"
 	"github.com/gorilla/sessions"
 )
 

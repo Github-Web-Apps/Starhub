@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/Intika-Web-Apps/Starhub-Notifier/github/followers"
+	"github.com/Github-Web-Apps/Starhub/github/followers"
 	"github.com/google/go-github/github"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/oauth2"

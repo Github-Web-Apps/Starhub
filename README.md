@@ -1,8 +1,8 @@
 <p align="center">
-  <img alt="Starhub Logo" src="https://github.com/Intika-Web-Apps/Starhub-Notifier/raw/master/static/logo/logo-128.png" />
-  <h1 align="center">Starhub Notifier</h1>
+  <img alt="Starhub Logo" src="https://github.com/Github-Web-Apps/Starhub/raw/master/static/logo/logo-128.png" />
+  <h1 align="center">Starhub</h1>
   <h3 align="center">https://starhub.mywire.org/</h3>
-  <p align="center">Analytics about your Github account: public and private activity, stars count, release download count, who followed/unfollowed and starred/unstarred your Github repositories plus daily email notification about changes.</p>
+  <p align="center">All about your Github account, public and private activity, stars count, release download count, who followed/unfollowed and starred/unstarred your Github repositories plus daily email notification about changes and much more.</p>
 </p>
 
 ---
@@ -24,19 +24,20 @@
 - Tools: user mail finder
 - Tools: username converter
 - Tools: user-id converter
+- Etc.
 
 # Screenshot
 
 <div align="center">
-    <img src="https://raw.githubusercontent.com/Intika-Web-Apps/Starhub-Notifier/master/screenshot/1.png" width="700px"></img> 
+    <img src="https://raw.githubusercontent.com/Github-Web-Apps/Starhub/master/screenshot/1.png" width="700px"></img> 
 </div>
 </br>
 <div align="center">
-    <img src="https://raw.githubusercontent.com/Intika-Web-Apps/Starhub-Notifier/master/screenshot/2.png" width="700px"></img> 
+    <img src="https://raw.githubusercontent.com/Github-Web-Apps/Starhub/master/screenshot/2.png" width="700px"></img> 
 </div>
 </br>
 <div align="center">
-    <img src="https://raw.githubusercontent.com/Intika-Web-Apps/Starhub-Notifier/master/screenshot/3.png" width="700px"></img> 
+    <img src="https://raw.githubusercontent.com/Github-Web-Apps/Starhub/master/screenshot/3.png" width="700px"></img> 
 </div>
 
 # Running it locally
@@ -50,8 +51,8 @@ Let's assume `~/Code/Go` as our default Go projects folder.
 So:
 
 ```sh
-git clone git@github.com:Intika-Web-Apps/Starhub-Notifier.git
-cd Starhub-Notifier
+git clone git@github.com:Github-Web-Apps/Starhub.git
+cd Starhub
 ```
 
 **Dependencies**
@@ -103,7 +104,7 @@ Then, create an application on [github](https://github.com/settings/applications
 
 Fill it like this:
 
-1. Application name: `Starhub-Notifier-Dev-Username`
+1. Application name: `Starhub-Dev-Username`
 1. Homepage URL: the ngrok http forwarding URL, e.g. `https://6f7ca783.ngrok.io`
 1. Application description: empty
 1. Authorization callback URL: same as homepage url, but with a `/login/callback`

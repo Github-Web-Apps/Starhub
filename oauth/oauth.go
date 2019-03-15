@@ -3,8 +3,8 @@ package oauth
 import (
 	"context"
 
-	"github.com/Intika-Web-Apps/Starhub-Notifier/config"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/token"
+	"github.com/Github-Web-Apps/Starhub/config"
+	"github.com/Github-Web-Apps/Starhub/shared/token"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 	githuboauth "golang.org/x/oauth2/github"

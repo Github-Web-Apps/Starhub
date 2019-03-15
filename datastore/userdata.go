@@ -1,6 +1,6 @@
 package datastore
 
-import "github.com/Intika-Web-Apps/Starhub-Notifier/shared/model"
+import "github.com/Github-Web-Apps/Starhub/shared/model"
 
 type Userdatastore interface {
 	GetFollowers(userID int64) ([]string, error)

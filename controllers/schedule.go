@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Intika-Web-Apps/Starhub-Notifier/config"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/datastore"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/pages"
+	"github.com/Github-Web-Apps/Starhub/config"
+	"github.com/Github-Web-Apps/Starhub/datastore"
+	"github.com/Github-Web-Apps/Starhub/shared/pages"
 	"github.com/gorilla/sessions"
 )
 

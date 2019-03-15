@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/apex/log"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/datastore"
+	"github.com/Github-Web-Apps/Starhub/datastore"
 	"github.com/jmoiron/sqlx"
 )
 

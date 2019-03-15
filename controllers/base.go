@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/apex/log"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/config"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/dto"
+	"github.com/Github-Web-Apps/Starhub/config"
+	"github.com/Github-Web-Apps/Starhub/shared/dto"
 	"github.com/gorilla/sessions"
 )
 

@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/Intika-Web-Apps/Starhub-Notifier/config"
+	"github.com/Github-Web-Apps/Starhub/config"
 	"github.com/gorilla/sessions"
 )
 

@@ -3,10 +3,10 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/Intika-Web-Apps/Starhub-Notifier/config"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/datastore"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/dto"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/pages"
+	"github.com/Github-Web-Apps/Starhub/config"
+	"github.com/Github-Web-Apps/Starhub/datastore"
+	"github.com/Github-Web-Apps/Starhub/shared/dto"
+	"github.com/Github-Web-Apps/Starhub/shared/pages"
 	"github.com/gorilla/sessions"
 )
 

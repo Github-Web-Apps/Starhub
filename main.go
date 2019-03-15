@@ -12,11 +12,11 @@ import (
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/logfmt"
 
-	"github.com/Intika-Web-Apps/Starhub-Notifier/config"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/controllers"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/datastore/database"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/oauth"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/scheduler"
+	"github.com/Github-Web-Apps/Starhub/config"
+	"github.com/Github-Web-Apps/Starhub/controllers"
+	"github.com/Github-Web-Apps/Starhub/datastore/database"
+	"github.com/Github-Web-Apps/Starhub/oauth"
+	"github.com/Github-Web-Apps/Starhub/scheduler"
 
 	"github.com/gorilla/context"
 	"github.com/gorilla/mux"

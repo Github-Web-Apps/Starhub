@@ -3,7 +3,7 @@ package diff_test
 import (
 	"testing"
 
-	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/diff"
+	"github.com/Github-Web-Apps/Starhub/shared/diff"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -3,9 +3,9 @@ package user
 import (
 	"context"
 
-	"github.com/Intika-Web-Apps/Starhub-Notifier/github/email"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/github/followers"
-	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/dto"
+	"github.com/Github-Web-Apps/Starhub/github/email"
+	"github.com/Github-Web-Apps/Starhub/github/followers"
+	"github.com/Github-Web-Apps/Starhub/shared/dto"
 	"github.com/google/go-github/github"
 )
 

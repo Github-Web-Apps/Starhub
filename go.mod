@@ -1,4 +1,4 @@
-module github.com/Intika-Web-Apps/Starhub-Notifier
+module github.com/Github-Web-Apps/Starhub
 
 require (
 	github.com/Masterminds/semver v1.2.2 // indirect

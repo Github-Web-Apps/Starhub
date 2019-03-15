@@ -3,7 +3,7 @@ package database
 import (
 	"encoding/json"
 
-	"github.com/Intika-Web-Apps/Starhub-Notifier/shared/model"
+	"github.com/Github-Web-Apps/Starhub/shared/model"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
 )
