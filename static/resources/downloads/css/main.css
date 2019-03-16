@@ -15,7 +15,14 @@ code {
 .form-group {
     width: 100%;
 }
-#username, #username2, #username3, #username4, #repository, #get-stats-button, #results, #results2, #results3, #results4, #get-infos, #get-infos, #get-infos-1, #get-infos-2, #get-infos-3, #get-infos-4 {
+
+#linkurl1, #linkurl2, #linkurl3, #linkurl4, #linkurl5, #linkurl6,
+#username, #username2, #username3, #username4, #username5, #username6,  
+#repository, 
+#get-stats-button, 
+#results, #results2, #results3, #results4, #results5, #results6,
+#get-infos, #get-infos, #get-infos-1, #get-infos-2, #get-infos-3, #get-infos-4, #get-infos-5, #get-infos-6
+{
     margin-top: 10px;
     width: 100%;
 }

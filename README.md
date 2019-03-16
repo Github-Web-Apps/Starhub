@@ -24,7 +24,7 @@
 - Tools: user mail finder
 - Tools: username converter
 - Tools: user-id converter
-- Etc.
+- And much more...
 
 # Screenshot
 

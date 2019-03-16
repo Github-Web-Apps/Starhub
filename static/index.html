@@ -1,6 +1,7 @@
 {{ define "title" }}
     <h4 class="what-is-it" style="font-weight: bold; margin-bottom: unset;">
-        Watch and notify who followed/unfollowed you and starred/unstarred your github repositories
+        All about your Github account, public and private activity, stars, followers and much more
+        </br>Starhub is currently under dev, additional features are being lended.
     </h4>
 {{ end }}
 {{ define "content-naked" }}
@@ -15,7 +16,7 @@
 	<div class="ui very padded segment">
 		<h3 class="ui header">Starhub:</h3>
 		<p>
-		Analytics about your Github account: public and private activity, stars count, release download count, who followed/unfollowed and starred/unstarred your Github repositories plus daily email notification about changes.</br>
+		All about your Github account, public and private activity, stars count, release download count, who followed/unfollowed and starred/unstarred your Github repositories plus daily email notification about changes and much more.</br>
 
 		<h3 class="ui header">Features:</h3>
 
@@ -57,77 +58,95 @@
 	
 {{ else }}
 
-  <div class="ui very padded segment">
-    <h2 class="ui header">
-      <img src="https://avatars3.githubusercontent.com/u/{{ .User.ID }}?v=3&s=144" class="ui circular image">
-      Hello {{ .User.Login}}!
-    </h2>
     {{ if .User.IsNew }}
-  
-      <p>
-        <b>We're are all set!</b>
-        You should receive a welcome email soon <i class="mail icon"></i></br></br>
-        <b>The profile creation process takes 3-10 min to be completed.</b></br></br>
-        This will trigger a welcome mail to your <b>main github email address.</b></br></br>
-        <b>Changes</b> to your account are checked once a day, you'll only receive an email if there were changes since the last notification email.</br></br>
-  		Refresh the home page after the profile creation needed delay to see the changes, or wait for the notification/welcome email.</br></br>
-  		Thank you for using our service, <b>if you like it please consider a <a href="donate">donation</a> to help us with the server fees</b>
-      </p>
-      <p>
-        <a class="ui blue basic small button" href="/">
-          Back
-        </a>
-        <a target="blank" class="ui secondary basic small button" href="https://github.com/settings/connections/applications/{{ .ClientID }}">
-          Change settings
-        </a>
-      </p>
-      
-    {{ else }}
-    
-      <h3>Your profile looks good!</h3>
-      <div class="ui statistics">
-        <div class="statistic">
-          <div class="value">
-            {{ .FollowerCount }}
-          </div>
-          <div class="label">
-            Followers
-          </div>
-        </div>
-        <div class="statistic">
-          <div class="value">
-            {{ .RepositoryCount }}
-          </div>
-          <div class="label">
-            Repositories
-          </div>
-        </div>
-        <div class="statistic">
-          <div class="value">
-            {{ .StarCount }}
-          </div>
-          <div class="label">
-            Stars
-          </div>
-        </div>
-      </div>
-      <br>
-      <div class="ui two buttons">
-        <a class="ui primary small button" href="/schedule">
-          Check now
-        </a>
-        <a target="blank" class="ui small button" href="https://github.com/settings/connections/applications/{{ .ClientID }}">
-          Change settings
-        </a>
-      </div>
 
-      <p>
-        </br>
-        Thank you for using Starhub, <b>if you like it please consider a <a href="donate">donation</a> to help us with the server fees.</b>
-      </p>
-      
-    {{ end }}
+		<div class="ui very padded segment">
+		
+			<h2 class="ui header">
+				<img src="https://avatars3.githubusercontent.com/u/{{ .User.ID }}?v=3&s=144" class="ui circular image">
+				Hello {{ .User.Login}}!
+			</h2>
+  
+			<p>
+				<b>We're are all set!</b>
+				You should receive a welcome email soon <i class="mail icon"></i></br></br>
+				<b>The profile creation process takes 3-10 min to be completed.</b></br></br>
+				This will trigger a welcome mail to your <b>main github email address.</b></br></br>
+				<b>Changes</b> to your account are checked once a day, you'll only receive an email if there were changes since the last notification email.</br></br>
+				Refresh the home page after the profile creation needed delay to see the changes, or wait for the notification/welcome email.</br></br>
+				Thank you for using our service, <b>if you like it please consider a <a href="donate">donation</a> to help us with the server fees</b>
+			</p>
+
+			<p>
+				<a class="ui blue basic small button" href="/">Back</a>
+				<a target="blank" class="ui secondary basic small button" href="https://github.com/settings/connections/applications/{{ .ClientID }}">Change settings</a>
+			</p>
+
+		</div>
+
+	{{ else }}
+
+		<div class="ui very padded segment">
+
+			<h2 class="ui header">
+				<img src="https://avatars3.githubusercontent.com/u/{{ .User.ID }}?v=3&s=144" class="ui circular image">
+				Hello {{ .User.Login}}!
+			</h2>
     
-  </div>
+			<h3>Your profile looks good!</h3>
+			
+			<div class="ui statistics">
+				<div class="statistic">
+					<div class="value">{{ .FollowerCount }}
+					</div>
+					<div class="label">Followers
+					</div>
+				</div>
+				<div class="statistic">
+					<div class="value">{{ .RepositoryCount }}
+					</div>
+					<div class="label">Repositories
+					</div>
+				</div>
+				<div class="statistic">
+					<div class="value">{{ .StarCount }}
+					</div>
+					<div class="label">Stars
+					</div>
+				</div>
+			</div>
+
+			<br>
+			
+			<a class="ui primary small button" style="margin:1%; width:47.5%;" href="/schedule">Check now
+			</a>
+			<a class="ui small button"		   style="margin:1%; width:47.5%;" href="https://github.com/settings/connections/applications/{{ .ClientID }}" target="blank">Change settings
+			</a>
+
+			<p>
+				</br>Thank you for using Starhub, <b>if you like it please consider a <a href="donate">donation</a> to help us with the server fees.</b>
+			</p>
+
+		</div>
+
+		<div class="ui very padded segment">
+
+				<a class="ui small button" target="blank" style="margin:1%; width:31%;" href="https://ghuser.io/{{ .User.Login}}" >
+					<img src="static/logo/3rd/ghu.png" alt="ghuser.io" height="16" width="16" style="vertical-align:middle">
+					Better profile
+				</a>
+				<a class="ui small button" target="blank" style="margin:1%; width:31%;" href="https://octobox.io/login" >
+					<img src="static/logo/3rd/octobox.png" alt="octobox.io" height="16" width="16" style="vertical-align:middle">
+					Manage issues
+				</a>
+				<a class="ui small button" target="blank" style="margin:1%; width:31%;" href="https://app.astralapp.com/auth/github" >
+					<img src="static/logo/3rd/astral.png" alt="astralapp.com" height="16" width="16" style="vertical-align:middle">
+					Manage starred
+				</a>
+
+		</div>
+      
+	{{ end }}
+	
 {{ end }}
 {{ end }}

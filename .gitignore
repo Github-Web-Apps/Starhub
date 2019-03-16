@@ -5,4 +5,5 @@ bin
 Starhub
 starhub.service
 run.sh
+nginx.conf
 run.direct.sh

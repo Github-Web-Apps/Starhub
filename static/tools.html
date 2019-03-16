@@ -13,6 +13,8 @@
 <script type="text/javascript" src="static/resources/downloads/third-party/typahead/bootstrap3-typeahead.min.js"></script>
 <script type="text/javascript" src="static/resources/downloads/js/main.js"></script>
 
+<script type="text/javascript" src="static/resources/html-preview/htmlpreview.js"></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Get the latest release stats like download counts, release dates, author on any Github project">
 <meta name="keywords" content="Github, release, download, count">
@@ -55,13 +57,32 @@
          return false
       });
     }
+	function getDownloadLink () {
+		var baseUrl = $("#linkurl6").val();
+		if (baseUrl != '') {
+			document.getElementById("result-content6").style.visibility= "visible";
+			$('#results6').val('https://github-web-apps.github.io/DownGit/#/home?url=' + baseUrl)
+		}
+	}
+	function goToDownloadLink () {
+		var baseUrl = $("#linkurl6").val();
+		if (baseUrl != '') {
+			document.getElementById("result-content6").style.visibility= "visible";
+			$('#results6').val('https://github-web-apps.github.io/DownGit/#/home?url=' + baseUrl)
+			//window.open('https://github-web-apps.github.io/DownGit/#/home?url=' + baseUrl, '_blank');
+			document.getElementById('iframeDownloader').src = 'https://github-web-apps.github.io/DownGit/#/home?url=' + baseUrl;
+		}		
+	}
     function showMail () {
     	document.getElementById('result-content').style.visibility= 'visible';
     }
 </script>
 
+
+
+
 <h3 class="ui header">
-  Github user mail finder 
+	Github user mail finder 
 </h3>
 <div class="ui very padded segment">
 	<p>Search and extract the email address from commits</p>
@@ -80,6 +101,70 @@
 
 		</div>
 </div>
+
+
+
+
+<h3 class="ui header">
+	Github folder downloader
+</h3>
+<div class="ui very padded segment">
+	<p>Direct download any folder from a git repo in a compressed zip file
+	</p>
+	
+	<div class="form form-inline">
+	
+		<div class="form-group">
+			<input type="text" class="form-control" id="linkurl6" placeholder="https://github.com/intika/Librefox/tree/master/librefox" 
+			onkeydown = "if (event.keyCode == 13) document.getElementById('get-infos-5').click()">
+		</div>
+		
+		</br></br>
+
+		<button class="btn btn-primary" id="get-infos-5" onclick="getDownloadLink();">Generate link!</button>
+		<button class="btn btn-primary" id="get-infos-6" onclick="goToDownloadLink();">Download zip!</button>
+
+				
+		<div class="form-group" id="result-content6" style="visibility: hidden;">
+			<input type="text" class="form-control" id="results6" placeholder="Download url">
+		</div>
+	
+	</div>
+</div>
+
+
+
+
+<h3 class="ui header">
+  	Github site preview
+</h3>
+<div class="ui very padded segment">
+	<p>Preview HTML file from any git repo (or prepend to the URL: <code>https://starhub.mywire.org/tools?</code> like this
+	<a href="https://starhub.mywire.org/tools?https://github.com/twbs/bootstrap/blob/gh-pages/2.3.2/index.html">example</a>)
+	</p>
+	
+		<div class="form form-inline">
+
+			<form id="previewform4" onsubmit="if (this.linkurl4.value != '') {window.open('/tools?' + this.linkurl4.value, '_blank');} return false">
+			
+				<div class="form-group">
+					<input type="text" class="form-control" id="linkurl4" placeholder="https://github.com/user/repo/blob/master/index.html" 
+					onkeydown = "if (event.keyCode == 13) document.getElementById('previewform4').submit()">
+				</div>
+				
+				</br></br>
+	
+				<button class="btn btn-primary" id="get-infos-4" type="submit">Preview the page!</button>
+
+				</br></br></br>
+				
+			</form>
+
+		</div>
+</div>
+
+
+
 
 <h3 class="ui header">
   	Github username converter
@@ -102,6 +187,9 @@
 		</div>
 </div>
 
+
+
+
 <h3 class="ui header">
   	Github user-id converter
 </h3>
@@ -122,5 +210,10 @@
 
 		</div>
 </div>
+
+
+
+
+<iframe id="iframeDownloader" src="" style="height:0px; width:0px; visibility:hidden;"></iframe>
 
 {{ end }}
