@@ -69,6 +69,8 @@ function showPlot(data, user, repo) {
 }
 
 function showStats(stats, user, repo) {
+	$('#divPub').show();
+    
 	var tableHTML = '<table><thead><th colspan="2">Stats for ' + user + '/' + repo + '</th></thead><tbody>';
 	$.each(stats, function(i, item) {
 		tableHTML += '<tr><td>' + item['text'] + '</td><td>' + item['data'] + '</td></tr>';
@@ -81,6 +83,7 @@ function showStats(stats, user, repo) {
 	if ($('#add_or_replace').val() == "replace") {
 		$('#stats-container').empty();
 	}
+	
 	$('#stats-container').append(tableHTML);
 }
 
