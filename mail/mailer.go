@@ -19,7 +19,7 @@ import (
 var emailConfig = hermes.Hermes{
 	Product: hermes.Product{
 		Name:      "Starhub",
-		Link:      "https://starhub.mywire.org/",
+		Link:      "https://starhub.be/",
 		Logo:      "https://raw.githubusercontent.com/Github-Web-Apps/Starhub/master/static/logo/logo-144.png",
 		Copyright: "Copyright © 2019 Starhub.",
 	},
@@ -89,7 +89,7 @@ func (s *Service) generate(login string, data interface{}, tmpl *template.Templa
 							"We will continue to watch for changes and let you know!",
 							"\n\n---\n\n",
 							"<small>",
-							`Liking our service? Maybe you'll consider [make a donation](https://starhub.mywire.org/donate) to help with the server fees.`,
+							`Liking our service? Maybe you'll consider [make a donation](https://starhub.be/donate) to help with the server fees.`,
 							fmt.Sprintf(
 								`You might also want to change [your settings](%s).`,
 								"https://github.com/settings/connections/applications/"+s.config.ClientID,
@@ -106,7 +106,7 @@ func (s *Service) generate(login string, data interface{}, tmpl *template.Templa
 
 func (s *Service) send(name, email, subject, html string) {
 	var log = log.WithField("email", email)
-	var from = mail.NewEmail("Starhub", "noreply@starhub.mywire.org")
+	var from = mail.NewEmail("Starhub", "noreply@starhub.be")
 	var to = mail.NewEmail(name, email)
 	var request = sendgrid.GetRequest(
 		s.config.SendgridAPIKey,
