@@ -56,55 +56,25 @@
 		</div>
 		</br>
 
-	</div>
-
-	<div class="ui very padded segment">
-			<h1><a id="Running_it_locally_0"></a>Running it locally</h1>
-			<p><strong>Cloning</strong></p>
-			<p>For Go projects to work they have to be cloned on the right places.</p>
-			<p>Let’s assume <code>~/Code/Go</code> as our default Go projects folder.</p>
-			<p>So:</p>
-			<pre><code class="language-sh">git <span class="hljs-built_in">clone</span> git@github.com:Github-Web-Apps/Starhub.git;cd Starhub
-			</code></pre>
-			<p><strong>Dependencies</strong></p>
-			<p>Now, install Go 1.11+ and run:</p>
-			<pre><code class="language-sh">make setup
-			</code></pre>
-			<p>To install the other project’s dependencies.</p>
-			<p><strong>Building</strong></p>
-			<p>Just run:</p>
-			<pre><code class="language-sh">make build
-			</code></pre>
-			<p><strong>Running the tests</strong></p>
-			<p>Just run:</p>
-			<pre><code class="language-sh">make <span class="hljs-built_in">test</span>
-			</code></pre>
-			<p><strong>Database setup</strong></p>
-			<p>Start up postgres and run:</p>
-			<pre><code class="language-sh">createdb watchub; forsql in ./migrations/*; <span class="hljs-keyword">do</span> psql watchub <span class="hljs-operator">-f</span> <span class="hljs-variable">$sql</span>; <span class="hljs-keyword">done</span>
-			</code></pre>
-			<p><strong>Tunnel with ngrok</strong></p>
-			<p>To test the entire flow, you’ll need to install ngrok.</p>
-			<p>Install it, then just run:</p>
-			<pre><code class="language-sh">ngrok http <span class="hljs-number">3000</span>
-			</code></pre>
-			<p>Then, create an application on <a href="https://github.com/settings/applications/new">github</a>.</p>
-			<p>Fill it like this:</p>
-			<ol>
-			<li>Application name: <code>Starhub-Dev-Username</code></li>
-			<li>Homepage URL: the ngrok http forwarding URL, e.g. <code>https://6f7ca783.ngrok.io</code></li>
-			<li>Application description: empty</li>
-			<li>Authorization callback URL: same as homepage url, but with a <code>/login/callback</code><br>
-			suffix. e.g.: <code>https://6f7ca783.ngrok.io/login/callback</code></li>
-			</ol>
-			<p>GitHub will then give you a Client ID and a Client Secret.</p>
-			<p>Export them like this:</p>
-			<pre><code class="language-sh"><span class="hljs-built_in">export</span> GITHUB_CLIENT_ID=export GITHUB_CLIENT_SECRET=<span class="hljs-string">"your client secret"</span>
-			</code></pre>
-			<p>And then just run the app:</p>
-			<pre><code class="language-sh">go run main.go
-			</code></pre>
-		</br>
+		<script src="static/resources/images/ads.js"></script>
+		<script>
+	      if( window.canRunAds === undefined ){
+	        // adblocker detected, show fallback
+	        document.write('<div align="center" style="background-image: url(static/resources/images/image.png);');
+	        document.write('background-repeat:no-repeat; background-position:center;height:60px;"></div>');}
+	    </script>
+		<div align="center">
+			<script type="text/javascript">
+		    google_ad_client = "ca-pub-4643883406855060";
+		    google_ad_slot = "6799285178";
+		    google_ad_width = 468;
+		    google_ad_height = 60;
+			</script>
+			<!-- Starhub main -->
+			<script type="text/javascript"
+			src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
+		</div>
 	</div>
 	
 {{ else }}
@@ -197,70 +167,91 @@
 
 		</div>
 
-
-		<div class="ui very padded segment center" style="text-align: center">
-
-			<script type="text/javascript" src="static/resources/profile/github-stats/github-stats.js"></script>
+		<script src="static/resources/images/ads.js"></script>
+		<div class="ui very padded segment">
 			<script>
-				(async () => {
-			    const GITHUB_USERNAME = '{{ .User.Login}}';
-			    const COMMITS_CONTAINER = '#github-contributions';
-			    const LANGUAGES_CONTAINER = '#github-language-distribution';
-		
-			    const githubStats = await GithubStats(GITHUB_USERNAME);
-	
-			    let githubCommits = document.querySelector(COMMITS_CONTAINER);
-			    /* Render SVG for commit contributions */
-			    let commitsContribSVG = githubStats.commitsContribSVG({
-			        rows: 7,
-			        space: 2,
-			        rectWidth: 8,
-			        levelColors: [
-			            {
-			                minCommits: 0,
-			                color: '#ebedf0'
-			            },
-			            {
-			                minCommits: 1,
-			                color: '#c6e48b'
-			            },
-			            {
-			                minCommits: 9,
-			                color: '#7bc96f'
-			            },
-			            {
-			                minCommits: 17,
-			                color: '#239a3b'
-			            },
-			            {
-			                minCommits: 26,
-			                color: '#196127'
-			            }
-			        ]
-			    });
-			    githubCommits.appendChild(commitsContribSVG);
-
-				    let githubLanguageDistribution = document.querySelector(LANGUAGES_CONTAINER);
-				    /* Render SVG for language contributions */
-				    let languageContribSVG = githubStats.languagesContribSVG({
-				        barHeight: 20,
-				        barWidth: githubLanguageDistribution.offsetWidth/2,
-				        lineSpacing: 4,
-				        languageNameWidth: 100,
-				        fontSize: 14
-				    });
-				    githubLanguageDistribution.appendChild(languageContribSVG);
-				})();
-			</script>
-			<a target="blank" href="https://github.com/{{ .User.Login}}">
-				<div class="ui center" id="github-contributions" style="display: inline-block"></div>
-			</a>
-			</br>
-			</br>
-			</br>
-			<div class="ui center" id="github-language-distribution"></div>
-
+		      if( window.canRunAds === undefined ){
+		        // adblocker detected, show fallback
+		        document.write('<div align="center" style="background-image: url(static/resources/images/image.png);');
+		        document.write('background-repeat:no-repeat; background-position:center;height:60px;"></div>');}
+		    </script>
+			<div align="center">
+				<script type="text/javascript">
+			    google_ad_client = "ca-pub-4643883406855060";
+			    google_ad_slot = "6799285178";
+			    google_ad_width = 468;
+			    google_ad_height = 60;
+				</script>
+				<!-- Starhub main -->
+				<script type="text/javascript"
+				src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script>
+			</div>
 		</div>
+
+        <div class="ui very padded segment" style="text-align: center">
+
+                <script type="text/javascript" src="static/resources/profile/github-stats/github-stats.js"></script>
+                <script>
+                        (async () => {
+                    const GITHUB_USERNAME = '{{ .User.Login}}';
+                    const COMMITS_CONTAINER = '#github-contributions';
+                    const LANGUAGES_CONTAINER = '#github-language-distribution';
+
+                    const githubStats = await GithubStats(GITHUB_USERNAME);
+
+                    let githubCommits = document.querySelector(COMMITS_CONTAINER);
+                    /* Render SVG for commit contributions */
+                    let commitsContribSVG = githubStats.commitsContribSVG({
+                        rows: 7,
+                        space: 2,
+                        rectWidth: 8,
+	                    levelColors: [
+	                        {
+	                            minCommits: 0,
+	                            color: '#ebedf0'
+	                        },
+	                        {
+	                            minCommits: 1,
+	                            color: '#c6e48b'
+	                        },
+	                        {
+	                            minCommits: 9,
+	                            color: '#7bc96f'
+	                        },
+	                        {
+	                            minCommits: 17,
+	                            color: '#239a3b'
+	                        },
+	                        {
+	                            minCommits: 26,
+	                            color: '#196127'
+	                        }
+	                    ]
+	                });
+	                githubCommits.appendChild(commitsContribSVG);
+	
+	                        let githubLanguageDistribution = document.querySelector(LANGUAGES_CONTAINER);
+	                        /* Render SVG for language contributions */
+	                        let languageContribSVG = githubStats.languagesContribSVG({
+	                            barHeight: 20,
+	                            barWidth: githubLanguageDistribution.offsetWidth/2,
+	                            lineSpacing: 4,
+	                            languageNameWidth: 100,
+	                            fontSize: 14
+	                        });
+	                        githubLanguageDistribution.appendChild(languageContribSVG);
+	                    })();
+	            </script>
+	            <a target="blank" href="https://github.com/{{ .User.Login}}">
+	                    <div class="ui center" id="github-contributions" style="display: inline-block"></div>
+	            </a>
+	            </br>
+	            </br>
+	            </br>
+	            <div class="ui center" id="github-language-distribution"></div>
+	    </div>
+
       
 	{{ end }}
 	

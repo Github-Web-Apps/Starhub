@@ -70,6 +70,19 @@ function showPlot(data, user, repo) {
 
 function showStats(stats, user, repo) {
 	$('#divPub').show();
+	//$('#advbtn').show();
+	//$('#advbtn').css('visibility', 'visible');
+	//$('#advbtn').css('height', '35px');
+	
+	var urliframe = 'static/startrack-adv.html?q=' + user + '/' + repo;
+	var $iframe = $('#stars-adv');
+    if ( $iframe.length ) {
+        $iframe.attr('src',urliframe);
+    }
+
+	$('#stars-adv').css('visibility', 'visible');
+    $('#stars-adv').css('height', '600px');
+
     
 	var tableHTML = '<table><thead><th colspan="2">Stats for ' + user + '/' + repo + '</th></thead><tbody>';
 	$.each(stats, function(i, item) {
