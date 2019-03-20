@@ -20,9 +20,9 @@
 <body>
 
   <div class="ui inverted vertical masthead center aligned segment">
-    <div class="ui container" style="margin-left:auto !important; margin-right:auto !important;">
-      <div class="ui large secondary inverted pointing menu">
-
+    <div class="ui container">
+      <div class="ui center aligned grid large secondary inverted pointing menu" >
+      
 		<a class="item" href="/" title="Starhub" style="padding-bottom:10px;">
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 
      	xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="27px" 
@@ -107,25 +107,20 @@
 	    <a class="item" href="/apps" title="Github apps listing">Github Apps</a>
         <a class="item" href="/donate" title="Support us">Donate</a>
         <a class="item" href="/contact" title="Contact, links, about and privacy policy">About</a>
-        
-        <div class="right menu" style="margin-right:10px">
-          {{ if eq .User.ID 0 }}
-          
-			<div style="margin-top:17px">
-				<a href="/login" class="ui large positive button" title="Authenticate with Github">
-				<i class="github icon"></i>Login</a>
-			</div>
-            
-          {{ else }}
 
-			<div style="margin-top:17px">
-				<a href="/logout" class="ui large black button" title="Logout">
-				<i class="power icon"></i>
-				{{ .User.Login }}</a>
-			</div>
-            
-          {{ end }}
-        </div>
+		{{ if eq .User.ID 0 }}
+		
+		<a class="green active item" style="margin-left: 75px; border-radius: 5px;" href="/login" title="Authenticate with Github">
+		<i class="github icon"></i>
+		Login</a>
+
+		{{ else }}
+
+		<a class="item" style="margin-left: 75px; border-radius: 5px;" href="/logout" title="Logout">
+		<i class="power icon"></i>
+		{{ .User.Login }}</a>
+
+		{{ end }}
         
       </div>
     </div>
