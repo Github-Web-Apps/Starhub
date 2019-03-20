@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='style.css'>
+    <!-- Begin Jekyll SEO tag v2.5.0 -->
+    <title>Starhub Github-ID</title>
+    <meta name='generator' content='Jekyll v3.7.3.1'/>
+    <meta property='og:title' content='Starhub Github-ID'/>
+    <meta property='og:locale' content='en_US'/>
+    <meta property='og:site_name' content='github-id'/>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js'></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js'></script>
+    <script type='text/javascript' src='index.js'></script>
+    <!-- End Jekyll SEO tag -->
+    <link rel='stylesheet' href='index.css'>
+</head>
+<body>
+<div id='progress-bar' style='position: fixed; left: 0; top: 0; width: 0; height:2px; background-color:#00FF7F'></div>
+<div id='spacerBar' style='height:10px;'></div>
+<div class='container'>
+    <section id='main_content'>
+        <div class='wrapper'>
+            <div id='outer' style='background-color: #fafafa;'>
+                <div class='content' style='text-align: center'>
+                    <img id='github_logo' src='GitHub-Mark-32px.png'>
+                    <h1 id='user_id'></h1>
+                    <div id='repo' style='text-align: center; margin:auto;'></div>
+                    <div class='button' style='text-align: center; margin:auto; margin-top:30px;'>
+                        	<p><a target="_blank" id='following'></a><a target="_blank" id='follower' class='cart-btn'></a></p>
+                    </div>
+                </div>
+                <img id='avatar' src=''>
+                <div id='language'></div>
+            </div>
+            <div id='outerAct' style='background-color: #fafafa; height:60px;'>
+            	<div id='rank'></div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+<script>
+   	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var user = url.searchParams.get("q");    	
+	var userlinkFollowers = 'https://github.com/' + user + '?tab=followers';
+	var userlinkFollowing = 'https://github.com/' + user + '?tab=following';
+   	document.getElementById("following").setAttribute("href",userlinkFollowing);
+   	document.getElementById("follower").setAttribute("href",userlinkFollowers);
+</script>
+</html>

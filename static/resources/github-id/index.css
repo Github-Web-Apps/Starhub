@@ -1,0 +1,176 @@
+* {
+    box-sizing: border-box;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol" !important;
+}
+
+body {
+    background: #fff !important;
+}
+
+.wrapper {
+	margin-top: 10px;
+	margin: auto;
+	display: inline-block;
+	text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+#outer {
+    position: relative;
+    background: #fff;
+    height: 365px;
+    width: 550px;
+    /*overflow: hidden;*/
+    display: flex;
+    align-items: center;
+    border-radius: 7px;
+}
+
+#outerAct {
+    position: relative;
+    background: #fff;
+    height: 365px;
+    width: 550px;
+    /*overflow: hidden;*/
+    display: flex;
+    align-items: center;
+    border: 1px solid #aaa;
+    border-radius: 7px;
+}
+
+#avatar {
+    position: absolute;
+    top: 20px;
+    right: 60px;
+    width: 150px;
+    z-index: 0;
+    animation-delay: 0.5s;
+}
+
+#rank {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    left: 0;
+}
+
+#language {
+    position: absolute;
+    right: 10px;
+    top: 140px;
+    width: 250px;
+    height: 250px;
+}
+
+#repo {
+    width: 250px;
+    height: 150px;
+}
+
+.content {
+    animation-delay: 0.3s;
+    position: absolute;
+    left: 20px;
+    z-index: 3
+}
+
+#user_id {
+    color: #111;
+    margin-bottom: 5px;
+}
+
+p {
+    width: 280px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #aaa;
+    margin: 20px 0;
+}
+
+.bg {
+    display: inline-block;
+    color: #fff;
+    background: cornflowerblue;
+    padding: 2px 10px;
+    border-radius: 50px;
+    font-size: .7em;
+}
+
+.button {
+    width: fit-content;
+    height: fit-content;
+    margin-top: 10px;
+}
+
+.button a {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    font-size: 11px;
+    color: #111;
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 1px solid #aaa;
+    font-weight: bold;
+
+}
+
+.button a:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -10px;
+    width: 0%;
+    background: #111;
+    height: 100%;
+    z-index: -1;
+    transition: width 0.3s ease-in-out;
+    transform: skew(-25deg);
+    transform-origin: right;
+}
+
+.button a:hover:after {
+    width: 150%;
+    left: -10px;
+    transform-origin: left;
+}
+
+.button a:hover {
+    color: #fff;
+    transition: all 0.5s ease;
+}
+
+.button a:nth-of-type(1) {
+    border-radius: 50px 0 0 50px;
+    border-right: none;
+}
+
+.button a:nth-of-type(2) {
+    border-radius: 0px 50px 50px 0;
+}
+
+.cart-icon {
+    padding-right: 8px;
+}
+
+.footer {
+    color: #aaaaaa;
+    font-size: 11px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+#capture {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    border: 1px solid #aaa;
+    border-radius: 50px ;
+    padding: 1px 10px 2px 10px;
+    display: inline-block;
+    cursor: pointer;
+}

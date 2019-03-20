@@ -20,6 +20,27 @@
   </p>
 </div>
 
+<div class="ui very padded segment">
+	<script src="static/resources/images/ads.js"></script>
+	<script>
+		if( window.canRunAds === undefined ){
+		// adblocker detected, show fallback
+		document.write('<div align="center" style="background-image: url(static/resources/images/image.png);');
+		document.write('background-repeat:no-repeat; background-position:center;height:60px;"></div>');}
+	</script>
+	<div align="center">
+		<script type="text/javascript">
+			google_ad_client = "ca-pub-4643883406855060";
+			google_ad_slot = "6799285178";
+			google_ad_width = 468;
+			google_ad_height = 60;
+		</script>
+		<!-- Starhub main -->
+		<script type="text/javascript"
+			src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+	</div>
+</div>
 
 <h3 class="ui header">
   Contact
@@ -47,8 +68,52 @@
 	- Cookie-Notice by <a class="ui" href="https://github.com/AOEpeople" target="_blank">@AOEpeople</a></br>
 	- HTML-Preview by <a class="ui" href="https://github.com/niutech" target="_blank">@niutech</a></br>
 	- Down-Git by <a class="ui" href="https://github.com/MinhasKamal" target="_blank">@MinhasKamal</a></br>
+	- Github-Gazer by <a class="ui" href="https://github.com/pingao777" target="_blank">@pingao777</a></br>
+	- Github-ID by <a class="ui" href="https://github.com/pingao777" target="_blank">@pingao777</a></br>
+	- Github-Stats by <a class="ui" href="https://github.com/byliuyang" target="_blank">@byliuyang</a></br>
+	- Profile-Summary by <a class="ui" href="https://github.com/tipsy" target="_blank">@tipsy</a></br>
+	- Github-Profile by <a class="ui" href="https://github.com/thundernet8" target="_blank">@thundernet8</a></br>
 	- A stackoverflow <a class="ui" href="https://stackoverflow.com/questions/12686545/how-to-leave-a-message-for-a-github-com-user" target="_blank">question</a></br>
 	</p>
+</div>
+
+<h3 class="ui header">
+  Fork It
+</h3>
+<div class="ui very padded segment">
+		<p><strong>Cloning</strong></p>
+		<p>Clone the projects</p>
+		<i>git clone git@github.com:Github-Web-Apps/Starhub.git</i></br>
+		<i>cd Starhub</i>
+		</br>
+		</br>
+		<p><strong>Dependencies</strong></p>
+		<p>Install Go 1.11+ and run the following command to install the needed packages </p>
+		<i>make setup</i></br></br>
+		<p><strong>Building</strong></p>
+		<p>Build command:</p>
+		<i>make build</i></br></br>
+		<p><strong>Database Setup</strong></p>
+		<p>Install and start postgres service then run:</p>
+		<i>createdb watchub</i></br>
+		<i>forsql in ./migrations/*; do psql watchub -f $sql; done</i></br></br>
+		<p><strong>Tunnel With Ngrok</strong></p>
+		<p>To test the entire flow, you’ll need to install ngrok, after the installation run:</p>
+		<i>ngrok http 3000</i></br></br>
+		<p><strong>Register With Github</strong></p>
+		<p>On <a href="https://github.com/settings/applications/new">github</a>, fill the form with the following informations:</p>
+		<ol>
+			<li>Application name: starhub-dev-username</li>
+			<li>Application description: empty (not required)</li>
+			<li>Authorization callback URL: http://your-ngrok-url/login/callback<br></li>
+			<li>Homepage url: the ngrok http forwarding url, e.g. https://6f7ca783.ngrok.io</li>
+		</ol>
+		<p><strong>Export Settings:</strong></p>
+		<i>export GITHUB_CLIENT_ID="Client-ID"</i></br>
+		<i>export GITHUB_CLIENT_SECRET="Client-Secret"</i></br></br>
+		<p><strong>Run It:</strong></p>
+		<i>go run main.go</i></br>
+	</br>
 </div>
 
 <h3 id="privacy" class="ui header">
@@ -85,6 +150,28 @@
     Starhub uses <a class="ui" href="http://www.google.com/policies/privacy/partners/" target="_blank">Google</a> Ad program for serving ads on this site.</br>
 
   </p>
-</div>
+</div>
+
+<div class="ui very padded segment">
+	<script src="static/resources/images/ads.js"></script>
+	<script>
+		if( window.canRunAds === undefined ){
+		// adblocker detected, show fallback
+		document.write('<div align="center" style="background-image: url(static/resources/images/image.png);');
+		document.write('background-repeat:no-repeat; background-position:center;height:60px;"></div>');}
+	</script>
+	<div align="center">
+		<script type="text/javascript">
+			google_ad_client = "ca-pub-4643883406855060";
+			google_ad_slot = "6799285178";
+			google_ad_width = 468;
+			google_ad_height = 60;
+		</script>
+		<!-- Starhub main -->
+		<script type="text/javascript"
+			src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+	</div>
+</div>
 
 {{ end }}

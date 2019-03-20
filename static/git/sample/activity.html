@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Activity Widget</title>
+    <link href="../css/github_activity_widget.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div id="github-widget-activity" style="width:600px"></div>
+
+    <script src="../js/jquery-1.7.1.min.js"></script>
+    <script src="../js/github_widget_activity.js"></script>
+    <script>
+      $(function(){
+        $('#github-widget-activity').activity({
+          username: 'intika'
+        });
+      });
+    </script>
+  </body>
+</html>

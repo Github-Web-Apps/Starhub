@@ -233,20 +233,22 @@ async function GithubStats(username) {
 
     /* We cache http response to prevent reaching rate limit & to load the page faster */
     function getCache(key) {
-        return localStorage.getItem(`github-stats-${key}`);
+        //return localStorage.getItem(`github-stats-${key}`);
+        return null;
     }
 
     function saveCache(key, value) {
-        localStorage.setItem(`github-stats-${key}`, value);
+        //localStorage.setItem(`github-stats-${key}`, value);
     }
 
     function getJSONCache(key) {
-        let value = getCache(key);
-        return value ? JSON.parse(value) : null;
+        //let value = getCache(key);
+        //return value ? JSON.parse(value) : null;
+        return null;
     }
 
     function saveJSONCache(key, value) {
-        saveCache(key, JSON.stringify(value));
+        //saveCache(key, JSON.stringify(value));
     }
 
     function getJSON(url) {
