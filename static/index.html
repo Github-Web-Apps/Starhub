@@ -107,7 +107,8 @@
 	{{ else }}
 	
 		<h2 class="ui header" style="text-align:center;">
-		Currently under dev!
+		Currently under dev!</br>
+		
 		</h2>
 		
 		<div class="ui very padded segment">
@@ -180,10 +181,10 @@
 					Manage starred
 				</a>
 
-				<a class="ui small button" target="blank" title="fedepot profile (not accurate!)" style="margin:1%; width:31%;" href="https://github.com/{{ .User.Login}}" >
+				<a class="ui small button" target="blank" title="fedepot profile (not accurate!)" style="margin:1%; width:31%;" href="https://github.com/" >
 					<img src="" height="16" width="0" style="vertical-align:middle; margin-right:0px;">
 					<i class="github black icon" height="16" width="16" style="margin-right:5px"></i>
-					Github profile
+					Github dashboard
 				</a>
 				<a class="ui small button" target="blank" title="fedepot profile (not accurate!)" style="margin:1%; width:31%;" href="https://gp.fedepot.com/profile/{{ .User.Login}}" >
 					<img src="" height="16" width="0" style="vertical-align:middle; margin-right:0px;">
@@ -196,7 +197,11 @@
 					Tipsy profile
 				</a>
 				
-		</div>		
+		</div>
+
+		<div class="ui very padded segment" style="text-align: center">
+			Private/Public events will be displayed here
+		</div>
 
 		<script src="static/resources/images/ads.js"></script>
 		<div class="ui very padded segment">

@@ -60,6 +60,9 @@ func main() {
 	mux.Methods(http.MethodGet).Path("/contact").HandlerFunc(
 		controllers.NewContact(config, session).Handler,
 	)
+	mux.Methods(http.MethodGet).Path("/profile").HandlerFunc(
+		controllers.NewProfile(config, session).Handler,
+	)
     mux.Methods(http.MethodGet).Path("/startrack").HandlerFunc(
 		controllers.NewStartrack(config, session).Handler,
     )
