@@ -7,3 +7,4 @@ starhub.service
 run.sh
 nginx.conf
 run.direct.sh
+static/tmp/

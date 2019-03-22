@@ -74,7 +74,7 @@ function showStats(stats, user, repo) {
 	//$('#advbtn').css('visibility', 'visible');
 	//$('#advbtn').css('height', '35px');
 	
-	var urliframe = 'static/startrack-adv.html?q=' + user + '/' + repo;
+	var urliframe = 'static/resources/startrack/startrack-adv.html?q=' + user + '/' + repo;
 	var $iframe = $('#stars-adv');
     if ( $iframe.length ) {
         $iframe.attr('src',urliframe);

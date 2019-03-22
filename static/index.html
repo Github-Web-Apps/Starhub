@@ -3,9 +3,37 @@
         All about your Github account, public and private activity, stars, followers and much more
     </h4>
 {{ end }}
+
 {{ define "content-naked" }}
+<link rel="stylesheet" href="static/resources/notifications/notifications.css" type="text/css">
+<script src="static/resources/notifications/notifications.js" type="text/javascript"></script>
+<script>
+const myNotification = window.createNotification({
+  	closeOnClick: true,
+  	displayCloseButton: false,
+  	//nfc-top-right
+	//nfc-top-left
+	//nfc-bottom-right
+	//nfc-bottom-left
+	positionClass: 'nfc-bottom-right',
+	onclick: false,
+  	showDuration:5000,
+	// success, info, warning, error, and none
+	theme: 'info'
+});
+	{{ if eq .User.ID 0 }}
+		myNotification({
+		  	message: 'We are moving to https://starhub.be',	
+		});
+	{{ end }}
+</script>
 {{ end }}
+
 {{ define "content" }}
+
+<div class="ui very padded vertical stripe segment">
+<div class="ui text container">
+
 {{ if eq .User.ID 0 }}
 
 	<p align="center">
@@ -15,7 +43,8 @@
 	<div class="ui very padded segment">
 		<h3 class="ui header">Starhub:</h3>
 		<p>
-		All about your Github account, public and private activity, stars count, release download count, who followed/unfollowed and starred/unstarred your Github repositories plus daily email notification about changes and much more.</br>
+		All about your Github account, public and private activity, stars count, release download count, 
+		who followed/unfollowed and starred/unstarred your Github repositories plus daily email notification about changes and much more.</br>
 
 		<h3 class="ui header">Features:</h3>
 
@@ -111,7 +140,7 @@
 		
 		</h2>
 		
-		<div class="ui very padded segment">
+		<div class="ui very padded segment" style="width:900px">
 
 			<h2 class="ui header" style="text-align:center;">
 				<img src="https://avatars3.githubusercontent.com/u/{{ .User.ID }}?v=3&s=144" class="ui circular image">
@@ -415,4 +444,8 @@
 	{{ end }}
 	
 {{ end }}
+
+</div>
+</div>
+
 {{ end }}

@@ -74,7 +74,7 @@
 
 		{{ else }}
 
-		<a class="item" style="margin-left: 75px; border-radius: 5px;" href="/logout" title="Logout">
+		<a class="item" style="margin-left: 100px; border-radius: 5px;" href="/logout" title="Logout">
 		<i class="power icon"></i>
 		{{ .User.Login }}</a>
 
@@ -96,14 +96,9 @@
   </div>
   
 		{{ template "content-naked" . }}
-	
-  <div class="ui very padded vertical stripe segment">
-    <div class="ui text container">
     
 		{{ template "content" . }}
 	
-    </div>
-  </div>
   <div class="ui vertical stripe">
     <div class="ui text container center aligned">
       <p>
