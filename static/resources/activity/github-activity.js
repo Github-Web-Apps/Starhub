@@ -148,7 +148,6 @@ var GitHubActivity = (function() {
       }
       data.userLink = methods.renderLink(data.html_url, data.login);
       data.gravatarLink = methods.renderLink(data.html_url, '<img src="' + data.avatar_url + '">');
-
       return Mustache.render(templates.UserHeader, data);
     },
     getActivityHTML: function(data, limit) {
@@ -216,7 +215,7 @@ var GitHubActivity = (function() {
 
     var selector = options.selector,
         userUrl   = 'https://api.github.com/users/' + options.username,
-        eventsUrl = userUrl + '/events',
+        eventsUrl = userUrl + '/events?page=' + options.page,
         header,
         activity;
 
@@ -320,11 +319,7 @@ var templates = {
                          <div class="gha-message"><div class="gha-time">{{{timeString}}}</div>{{{userLink}}} {{{message}}}</div>\
                          <div class="gha-clear"></div>\
                        </div>',
-  UserHeader: '<div class="gha-header">\
-                 <div class="gha-github-icon"><span class="octicon octicon-mark-github"></span></div>\
-                 <div class="gha-user-info{{withoutName}}">{{{userNameLink}}}<p>{{{userLink}}}</p></div>\
-                 <div class="gha-gravatar">{{{gravatarLink}}}</div>\
-               </div><div class="gha-push"></div>',
+  UserHeader: ' ',
   Footer: '<div class="gha-footer">Activity <a href="https://starhub.be" target="_blank">Starhub</a>',
   NoActivity: '<div class="gha-info">This user does not have any public activity yet.</div>',
   UserNotFound: '<div class="gha-info">User {{username}} wasn\'t found.</div>',
