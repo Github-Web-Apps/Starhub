@@ -32,7 +32,7 @@ const myNotification = window.createNotification({
 {{ define "content" }}
 
 <div class="ui very padded vertical stripe segment">
-<div class="ui text container">
+<div class="ui text container" style=" max-width:800px !important;">
 
 {{ if eq .User.ID 0 }}
 
@@ -140,7 +140,7 @@ const myNotification = window.createNotification({
 		
 		</h2>
 		
-		<div class="ui very padded segment" style="width:900px">
+		<div class="ui very padded segment">
 
 			<h2 class="ui header" style="text-align:center;">
 				<img src="https://avatars3.githubusercontent.com/u/{{ .User.ID }}?v=3&s=144" class="ui circular image">
@@ -189,7 +189,7 @@ const myNotification = window.createNotification({
 			Logout
 			</a>
 
-			<p>
+			<p style="text-align:center;">
 				</br>Thank you for using Starhub, <b>if you like it please consider a <a href="donate">donation</a> to help us with the server fees.</b>
 			</p>
 
@@ -326,7 +326,7 @@ const myNotification = window.createNotification({
 					src="static/resources/github-id/?q={{ .User.Login}}"					
 					frameborder="0" 
 					scrolling="no" 
-					width="100%" 
+					width="640px" 
 					height="450px" 
 					style="display:block;"
 				></iframe>

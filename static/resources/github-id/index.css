@@ -25,6 +25,7 @@ body {
     width: 550px;
     /*overflow: hidden;*/
     display: flex;
+    margin:auto;
     align-items: center;
     border-radius: 7px;
 }
@@ -36,6 +37,7 @@ body {
     width: 550px;
     /*overflow: hidden;*/
     display: flex;
+    margin:auto;
     align-items: center;
     border: 1px solid #aaa;
     border-radius: 7px;
