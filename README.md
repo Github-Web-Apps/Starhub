@@ -9,23 +9,33 @@
 
 # Features:
 
-- Watch all repos (forked one as well)
-- No github write access required
-- SSL HTTPS - Encrypted Requests
-- Starts analytics over time with a graph
-- Display total stars for all repository
-- Display total public repos
-- Release downloads couter & stats
-- Daily email notifciation (only on changes)
-- Notify for new followers
-- Notify for new unfollower 
-- Notify for new starred repository
-- Notify for new unstarred repository
+- My-Starhub: display total stars for all repository
+- My-Starhub: display total public repos
+- My-Starhub: public and private activity history listing
+- My-Starhub: activity history listing filter/search
+- My-Starhub: watch all repos (forked one as well)
+- My-Starhub: no github write access required
+- My-Starhub: daily email notifciation (only on changes)
+- My-Starhub: notification for new followers
+- My-Starhub: notification for new unfollower
+- My-Starhub: notification for new starred repository
+- My-Starhub: notification for new unstarred repository
+- My-Starhub: global user statistics on activities and used languages
+- My-Starhub: main user organization statistic
+- My-Starhub: github profile center
+- My-Starhub: starhub iframe app loader
+- Statistics: stars analytics over time with a graph
+- Statistics: repo commmits, issue and activity analytics (under stars statics section)
+- Statistics: releases downloads couter & stats
+- Tools: github applications selection and listing
 - Tools: user mail finder
 - Tools: username converter
 - Tools: user-id converter
-- Github applications listing
--  
+- Tools: site preview (git html file preview)
+- Tools: git folder downloader
+- Profiler: github profile for any github user
+- Profiler: various statistics (activities/repos/langs)
+- Engine: encrypted requests (ssl https)
 - And much more...
 
 # Screenshot
