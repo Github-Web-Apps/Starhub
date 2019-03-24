@@ -130,7 +130,7 @@ const myNotification = window.createNotification({
 			
 			<p style="text-align:center;">
 				<a class="ui blue basic small button" href="/">Back</a>
-				<a target="blank" class="ui secondary basic small button" href="https://github.com/settings/connections/applications/{{ .ClientID }}">Change settings</a>
+				<a target="_blank" class="ui secondary basic small button" href="https://github.com/settings/connections/applications/{{ .ClientID }}">Change settings</a>
 			</p>
 
 		</div>
@@ -174,12 +174,12 @@ const myNotification = window.createNotification({
 
 			<br>
 			
-			<a class="ui primary small button" style="margin:1%; width:31%;" href="/schedule"
+			<a class="ui blue small button" style="margin:1%; width:31%;" href="/schedule"
 			title="Re-Check and notify for changes">
 			<i class="history black icon" height="16" width="16" style="margin-right:5px"></i>
 			Check now
 			</a>
-			<a class="ui small button"		   style="margin:1%; width:31%;" href="https://github.com/settings/connections/applications/{{ .ClientID }}" target="_blank"
+			<a class="ui blue small button"		   style="margin:1%; width:31%;" href="https://github.com/settings/connections/applications/{{ .ClientID }}" target="_blank"
 			title="Change starhub settings on Github">
 			<i class="cogs black icon" height="16" width="16" style="margin-right:5px"></i>
 			Change settings
@@ -511,6 +511,8 @@ const myNotification = window.createNotification({
 		
 
         <div class="ui very padded segment" style="text-align: center">
+        		<p style="text-align:center; font-size:17px;"><b>Statistics Classic Method</b></p>
+        		</br>
 
                 <script type="text/javascript" src="static/resources/github-stats/github-stats.js"></script>
                 <script>
@@ -576,6 +578,8 @@ const myNotification = window.createNotification({
 	    </div>
 
 		<div class="ui very padded segment">
+			<p style="text-align:center; font-size:17px;"><b>Statistics Reversed Method</b></p>
+        	</br>
 			<p align="center">
 				<iframe 
 					id="iframeProfile"
@@ -589,35 +593,58 @@ const myNotification = window.createNotification({
 			</p>			
 		</div>
 
-		<div class="ui padded segment">
+		<script src="static/resources/images/ads.js"></script>
+		<div class="ui very padded segment">
+			<script>
+		      if( window.canRunAds === undefined ){
+		        // adblocker detected, show fallback
+		        document.write('<div align="center" style="background-image: url(static/resources/images/image.png);');
+		        document.write('background-repeat:no-repeat; background-position:center;height:60px;"></div>');}
+		    </script>
+			<div align="center">
+				<script type="text/javascript">
+			    google_ad_client = "ca-pub-4643883406855060";
+			    google_ad_slot = "6799285178";
+			    google_ad_width = 468;
+			    google_ad_height = 60;
+				</script>
+				<!-- Starhub main -->
+				<script type="text/javascript"
+				src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script>
+			</div>
+		</div>
 
-				<a class="ui small button" target="blank" title="fedepot profile (not accurate!)" style="margin:1%; width:31%;" href="https://github.com/" >
+		<div class="ui padded segment">
+				<p style="text-align:center; font-size:17px;"><b>Github Profile Center</b></p>
+
+				<a class="ui primary small button" target="_blank" title="Github.com dashboard (open in new tab)" style="margin:1%; width:31%;" href="https://github.com/" >
 					<img src="" height="16" width="0" style="vertical-align:middle; margin-right:0px;">
 					<i class="github black icon" height="16" width="16" style="margin-right:5px"></i>
 					Github dashboard
 				</a>
-				<a class="ui small button" target="blank" title="octobox.io" style="margin:1%; width:31%;" href="https://octobox.io/login" >
+				<a class="ui primary small button" target="_blank" title="Octobox.io (open in new tab)" style="margin:1%; width:31%;" href="https://octobox.io/login" >
 					<img src="static/logo/3rd/octobox.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
 					Manage issues
 				</a>
-				<a class="ui small button" target="blank" title="astralapp.com" style="margin:1%; width:31%;" href="https://app.astralapp.com/auth/github" >
+				<a class="ui primary small button" target="_blank" title="Astralapp.com (open in new tab)" style="margin:1%; width:31%;" href="https://app.astralapp.com/auth/github" >
 					<img src="static/logo/3rd/astral.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
 					Manage starred
 				</a>
 
-				<a class="ui small button" target="blank" title="ghuser.io" style="margin:1%; width:31%;" href="https://ghuser.io/{{ .User.Login}}" >
+				<a class="ui primary small button" target="_blank" title="Ghuser.io (open in new tab)" style="margin:1%; width:31%;" href="https://ghuser.io/{{ .User.Login}}" >
 					<img src="static/logo/3rd/ghu.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
 					Ghuser profile
 				</a>
-				<a class="ui small button" target="blank" title="fedepot profile (not accurate!)" style="margin:1%; width:31%;" href="https://gp.fedepot.com/profile/{{ .User.Login}}" >
-					<img src="" height="16" width="0" style="vertical-align:middle; margin-right:0px;">
-					<i class="user black icon" height="16" width="16" style="margin-right:5px"></i>
-					Fedepot profile
+				
+				<a class="ui primary small button" target="_blank" title="Starhub tools for github (open in new tab)" style="margin:1%; width:31%;" href="/tools" >
+					<img src="static/logo/logo-16.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
+					Starhub tools
 				</a>
-				<a class="ui small button" target="blank" title="tipsy profile (not accurate!)" style="margin:1%; width:31%;" 
-					href="https://profile-summary-for-github.com/user/{{ .User.Login}}" >
-					<img src="static/logo/3rd/tipsy.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
-					Tipsy profile
+				<a class="ui primary small button" target="_blank" title="Starhub's applications listing (open in new tab)" style="margin:1%; width:31%;" href="/apps" >
+					<img src="" height="16" width="0" style="vertical-align:middle; margin-right:0px;">
+					<i class="star black icon" height="16" width="16" style="margin-right:5px"></i>
+					Apps listing
 				</a>
 				
 		</div>
@@ -700,16 +727,18 @@ const myNotification = window.createNotification({
 	    </script>
 
 		<div class="ui padded segment">
-				<a class="ui small button" title="Load my ghuser.io profile" style="margin:1%; width:31%;" onclick="loadGhuser()" >
+				<p style="text-align:center; font-size:17px;"><b>Starhub iFrame App Loader</b></p>
+				
+				<a class="ui primary small button" title="Load my ghuser.io profile" style="margin:1%; width:31%;" onclick="loadGhuser()" >
 					<img src="static/logo/3rd/ghu.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
 					Get my ghuser profile
 				</a>
-				<a class="ui small button" title="Load my fedepot profile (not accurate!)" style="margin:1%; width:31%;" onclick="loadFedepot()" >
+				<a class="ui small button" title="Load my fedepot profile (this app is not accurate!)" style="margin:1%; width:31%;" onclick="loadFedepot()" >
 					<img src="" height="16" width="0" style="vertical-align:middle; margin-right:5px;">
 					<i class="user black icon" height="16" width="16" style="margin-right:0px"></i>
 					Get my fedepot profile
 				</a>
-				<a class="ui small button" title="Load my tipsy profile (not accurate!)" style="margin:1%; width:31%;" onclick="loadTipsy()" >
+				<a class="ui small button" title="Load my tipsy profile (this app is not accurate!)" style="margin:1%; width:31%;" onclick="loadTipsy()" >
 					<img src="static/logo/3rd/tipsy.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
 					Get my tipsy profile
 				</a>
