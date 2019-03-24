@@ -8,18 +8,303 @@
 {{ define "content" }}
 
 <div class="ui very padded vertical stripe segment">
-<div class="ui text container">
+<div class="ui text container" style=" max-width:800px !important;">
 
 <h3 class="ui header">
-  Starhub Github's Profile 
+  Starhub Github&apos;s Profile 
 </h3>
+
 <div class="ui very padded segment">
 	<p>
 		For any github user, under dev, coming soon!
 	</p>
 </div>
 
+
+<div class="ui very padded segment" style="text-align: center">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
+
+<h3 style="text-align:center; margin-top:0px;">My public activity </h3>
+
+</br>
+
+<script>
+
+var pageBrowsePriv=1;
+var pageFilterPriv=0;
+
+function privfilterList (who) {	
+	pageFilterPriv=who;
+	var privtextDescId 	= 'privtextFilter' + who;
+	var privtext 		= document.getElementById(privtextDescId).innerHTML;
+	document.getElementById('privfkingFilterText').innerHTML = privtext;
+	privLoadActi(pageBrowsePriv, '2', pageFilterPriv);
+	//Warning the inner div trigger showFker() a second time because of the onclick
+}
+
+function privintelliHideFker() {
+	if (document.getElementById('privfkingMenuList').clientHeight == '0' || document.getElementById('privfkingMenuList').style.visibility == 'hidden') {
+		document.getElementById('privfkingMenuList').style.visibility = 'hidden';
+	} else {
+		setTimeout(privintelliHideFker, 500);
+	}
+}
+
+function privhideFker() {
+	document.getElementById('privfkingMenuList').style.visibility = 'hidden';
+}
+
+//Warning this is triggered on menu click and sub click 
+function privshowFker() {
+	if (document.getElementById('privfkingMenuList').style.visibility == 'hidden') {
+		document.getElementById('privfkingMenuList').style.visibility = 'visible';
+		privintelliHideFker();
+	} else {
+		privhideFker();
+	}
+}
+
+function loadPreviousPriv() {
+	if (pageBrowsePriv < 2 ) {
+		document.getElementById('privPrevButton').classList.remove('primary');
+	} else {
+		pageBrowsePriv--;
+		document.getElementById('privPrevButton').classList.add('primary');
+		document.getElementById('privNextButton').classList.add('primary');
+		privLoadActi(pageBrowsePriv, '2', pageFilterPriv);
+	}
+}
+
+function loadNextPriv() {
+	if (pageBrowsePriv > 8 ) {
+		document.getElementById('privNextButton').classList.remove('primary');
+	} else {
+		pageBrowsePriv++;
+		document.getElementById('privNextButton').classList.add('primary');
+		document.getElementById('privPrevButton').classList.add('primary');
+		privLoadActi(pageBrowsePriv, '2', pageFilterPriv);
+	}
+}
+
+function privLoadActi(page, type, filter) {
+	var urlSrc="static/resources/activity/activity.html?u={{ .User.Login}}&p=" + page + "&t=" + type +"&f=" + filter;
+	document.getElementById("pIframeContainerActPriv").style.height = "";
+	document.getElementById("divIframeActPrivLoader").style.height = "";
+	document.getElementById("divIframeActPrivLoader").style.marginTop = "40px";
+	document.getElementById("divIframeActPrivLoader").style.visibility = "visible";
+	document.getElementById("iframeActPriv").style.visibility = "visible";
+	document.getElementById("iframeActPriv").src=urlSrc;
+	document.getElementById("iframeActPriv").onload = function(){
+		document.getElementById("iframeActPriv").height = "610px";
+		document.getElementById("iframeActPriv").style.height = "610px";
+		document.getElementById("divIframeActPrivLoader").style.height = "0px";
+		document.getElementById("divIframeActPrivLoader").style.marginTop = "0px";
+		document.getElementById("divIframeActPrivLoader").style.visibility = "hidden";
+	};	
+}
+
+
+</script>
+
+<div class="ui simple selection dropdown" style="width:98%; padding-top:8px; margin-left: auto; margin-right: auto;" onclick="privshowFker();">
+
+	<i class="dropdown icon"></i>
+	<p  id="privfkingFilterText"
+		style="text-align:center; 
+			  margin:0px;
+			  color:grey;
+			  font-size:14px;
+			  height:14px;">
+		Select an activity type (filter) 
+	</p>
+	
+	<div class="menu" id="privfkingMenuList" style="visibility:hidden; overflow:scroll; overflow-x:hidden;">
+	
+		<div class="item" onclick="privfilterList('0');"><p id="privtextFilter0">
+			<span class="octicon octicon-broadcast" style="color:grey; margin-right:10px; width:16px"></span>
+			Show all</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('1')"><p id="privtextFilter1">
+			<span class="octicon octicon-comment-discussion" style="color:grey; margin-right:10px; width:16px"></span>
+			Commit comment</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('2')"><p id="privtextFilter2">
+			<span class="octicon octicon-repo-create" style="color:grey; margin-right:10px; width:16px"></span>
+			Create repository</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('3')"><p id="privtextFilter3">
+			<span class="octicon octicon-tag-add" style="color:grey; margin-right:10px; width:16px"></span>
+			Add tag</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('4')"><p id="privtextFilter4">
+			<span class="octicon octicon-git-branch-create" style="color:grey; margin-right:10px; width:16px"></span>
+			Create branch</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('5')"><p id="privtextFilter5">
+			<span class="octicon octicon-repo-delete" style="color:grey; margin-right:10px; width:16px"></span>
+			Delete event</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('6')"><p id="privtextFilter6">
+			<span class="octicon octicon-person-follow" style="color:grey; margin-right:10px; width:16px"></span>
+			Follow event</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('7')"><p id="privtextFilter7">
+			<span class="octicon octicon-repo-forked" style="color:grey; margin-right:10px; width:16px"></span>
+			Fork repository</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('8')"><p id="privtextFilter8">
+			<span class="octicon octicon-gist" style="color:grey; margin-right:10px; width:16px"></span>
+			Gist event</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('9')"><p id="privtextFilter9">
+			<span class="octicon octicon-repo" style="color:grey; margin-right:10px; width:16px"></span>
+			Repository</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('10')"><p id="privtextFilter10">
+			<span class="octicon octicon-issue-opened" style="color:grey; margin-right:10px; width:16px"></span>
+			Issue open/close</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('11')"><p id="privtextFilter11">
+			<span class="octicon octicon-comment-discussion" style="color:grey; margin-right:10px; width:16px"></span>
+			Issue comment</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('12')"><p id="privtextFilter12">
+			<span class="octicon octicon-person" style="color:grey; margin-right:10px; width:16px"></span>
+			Member event</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('13')"><p id="privtextFilter13">
+			<span class="octicon octicon-globe" style="color:grey; margin-right:10px; width:16px"></span>
+			Public event</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('14')"><p id="privtextFilter14">
+			<span class="octicon octicon-git-pull-request" style="color:grey; margin-right:10px; width:16px"></span>
+			Pull request</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('15')"><p id="privtextFilter15">
+			<span class="octicon octicon-comment-discussion" style="color:grey; margin-right:10px; width:16px"></span>
+			Pull request review comment</p>
+		</div>
+		
+		<div class="item" onclick="privfilterList('16')"><p id="privtextFilter16">
+			<span class="octicon octicon-git-commit" style="color:grey; margin-right:10px; width:16px"></span>
+			Push event</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('17')"><p id="privtextFilter17">
+			<span class="octicon octicon-tag-add" style="color:grey; margin-right:10px; width:16px"></span>
+			Release event</p>
+		</div>
+
+		<div class="item" onclick="privfilterList('18')"><p id="privtextFilter18">
+			<span class="octicon octicon-star" style="color:grey; margin-right:10px; width:16px"></span>
+			Stars event</p>
+		</div>
+		
+	</div>
+</div>
+
+</br></br>
+
+<a class="ui primary small button" id="privPrevButton" style="margin:auto; margin-right:1%; width:47.5%;" onclick="loadPreviousPriv()"
+	title="Load previous page">
+	Previous
+</a>
+<a class="ui primary small button" id="privNextButton" style="margin:auto; margin-left:1%; width:47.5%;" onclick="loadNextPriv()"
+	title="Load next page">
+	Next
+</a>
+
+<div id="divIframeActPrivLoader" class="ui active centered inline loader" style="height:0px; visibility:hidden;"></div>
+
+<p id="pIframeContainerActPriv" align="center" style="margin-bottom:0px;">
+	</br>
+	<iframe id="iframeActPriv" frameborder="0" scrolling="no" width="100%" height="0px" style="display:block; visibility:hidden; margin-bottom:0px;">
+	</iframe>
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ui very padded segment" style="text-align: center">
+
+<script>
+
+function tabClickSwitch (){
+	var activateMeTab 	  = 'tabTitle1';
+	var activateMeDiv     = 'tabDiv1';
+	var desactivateMeTab  = 'tabTitle2';
+	var desactivateMeDiv  = 'tabDiv2';
+
+	document.getElementById(activateMeTab).classList.toggle('active');
+	document.getElementById(activateMeDiv).classList.toggle('active');
+	document.getElementById(desactivateMeTab).classList.toggle('active');
+	document.getElementById(desactivateMeDiv).classList.toggle('active');
+}
+
+</script>
+
+<div class="ui top attached tabular menu" onclick="tabClickSwitch()" style="height:30px; min-height:0px; margin-top:0px;">
+	<a class="item active"  id="tabTitle1" data-tab="first"  style="width:50%;padding:0px;height:30px;"><p style="text-align:center; margin:auto;">
+	Private Activity</p></a>
+	<a class="item"         id="tabTitle2" data-tab="second" style="width:50%;padding:0px;height:30px;"><p style="text-align:center; margin:auto;">
+	Public Activity</p></a>
+</div>
+<div class="ui bottom attached tab segment active"  id="tabDiv1" data-tab="first">
+	</br>
+	</br>
+	First
+	</br>
+	</br>
+</div>
+<div class="ui bottom attached tab segment" 	    id="tabDiv2" data-tab="second">
+	</br>
+	</br>
+	Second
+	</br>
+	</br>
 </div>
 </div>
 
+
+
+
+
+</br></br>
+<script>
+setTimeout(privLoadActi(pageBrowsePriv, '2', pageFilterPriv), 3000);
+</script>
+
+</div>
+</div>
 {{ end }}

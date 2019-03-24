@@ -9,26 +9,34 @@
 <script type="text/javascript" src="github-activity.js"></script>
 
 <script>
-	function updateFeed(username, page) {
-		GitHubActivity.feed({ username: username, selector: '#feed', page: page });
+	function updateFeed(username, page, type, filter) {
+		GitHubActivity.feed({ username: username, selector: '#feed', page: page, type: type, filter: filter });
 	}
 	
-	var parsedUrl = new URL(window.location.href);
-	var username = parsedUrl.searchParams.get('u');
-	var page = parsedUrl.searchParams.get('p');
+	var parsedUrl 	= new URL(window.location.href);
+	var username 	= parsedUrl.searchParams.get('u');
+	var page 		= parsedUrl.searchParams.get('p');
+	var type 		= parsedUrl.searchParams.get('t');
+	var filter 		= parsedUrl.searchParams.get('f');
 
-	if (!page) {
-		page = '1';	
-	}
+	if (!page) 		{page 	= '1';}
+	if (!type) 		{type 	= '1';}
+	if (!filter) 	{filter = '0';}
 
 	$(document).ready(function() {
 		if (username) {	
-			updateFeed(username, page);
+			updateFeed(username, page, type, filter);
 		}
 	});
 </script>
 
-<style>	
+<style>
+	body {
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 1px;
+		margin-bottom: 0px;
+	}
 	#feed {
 		width: 700px;
 		height: 600px;

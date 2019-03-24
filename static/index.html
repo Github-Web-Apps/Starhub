@@ -107,7 +107,7 @@ const myNotification = window.createNotification({
 	
 {{ else }}
 
-    {{ if .User.IsNew }}
+	{{ if .User.IsNew }}
 
 		<div class="ui very padded segment">
 		
@@ -126,7 +126,9 @@ const myNotification = window.createNotification({
 				Thank you for using our service, <b>if you like it please consider a <a href="donate">donation</a> to help us with the server fees</b>
 			</p>
 
-			<p>
+			</br>
+			
+			<p style="text-align:center;">
 				<a class="ui blue basic small button" href="/">Back</a>
 				<a target="blank" class="ui secondary basic small button" href="https://github.com/settings/connections/applications/{{ .ClientID }}">Change settings</a>
 			</p>
@@ -136,8 +138,7 @@ const myNotification = window.createNotification({
 	{{ else }}
 	
 		<h2 class="ui header" style="text-align:center;">
-		Currently under dev!</br>
-		
+			Currently under dev!</br>
 		</h2>
 		
 		<div class="ui very padded segment">
@@ -228,10 +229,6 @@ const myNotification = window.createNotification({
 				
 		</div>
 
-		<div class="ui very padded segment" style="text-align: center">
-			Private/Public events will be displayed here
-		</div>
-
 		<script src="static/resources/images/ads.js"></script>
 		<div class="ui very padded segment">
 			<script>
@@ -253,6 +250,70 @@ const myNotification = window.createNotification({
 				</script>
 			</div>
 		</div>
+
+		<div class="ui very padded segment" style="text-align: center">
+			<script>
+				//filterList
+				//1:  'comment-discussion',	//: CommitCommentEvent
+				//2:  'repo-create',			//: CreateEvent_repository
+				//3:  'tag-add',				//: CreateEvent_tag
+				//4:  'git-branch-create',	//: CreateEvent_branch
+				//5:  'repo-delete',			//: DeleteEvent
+				//6:  'person-follow',		//: FollowEvent
+				//7:  'repo-forked',          //: ForkEvent
+				//8:  'gist',                 //: GistEvent
+				//9:  'repo',                 //: GollumEvent
+				//10: 'issue-opened',         //: IssuesEvent
+				//11: 'comment-discussion', 	//: IssueCommentEvent
+				//12: 'person',              	//: MemberEvent
+				//13: 'globe',               	//: PublicEvent
+				//14: 'git-pull-request',     //: PullRequestEvent
+				//15: 'comment-discussion',   //: PullRequestReviewCommentEvent
+				//16: 'git-commit',           //: PushEvent
+				//17: 'tag-add',              //: ReleaseEvent
+				//18: 'star'                  //: WatchEvent
+			</script>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
+			
+			<h3 style="text-align:center; margin-top:0px;">My public activity </h3>
+
+		
+			</br>
+			Available soon
+
+			
+			<div class="ui fluid selection dropdown">
+				<input type="hidden" name="user">
+				<i class="dropdown icon"></i>
+				<div class="default text">Select an activity type</div>
+				<div class="menu">
+					<div class="item" data-value="jenny">
+					<img class="octicon octicon-star"></img>
+					Jenny Hess
+					</div>
+
+					<span class="octicon octicon-star"></span>
+			<span class="octicon octicon-broadcast"></span>
+					
+					<div class="item" data-value="elliot">
+					Elliot Fu
+					</div>
+					
+					<h3 style="text-align:center; margin-top:0px;">My public activity</h3>
+					
+					<div class="item" data-value="stevie">
+					Stevie Feliciano
+					</div>
+				</div>
+			</div>
+
+			<p id="pIframeContainerActPub" align="center">
+				</br>
+				<iframe id="iframeActPub" frameborder="0" scrolling="no" width="80%" height="0px" style="display:block; visibility:hidden;"></iframe>
+			</p>
+			
+		</div>
+
 
         <div class="ui very padded segment" style="text-align: center">
 
@@ -435,10 +496,10 @@ const myNotification = window.createNotification({
 		</div>		
 
 		</div>
-		<p id="pIframeContainer" align="center">
-			</br>
-			<iframe id="iframeSurf" frameborder="0" scrolling="no" width="80%" height="0px" style="display:block; visibility:hidden;"></iframe>
-		</p>
+			<p id="pIframeContainer" align="center">
+				</br>
+				<iframe id="iframeSurf" frameborder="0" scrolling="no" width="80%" height="0px" style="display:block; visibility:hidden;"></iframe>
+			</p>
 		<div>
 		
 	{{ end }}
