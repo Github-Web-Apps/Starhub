@@ -216,10 +216,6 @@ $(document).ready(function () {
     };
 
     let display_repo = function (data) {
-    
-    	//terminate repo not needed
-    	return '';
-    	
         let myChart = echarts.init(document.getElementById('repo'));
 
         let option = {
@@ -290,12 +286,12 @@ $(document).ready(function () {
     let render_chart = function (user_id) {
         let user_url = 'https://api.github.com/users/' + user_id + '?access_token=' + select_token();
         invoke_github_api(user_url, function (user_data) {
-            //let email = format_email(user_id, user_data['email']);
-            //let email_html = is_empty(email) ? '' : '<span style="font-size: 12px; color: #999; letter-spacing: 0.01em">&nbsp;' + email + '</span>';
-            //$('#user_id').html(user_id + email_html);
-            //$('#avatar').attr('src', user_data['avatar_url']);
-            //$('#following').html('Following: ' + simple_number(user_data['following'], 1));
-            //$('#follower').html('Follower: ' + simple_number(user_data['followers'], 1));
+            let email = format_email(user_id, user_data['email']);
+            let email_html = is_empty(email) ? '' : '<span style="font-size: 12px; color: #999; letter-spacing: 0.01em">&nbsp;' + email + '</span>';
+            $('#user_id').html(user_id + email_html);
+            $('#avatar').attr('src', user_data['avatar_url']);
+            $('#following').html('Following: ' + simple_number(user_data['following'], 1));
+            $('#follower').html('Follower: ' + simple_number(user_data['followers'], 1));
 
             let progress_bar = $('#progress-bar');
             progress_bar.css('width', '10%');
@@ -399,5 +395,18 @@ $(document).ready(function () {
     let q = is_empty(query['q']) ? 'intika' : query['q'];
 
     render_chart(q);
+
+    $('#capture').click(function () {
+        domtoimage.toPng(document.getElementById('outer'))
+            .then(function (dataUrl) {
+                let link = document.createElement('a');
+                link.download = 'github-id_' + q + '.png';
+                link.href = dataUrl;
+                link.click();
+            })
+            .catch(function (error) {
+                console.error('Oops, something went wrong!', error);
+            });
+    });
 
 });

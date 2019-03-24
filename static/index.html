@@ -511,7 +511,7 @@ const myNotification = window.createNotification({
 		
 
         <div class="ui very padded segment" style="text-align: center">
-        		<p style="text-align:center; font-size:17px;"><b>Statistics Classic Method</b></p>
+        		<p style="text-align:center; font-size:17px;"><b>Global Statistics</b></p>
         		</br>
 
                 <script type="text/javascript" src="static/resources/github-stats/github-stats.js"></script>
@@ -578,8 +578,16 @@ const myNotification = window.createNotification({
 	    </div>
 
 		<div class="ui very padded segment">
-			<p style="text-align:center; font-size:17px;"><b>Statistics Reversed Method</b></p>
+			<p style="text-align:center; font-size:17px;"><b>Main Organization Statistics</b></p>
         	</br>
+        	
+        	<script type="text/javascript" src="static/resources/widgets/widget.js"></script>
+			<div class="github-widget" style="width:550px; margin:auto;" data-username="{{ .User.Login}}"></div>
+
+			</br>
+			<p style="text-align:center; font-size:15px; margin:0px;">Activity frequency and used languages</p>
+        	<p style="text-align:center; font-size:12px; margin:0px;">On main default organization</p>
+        	
 			<p align="center">
 				<iframe 
 					id="iframeProfile"
@@ -587,10 +595,10 @@ const myNotification = window.createNotification({
 					frameborder="0" 
 					scrolling="no" 
 					width="640px" 
-					height="450px" 
+					height="350px" 
 					style="display:block;"
 				></iframe>
-			</p>			
+			</p>
 		</div>
 
 		<script src="static/resources/images/ads.js"></script>
