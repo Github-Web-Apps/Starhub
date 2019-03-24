@@ -74,6 +74,7 @@ const myNotification = window.createNotification({
 		- Tools: git folder downloader</br>
 		- Profiler: github profile for any github user</br>
 		- Profiler: various statistics (activities/repos/langs)</br>
+		- Profiler: work with (url) get method for an easy access</br>
 		- Engine: encrypted requests (ssl https)</br>
 		- And much more...</br>
 		</p>
@@ -82,6 +83,18 @@ const myNotification = window.createNotification({
 
 		<div align="center">
 		    <img src="https://raw.githubusercontent.com/Github-Web-Apps/Starhub/master/screenshot/1.png" width="85%"></img> 
+		</div>
+
+		</br>
+		
+		<div align="center">
+		    <img src="https://raw.githubusercontent.com/Github-Web-Apps/Starhub/master/screenshot/2.png" width="85%"></img> 
+		</div>
+
+		</br>
+
+		<div align="center">
+		    <img src="https://raw.githubusercontent.com/Github-Web-Apps/Starhub/master/screenshot/3.png" width="85%"></img> 
 		</div>
 
 	</div>
@@ -148,12 +161,14 @@ const myNotification = window.createNotification({
 		</div>
 
 	{{ else }}
-	
-		<h2 class="ui header" style="text-align:center;">
+
+		<!--
+		<h2 class="ui header" style="text-align:center; margin:0px; padding:0px;">
 			Currently under dev!</br>
 		</h2>
+		-->
 		
-		<div class="ui very padded segment">
+		<div class="ui very padded segment" style="margin-top:0px">
 
 			<h2 class="ui header" style="text-align:center;">
 				<img src="https://avatars3.githubusercontent.com/u/{{ .User.ID }}?v=3&s=144" class="ui circular image">
