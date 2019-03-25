@@ -1,41 +1,39 @@
 {{ define "title" }}
     <h4 class="what-is-it" style="font-weight: bold; margin-bottom: unset;">
-		All about your Github account, public and private activity, stars, followers and much more
+		All about any Github account, public and private activity, stars, followers and much more
     </h4>
 {{ end }}
 {{ define "content-naked" }}
 {{ end }}
 {{ define "content" }}
 
-<script>	
-	//var parsedUrlProf = new URL(window.location.href);
-	//var usernameProf	= parsedUrlProf.searchParams.get('u');
-
-	var usernameProf = window.location.pathname;
-	usernameProf = usernameProf[0] == '/' ? usernameProf.substr(1) : usernameProf;
-
-	$(document).ready(function() {
-		if ((usernameProf) && (usernameProf != 'profile')) {
-			//alert(usernameProf);
-		} else {
-		}
-	});
-</script>
-
 <div class="ui very padded vertical stripe segment">
 <div class="ui text container" style=" max-width:800px !important;">
 
-<h3 class="ui header">
-  Starhub Github&apos;s Profile 
+<h3 class="ui header" id="titleBox">
+  Starhub Profiler
 </h3>
 
-<div class="ui very padded segment">
-	<p>
-		For any github user, under dev, coming soon!
-	</p>
+<link rel="stylesheet" href="static/resources/downloads/third-party/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="static/resources/downloads/css/main.css">
+
+<div class="ui padded segment" id="searchBox">
+	<div class="form form-inline" style="margin-right:100px; margin-left:100px;">
+		<p>Profile any github user or repository (direct access with <b>https://starhub.be/username</b>)</p>
+		<div class="form-group">
+			<input type="text" class="form-control" id="username" placeholder="Github username or repository link" onkeydown = "if (event.keyCode == 13) document.getElementById('get-infos-1').click()">
+		</div>
+		
+		</br>
+
+		<button class="btn btn-primary" id="get-infos-1" onclick="">Profile!</button>
+		
+		<input list="users" class="form-control" value="">
+
+	</div>
 </div>
 
-<div class="ui padded segment" style="text-align: center; visibility:hidden; height:0px">
+<div id="activityDiv" class="ui padded segment" style="text-align: center; visibility:hidden; height:0px">
 
 	<script>
 	function tabClickSwitch (){
@@ -324,9 +322,31 @@
 </div>
 
 </br></br>
-<script>
+
+<script>	
+	//var parsedUrlProf = new URL(window.location.href);
+	//var usernameProf	= parsedUrlProf.searchParams.get('u');
+
 	//setTimeout(privLoadActi(pageBrowsePriv, '2', pageFilterPriv, '{{ .User.Login}}'), 3000);
 	//setTimeout(pubLoadActi(pageBrowsePub, '1', pageFilterPub, '{{ .User.Login}}'), 3000);
+
+	//<div id="activityDiv" class="ui padded segment" style="text-align: center; visibility:hidden; height:0px">
+
+	var usernameProf = window.location.pathname;
+	usernameProf = usernameProf[0] == '/' ? usernameProf.substr(1) : usernameProf;
+
+	$(document).ready(function() {
+		if ((usernameProf) && (usernameProf != 'profile')) {
+			//alert(usernameProf);
+			document.getElementById("titleBox").style.height = "0px";
+			document.getElementById("titleBox").height = "0px";
+	    	document.getElementById("titleBox").style.visibility = "hidden";
+	    	document.getElementById("searchBox").style.height = "0px";
+	    	document.getElementById("searchBox").height = "0px";
+	    	document.getElementById("searchBox").style.visibility = "hidden";
+		} else {
+		}
+	});
 </script>
 
 </div>
