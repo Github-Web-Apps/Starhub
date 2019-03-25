@@ -35,7 +35,7 @@
 - Tools: git folder downloader
 - Profiler: github profile for any github user
 - Profiler: various statistics (activities/repos/langs)
-- Profiler: work with (url) get method for an easy access
+- Profiler: work with (url) get method for an easy access (starhub.be/username)
 - Engine: encrypted requests (ssl https)
 - And much more...
 

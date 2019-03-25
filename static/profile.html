@@ -10,30 +10,30 @@
 <div class="ui very padded vertical stripe segment">
 <div class="ui text container" style=" max-width:800px !important;">
 
-<h3 class="ui header" id="titleBox">
+<h3 class="ui header" id="titleBox" style="visibility:hidden; height:0px; padding:0px; margin:0px;">
   Starhub Profiler
 </h3>
 
 <link rel="stylesheet" href="static/resources/downloads/third-party/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="static/resources/downloads/css/main.css">
 
-<div class="ui padded segment" id="searchBox">
+<div class="ui padded segment" id="searchBox" style="visibility:hidden; height:0px; padding:0px; margin:0px;">
 	<div class="form form-inline" style="margin-right:100px; margin-left:100px;">
-		<p>Profile any github user or repository (direct access with <b>https://starhub.be/username</b>)</p>
+		<p>Profile any github user (direct access with <b>https://starhub.be/username</b>)</p>
 		<div class="form-group">
-			<input type="text" class="form-control" id="username" placeholder="Github username or repository link" onkeydown = "if (event.keyCode == 13) document.getElementById('get-infos-1').click()">
+			<input type="text" class="form-control" id="username" placeholder="Github username (e.g. intika)" onkeydown = "if (event.keyCode == 13) document.getElementById('get-infos-1').click()">
 		</div>
 		
 		</br>
 
-		<button class="btn btn-primary" id="get-infos-1" onclick="">Profile!</button>
+		<button class="btn btn-primary" id="get-infos-1" onclick="profile();">Profile!</button>
+		</br>
+		</br>
 		
-		<input list="users" class="form-control" value="">
-
 	</div>
 </div>
 
-<div id="activityDiv" class="ui padded segment" style="text-align: center; visibility:hidden; height:0px">
+<div id="activityDiv" class="ui padded segment" style="text-align: center; visibility:hidden; height:0px; padding:0px; margin:0px;">
 
 	<script>
 	function tabClickSwitch (){
@@ -321,32 +321,248 @@
 	</div>
 </div>
 
-</br></br>
+<script src="static/resources/images/ads.js"></script>
+<div id="div2" class="ui very padded segment" style="visibility:hidden; height:0px; padding:0px; margin:0px;">
+	<script>
+      if( window.canRunAds === undefined ){
+        // adblocker detected, show fallback
+        document.write('<div align="center" style="background-image: url(static/resources/images/image.png);');
+        document.write('background-repeat:no-repeat; background-position:center;height:60px;"></div>');}
+    </script>
+	<div align="center">
+		<script type="text/javascript">
+	    google_ad_client = "ca-pub-4643883406855060";
+	    google_ad_slot = "6799285178";
+	    google_ad_width = 468;
+	    google_ad_height = 60;
+		</script>
+		<!-- Starhub main -->
+		<script type="text/javascript"
+		src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+	</div>
+</div>
 
-<script>	
-	//var parsedUrlProf = new URL(window.location.href);
-	//var usernameProf	= parsedUrlProf.searchParams.get('u');
+<div id="div3" class="ui very padded segment" style="text-align: center; visibility:hidden; height:0px; padding:0px; margin:0px;">
+	<p style="text-align:center; font-size:17px;"><b>Global Statistics</b></p>
+	</br>
 
-	//setTimeout(privLoadActi(pageBrowsePriv, '2', pageFilterPriv, '{{ .User.Login}}'), 3000);
-	//setTimeout(pubLoadActi(pageBrowsePub, '1', pageFilterPub, '{{ .User.Login}}'), 3000);
+     <script type="text/javascript" src="static/resources/github-stats/github-stats.js"></script>
+     
+     <a id="grapHref" target="_blank" href="https://github.com/">
+	     <div class="ui center" id="github-contributions" style="display: inline-block">
+	     	<div id="divGitStatLoader" class="ui active centered inline loader" style="height:'0px'; visibility:hidden;"></div>
+	     </div>
+     </a>
+     
+     </br></br></br>
+     
+     <div class="ui center" id="github-language-distribution"></div>
+</div>
 
-	//<div id="activityDiv" class="ui padded segment" style="text-align: center; visibility:hidden; height:0px">
+<div id="div4" class="ui very padded segment" style="visibility:hidden; height:0px; padding:0px; margin:0px;">
+	<p style="text-align:center; font-size:17px;"><b>Main Organization Statistics</b></p>
+	</br>
+	
+	<script type="text/javascript" id="widgetScript"></script>
 
-	var usernameProf = window.location.pathname;
-	usernameProf = usernameProf[0] == '/' ? usernameProf.substr(1) : usernameProf;
+	<div id="gitWid">
+	</div>
+	
+	</br>
+	<p style="text-align:center; font-size:15px; margin:0px;">Activity frequency and used languages</p>
+	<p style="text-align:center; font-size:12px; margin:0px;">On main default organization</p>
 
-	$(document).ready(function() {
-		if ((usernameProf) && (usernameProf != 'profile')) {
-			//alert(usernameProf);
-			document.getElementById("titleBox").style.height = "0px";
-			document.getElementById("titleBox").height = "0px";
-	    	document.getElementById("titleBox").style.visibility = "hidden";
-	    	document.getElementById("searchBox").style.height = "0px";
-	    	document.getElementById("searchBox").height = "0px";
-	    	document.getElementById("searchBox").style.visibility = "hidden";
-		} else {
-		}
-	});
+	<iframe
+		id="iframeProfile"
+		frameborder="0" 
+		scrolling="no" 
+		width="100%" 
+		height="0px" 
+		style="margin-right:auto; margin-left:auto;"
+	></iframe>
+</div>
+
+<script src="static/resources/images/ads.js"></script>
+<div id="div5"class="ui very padded segment" style="visibility:hidden; height:0px; padding:0px; margin:0px;">
+	<script>
+      if( window.canRunAds === undefined ){
+        // adblocker detected, show fallback
+        document.write('<div align="center" style="background-image: url(static/resources/images/image.png);');
+        document.write('background-repeat:no-repeat; background-position:center;height:60px;"></div>');}
+    </script>
+	<div align="center">
+		<script type="text/javascript">
+	    google_ad_client = "ca-pub-4643883406855060";
+	    google_ad_slot = "6799285178";
+	    google_ad_width = 468;
+	    google_ad_height = 60;
+		</script>
+		<!-- Starhub main -->
+		<script type="text/javascript"
+		src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+	</div>
+</div>
+
+<div id="div6" class="ui padded segment" style="visibility:hidden; height:0px; padding:0px; margin:0px;">
+		<p style="text-align:center; font-size:17px;"><b>Github Profile Center</b></p>
+
+		<a class="ui primary small button" target="_blank" title="Ghuser.io (open in new tab)" style="margin:1%; width:31%;" id="ghuserLink" href="https://ghuser.io/" >
+			<img src="static/logo/3rd/ghu.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
+			Ghuser profile
+		</a>
+		
+		<a class="ui primary small button" target="_blank" title="Starhub tools for github (open in new tab)" style="margin:1%; width:31%;" href="/tools" >
+			<img src="static/logo/logo-16.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
+			Starhub tools
+		</a>
+		<a class="ui primary small button" target="_blank" title="Starhub's applications listing (open in new tab)" style="margin:1%; width:31%;" href="/apps" >
+			<img height="16" width="0" style="vertical-align:middle; margin-right:0px;">
+			<i class="star black icon" height="16" width="16" style="margin-right:5px"></i>
+			Apps listing
+		</a>
+		<a class="ui primary small button" title="Starhub's profiler" style="margin:1%; width:98%;" href="/profile" >
+			<img height="16" width="0" style="vertical-align:middle; margin-right:0px;">
+			<i class="search black icon" height="16" width="16" style="margin-right:5px"></i>
+			Search again
+		</a>
+		
+</div>
+
+<script>
+
+function showDiv(div){
+	document.getElementById(div).style.height = "";
+	document.getElementById(div).style.padding = "";
+	document.getElementById(div).style.margin = "";
+	document.getElementById(div).style.visibility = "visible";
+}
+
+function hideDiv(div){
+	document.getElementById(div).style.height = "0px";
+	document.getElementById(div).style.padding = "0px";
+	document.getElementById(div).style.margin = "0px";
+	document.getElementById(div).style.visibility = "hidden";
+}
+
+var usernameProf = window.location.pathname;
+usernameProf = usernameProf[0] == '/' ? usernameProf.substr(1) : usernameProf;
+
+$(document).ready(function() {
+
+	if ((usernameProf) && (usernameProf != 'profile')) {
+		loadGlobal(usernameProf);
+	} else {
+		$('#div2').hide();
+		$('#div5').hide();
+		showDiv("titleBox");
+		showDiv("searchBox");
+	}
+	
+});
+
+function profile() {
+	var userInput = $("#username").val();
+	if (userInput) {		
+		loadGlobal(userInput);
+	}
+}
+
+function loadScript(src){
+	var script = document.createElement('script');
+	script.onload = function () { 
+		//do stuff with the script
+	};
+	script.src = src;
+	document.head.appendChild(script);
+}
+
+function loadGlobal(user) {	
+
+	showDiv("activityDiv");
+	showDiv("div2");
+	showDiv("div3");
+	showDiv("div4");
+	showDiv("div5");
+	showDiv("div6");
+	$('#div2').show();
+	$('#div5').show();
+	document.getElementById("activityDiv").style.height = "auto";
+	document.getElementById("activityDiv").style.visibility = "visible";
+	
+	document.getElementById("github-language-distribution").innerHTML = "";
+	document.getElementById("github-contributions").innerHTML = "<div id='divGitStatLoader' class='ui active centered inline loader' style='height:0px; visibility:hidden;'></div>";
+	document.getElementById("gitWid").innerHTML = "";
+	
+	document.getElementById("grapHref").href = "https://github.com/" + user;
+	document.getElementById("ghuserLink").href = "https://ghuser.io/" + user;
+
+	document.getElementById("iframeProfile").height = "350px";
+	document.getElementById("iframeProfile").src = "static/resources/github-id/?q=" + user;	
+	document.getElementById("divGitStatLoader").style.height = "";
+	document.getElementById("divGitStatLoader").style.visibility = "visible";
+	
+	document.getElementById("gitWid").innerHTML = "<div class='github-widget' style='width:550px; margin:auto;' data-username='" + user + "'></div>";
+
+	loadScript("static/resources/widgets/widget.js");
+	
+	setTimeout(privLoadActi(pageBrowsePriv, '2', pageFilterPriv, user), 2000);
+	setTimeout(pubLoadActi(pageBrowsePub, '1', pageFilterPub, user), 2000);
+		
+	(async () => {	
+		const GITHUB_USERNAME = user;
+		const COMMITS_CONTAINER = '#github-contributions';
+		const LANGUAGES_CONTAINER = '#github-language-distribution';
+		
+		const githubStats = await GithubStats(GITHUB_USERNAME);
+		
+		let githubCommits = document.querySelector(COMMITS_CONTAINER);
+		/* Render SVG for commit contributions */
+		let commitsContribSVG = githubStats.commitsContribSVG({
+		   rows: 7,
+		   space: 2,
+		   rectWidth: 8,
+		levelColors: [
+		    {
+		        minCommits: 0,
+		        color: '#ebedf0'
+		    },
+		    {
+		        minCommits: 1,
+		        color: '#c6e48b'
+		    },
+		    {
+		        minCommits: 9,
+		        color: '#7bc96f'
+		    },
+		    {
+		        minCommits: 17,
+		        color: '#239a3b'
+		    },
+		    {
+		        minCommits: 26,
+		        color: '#196127'
+		    }
+		]
+		});
+		githubCommits.appendChild(commitsContribSVG);
+		
+		    let githubLanguageDistribution = document.querySelector(LANGUAGES_CONTAINER);
+		    /* Render SVG for language contributions */
+		    let languageContribSVG = githubStats.languagesContribSVG({
+		        barHeight: 20,
+		        barWidth: githubLanguageDistribution.offsetWidth/2,
+		        lineSpacing: 4,
+		        languageNameWidth: 100,
+		        fontSize: 14
+		    });
+		    githubLanguageDistribution.appendChild(languageContribSVG);
+		    document.getElementById("divGitStatLoader").style.height = "0px";
+			document.getElementById("divGitStatLoader").style.visibility = "hidden";
+	})();
+}
+
 </script>
 
 </div>

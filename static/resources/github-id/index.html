@@ -32,13 +32,4 @@
     </section>
 </div>
 </body>
-<script>
-   	var url_string = window.location.href;
-	var url = new URL(url_string);
-	var user = url.searchParams.get("q");    	
-	var userlinkFollowers = 'https://github.com/' + user + '?tab=followers';
-	var userlinkFollowing = 'https://github.com/' + user + '?tab=following';
-   	document.getElementById("following").setAttribute("href",userlinkFollowing);
-   	document.getElementById("follower").setAttribute("href",userlinkFollowers);
-</script>
 </html>

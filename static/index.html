@@ -74,7 +74,7 @@ const myNotification = window.createNotification({
 		- Tools: git folder downloader</br>
 		- Profiler: github profile for any github user</br>
 		- Profiler: various statistics (activities/repos/langs)</br>
-		- Profiler: work with (url) get method for an easy access</br>
+		- Profiler: work with (url) get method for an easy access (starhub.be/username)</br>
 		- Engine: encrypted requests (ssl https)</br>
 		- And much more...</br>
 		</p>
@@ -595,7 +595,7 @@ const myNotification = window.createNotification({
 	    					document.getElementById("divGitStatLoader").style.visibility = "hidden";
 	                    })();
 	            </script>
-	            <a target="blank" href="https://github.com/{{ .User.Login}}">
+	            <a target="_blank" href="https://github.com/{{ .User.Login}}">
 	                <div class="ui center" id="github-contributions" style="display: inline-block">
 	                	<div id="divGitStatLoader" class="ui active centered inline loader" style="height:''; visibility:visible;"></div>
 	                </div>
@@ -615,17 +615,15 @@ const myNotification = window.createNotification({
 			<p style="text-align:center; font-size:15px; margin:0px;">Activity frequency and used languages</p>
         	<p style="text-align:center; font-size:12px; margin:0px;">On main default organization</p>
         	
-			<p align="center">
-				<iframe 
-					id="iframeProfile"
-					src="static/resources/github-id/?q={{ .User.Login}}"					
-					frameborder="0" 
-					scrolling="no" 
-					width="640px" 
-					height="350px" 
-					style="display:block;"
-				></iframe>
-			</p>
+			<iframe 
+				id="iframeProfile"
+				src="static/resources/github-id/?q={{ .User.Login}}"					
+				frameborder="0" 
+				scrolling="no" 
+				width="100%" 
+				height="350px" 
+				style="display:block;"
+			></iframe>
 		</div>
 
 		<script src="static/resources/images/ads.js"></script>

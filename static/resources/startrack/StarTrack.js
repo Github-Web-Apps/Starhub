@@ -78,9 +78,9 @@ function showStats(stats, user, repo) {
 	//$('#advbtn').css('height', '35px');
 
 	document.getElementById("stars-adv").onload = function(){
-		document.getElementById("divIframeLoader").style.height = "0px";
-		document.getElementById("divIframeLoader").style.marginTop = "0px";
-		document.getElementById("divIframeLoader").style.visibility = "hidden";};
+	document.getElementById("divIframeLoader").style.height = "0px";
+	document.getElementById("divIframeLoader").style.marginTop = "0px";
+	document.getElementById("divIframeLoader").style.visibility = "hidden";};
 	
 	var urliframe = 'static/resources/startrack/startrack-adv.html?q=' + user + '/' + repo;
 	var $iframe = $('#stars-adv');
