@@ -338,7 +338,7 @@
 		</script>
 		<!-- Starhub main -->
 		<script type="text/javascript"
-		src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+		src="//pagead2.tik.googlesyndication.com/pagead/show_ads.js">
 		</script>
 	</div>
 </div>
@@ -400,7 +400,7 @@
 		</script>
 		<!-- Starhub main -->
 		<script type="text/javascript"
-		src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+		src="//pagead2.tik.googlesyndication.com/pagead/show_ads.js">
 		</script>
 	</div>
 </div>
@@ -430,6 +430,8 @@
 		
 </div>
 
+<link rel="stylesheet" href="static/resources/notifications/notifications.css" type="text/css">
+<script src="static/resources/notifications/notifications.js" type="text/javascript"></script>
 <script>
 
 function showDiv(div){
@@ -446,13 +448,49 @@ function hideDiv(div){
 	document.getElementById(div).style.visibility = "hidden";
 }
 
+const myNotification = window.createNotification({
+	closeOnClick: true,
+	displayCloseButton: false,
+	//nfc-top-right
+	//nfc-top-left
+	//nfc-bottom-right
+	//nfc-bottom-left
+	positionClass: 'nfc-top-left',
+	onclick: false,
+	showDuration:5000,
+	// success, info, warning, error, and none
+	theme: 'info'
+});
+
+function checkUserIDandProceed (login) {
+	getIdFor(login, function(username, id) {
+		//alert(id);
+		//alert(login);
+		loadGlobal(login);
+	})
+}
+
+function getIdFor (username, callback) {
+	$.getJSON('https://api.github.com/users/' + username + "?callback=?", {},
+	function(json) {
+		var id = json["data"]["id"]
+		if (id) {callback(username, id)} else {
+			$('#div2').hide();
+			$('#div5').hide();
+			showDiv("titleBox");
+			showDiv("searchBox");
+			myNotification({message: 'Unknown github user, or limit reached',});
+		}
+	});
+}
+
 var usernameProf = window.location.pathname;
 usernameProf = usernameProf[0] == '/' ? usernameProf.substr(1) : usernameProf;
 
 $(document).ready(function() {
 
 	if ((usernameProf) && (usernameProf != 'profile')) {
-		loadGlobal(usernameProf);
+		checkUserIDandProceed(usernameProf);
 	} else {
 		$('#div2').hide();
 		$('#div5').hide();
@@ -464,21 +502,20 @@ $(document).ready(function() {
 
 function profile() {
 	var userInput = $("#username").val();
-	if (userInput) {		
-		loadGlobal(userInput);
+	if (userInput) {
+		checkUserIDandProceed(userInput);
 	}
 }
 
 function loadScript(src){
 	var script = document.createElement('script');
-	script.onload = function () { 
-		//do stuff with the script
+	script.onload = function () {
 	};
 	script.src = src;
 	document.head.appendChild(script);
 }
 
-function loadGlobal(user) {	
+function loadGlobal(user) {
 
 	showDiv("activityDiv");
 	showDiv("div2");
