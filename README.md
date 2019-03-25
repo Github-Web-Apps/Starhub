@@ -84,10 +84,6 @@
 <div align="center">
     <img src="https://raw.githubusercontent.com/Github-Web-Apps/Starhub/master/screenshot/11.png" width="700px"></img> 
 </div>
-</br>
-<div align="center">
-    <img src="https://raw.githubusercontent.com/Github-Web-Apps/Starhub/master/screenshot/12.png" width="700px"></img> 
-</div>
 
 # Running it locally
 
