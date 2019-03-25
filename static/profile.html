@@ -7,6 +7,21 @@
 {{ end }}
 {{ define "content" }}
 
+<script>	
+	//var parsedUrlProf = new URL(window.location.href);
+	//var usernameProf	= parsedUrlProf.searchParams.get('u');
+
+	var usernameProf = window.location.pathname;
+	usernameProf = usernameProf[0] == '/' ? usernameProf.substr(1) : usernameProf;
+
+	$(document).ready(function() {
+		if ((usernameProf) && (usernameProf != 'profile')) {
+			//alert(usernameProf);
+		} else {
+		}
+	});
+</script>
+
 <div class="ui very padded vertical stripe segment">
 <div class="ui text container" style=" max-width:800px !important;">
 
