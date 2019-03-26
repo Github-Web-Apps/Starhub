@@ -10,34 +10,18 @@
 
 # Features:
 
-- My-Starhub: display total stars for all repository
-- My-Starhub: display total public repos
-- My-Starhub: public and private activity history listing
-- My-Starhub: activity history listing filter/search
-- My-Starhub: watch all repos (forked one as well)
-- My-Starhub: no github write access required
-- My-Starhub: daily email notifciation (only on changes)
-- My-Starhub: notification for new followers
-- My-Starhub: notification for new unfollower
-- My-Starhub: notification for new starred repository
-- My-Starhub: notification for new unstarred repository
+- My-Starhub: display total repos, stars and followers
+- My-Starhub: public and private activity history listing plus filter
+- My-Starhub: watch all repos for changes
+- My-Starhub: daily email notifciation *(only on changes)*
+- My-Starhub: notification for new followers, unfollower, stars, un-star
 - My-Starhub: global user statistics on activities and used languages
 - My-Starhub: main user organization statistic
-- My-Starhub: github profile center
-- My-Starhub: starhub iframe app loader
-- Statistics: stars analytics over time with a graph
-- Statistics: repo commmits, issue and activity analytics (under stars statics section)
-- Statistics: releases downloads couter & stats
+- Statistics: stars and releases downloads couter analytics
 - Tools: github applications selection and listing
-- Tools: user mail finder
-- Tools: username converter
-- Tools: user-id converter
-- Tools: site preview (git html file preview)
-- Tools: git folder downloader
-- Profiler: github profile for any github user
-- Profiler: various statistics (activities/repos/langs)
-- Profiler: work with (url) get method for an easy access (starhub.be/username)
-- Engine: encrypted requests (ssl https)
+- Tools: mail finder, username and user-id converter, site preview and git downloader
+- Profiler: github profile for any github user with various statistics
+- Profiler: direct access (starhub.be/github-user-name)
 - And much more...
 
 # Screenshot
