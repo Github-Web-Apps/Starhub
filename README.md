@@ -2,7 +2,7 @@
   <img alt="Starhub Logo" src="https://github.com/Github-Web-Apps/Starhub/raw/master/static/logo/logo-128.png" />
   <h1 align="center">Starhub</h1>
   <h3 align="center">https://starhub.be/</h3>
-  <h4 align="center">https://starhub.be/YOUR-GITHUB-LOGIN</h4>
+  <h5 align="center">https://starhub.be/YOUR-GITHUB-LOGIN</h5>
   <p align="center">All about your Github account, public and private activity, stars count, release download count, who followed/unfollowed and starred/unstarred your Github repositories plus daily email notification about changes and much more.</p>
 </p>
 
