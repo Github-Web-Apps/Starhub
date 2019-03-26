@@ -13,11 +13,11 @@
 - My-Starhub: display total repos, stars and followers
 - My-Starhub: public and private activity history listing plus filter
 - My-Starhub: watch all repos for changes
-- My-Starhub: daily email notifciation *(only on changes)*
-- My-Starhub: notification for new followers, unfollower, stars, un-star
+- My-Starhub: daily email notification *(only on changes)*
+- My-Starhub: notification for new followers, un-follower, stars, un-star
 - My-Starhub: global user statistics on activities and used languages
 - My-Starhub: main user organization statistic
-- Statistics: stars and releases downloads couter analytics
+- Statistics: stars and releases downloads counter analytics
 - Tools: github applications selection and listing
 - Tools: mail finder, username and user-id converter, site preview and git downloader
 - Profiler: github profile for any github user with various statistics
