@@ -17,6 +17,7 @@
 - My-Starhub: notification for new followers, un-follower, stars, un-star
 - My-Starhub: global user statistics on activities and used languages
 - My-Starhub: main user organization statistic
+- My-Starhub: list search and filter starred repos
 - Statistics: stars and releases downloads counter analytics
 - Tools: github applications selection and listing
 - Tools: mail finder, username and user-id converter, site preview and git downloader

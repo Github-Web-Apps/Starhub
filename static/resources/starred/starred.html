@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html lang="en">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>StarHub</title>
+    <meta name="description" content="GitHub starred browser"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        
+   	<script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+   	<script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+   	<script src="js/stars.jsx" type="text/jsx"></script>
+   	<script src="js/github.js"></script>
+	
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/starred.css" />
+
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<input type="hidden" id="login">
+
+</body>
+
+<script>
+	var parsedUrl 		= new URL(window.location.href);
+	var usernameParam 	= parsedUrl.searchParams.get('u');
+
+	function starts(){
+	document.getElementById('mainForm').submit()
+	}
+
+	function start(){
+		if (document.getElementById('inputLoginMain')) {
+			$('#inputLoginMain').val(usernameParam);
+			document.getElementById('inputLoginMain').value = usernameParam;
+			document.getElementById("submitLogin").click();
+		} else {
+			document.getElementById('inputLogin').value = usernameParam;
+			$("#inputLogin").trigger("focus");
+			document.getElementById("changeLogin").click();
+		}
+	}
+		
+	$(document).ready(function() {
+		if (usernameParam) {
+			setTimeout(start, 2000);
+		}
+	});
+</script>
+
+</html>

@@ -27,12 +27,20 @@
       <div class="ui center aligned grid large secondary inverted pointing menu" >
       
 		<a class="item" href="/" title="Starhub" style="padding-bottom:9px;">
-		<object data="/static/logo/octocat.svg" type="image/svg+xml" style="height:27px;width:32px">
-			<img style="height:27px;width:27px;margin:0px" src="/static/logo/logo-32-white.png" />
-	    </object>
+			<img src="/static/logo/logo-32-white.png" srcset="/static/logo/octocat.svg" style="height:27px;width:32px">
         </a>
-
-        <a class="item" href="/" title="My profile (Stars, activity, followers, repositories, etc)">My Starhub</a>
+        
+   		<div class="ui simple dropdown item">
+			Starhub
+			<i class="dropdown icon"></i>
+			<div class="ui inverted grey menu" style="margin:0px;">
+				{{ if eq .User.ID 0 }}
+				<a class="item" href="/" 		title="Starhub.be">Home</a>
+				{{ end }}
+				<a class="item" href="/login" 	title="My profile (Stars, activity, followers, repositories, etc)">My Starhub</a>
+				<a class="item" href="/starred" title="My starred repositories">My Starred Repos</a>
+			</div>
+		</div>
 
    		<div class="ui simple dropdown item">
 			Statistics
@@ -47,8 +55,9 @@
 			Toolbox
 			<i class="dropdown icon"></i>
 			<div class="ui inverted grey menu" style="margin:0px;">
-				<a class="item" href="/apps"					    title="Github apps listing">Github Apps</a>
-				<a class="item" href="/tools#mail-finder"           title="Find any user email">Github Mail Finder</a>
+				<a class="item" href="/profile" 					title="Starhub github's profile summary for any user">Github Profiler</a>
+				<a class="item" href="/apps"					    title="Github apps listing">Github Applications</a>
+				<a class="item" href="/tools#mail-finder"           title="Find any user email">Github eMail Finder</a>
 				<a class="item" href="/tools#site-preview"          title="Preview HTML files">Github Site Preview</a>
 				<a class="item" href="/tools#userid-converter"      title="Convert user-id to username">Github User-ID Converter</a>
 				<a class="item" href="/tools#folder-downloader" 	title="Download any folder from a repo">Github Folder Downloader</a>
@@ -56,7 +65,6 @@
 			</div>
 		</div>
 
-	    <a class="item" href="/profile" title="Starhub github's profile summary for any user">Profiler</a>
         <a class="item" href="/donate" title="Support us">Donate</a>
         <a class="item" href="/contact" title="Contact, links, about and privacy policy">About</a>
 

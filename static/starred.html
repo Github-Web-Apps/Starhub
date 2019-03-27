@@ -1,0 +1,69 @@
+{{ define "title" }}
+	<h4 class="what-is-it" style="font-weight: bold; margin-bottom: unset;">
+		All about your Github account, public and private activity, stars, followers and much more
+	</h4>
+{{ end }}
+{{ define "content-naked" }}
+{{ end }}
+{{ define "content" }}
+
+<script>
+
+jQuery(function($){
+  var lastHeight = 0, curHeight = 0, $frame = $('iframe:eq(0)');
+  setInterval(function(){
+    curHeight = $frame.contents().find('body').height();
+    if ( curHeight != lastHeight ) {
+      $frame.css('height', (lastHeight = curHeight) + 'px' );
+    }
+  },500);
+});
+
+</script>
+
+
+{{ if eq .User.ID 0 }}
+
+	<div class="ui padded segment" style="padding:0px; margin-right:20px; margin-left:20px; background-color:#eee;">
+		<iframe id="iframeStarred" frameborder="0" scrolling="no" width="100%" height="100%" style="margin:0px; padding:0px;"
+		onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"
+		src="static/resources/starred/starred.html">
+		</iframe>
+	</div>
+
+{{ else }}
+
+	<div class="ui padded segment" style="padding:0px; margin-right:20px; margin-left:20px; background-color:#eee;">
+		<iframe id="iframeStarred" frameborder="0" scrolling="no" width="100%" height="100%" style="margin:0px; padding:0px;"
+		onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"
+		src="static/resources/starred/starred.html?u={{ .User.Login}}">
+		</iframe>
+	</div>
+
+{{ end }}
+
+	</br>
+
+	<script src="static/resources/images/ads.js"></script>
+	<script>
+	        if( window.canRunAds === undefined ){
+	        // adblocker detected, show fallback
+	        document.write('<div align="center" style="background-image: url(static/resources/images/image.png);');
+	        document.write('background-repeat:no-repeat; background-position:center;height:60px;"></div>');}
+	</script>
+	<div align="center">
+	        <script type="text/javascript">
+	                google_ad_client = "ca-pub-4643883406855060";
+	                google_ad_slot = "6799285178";
+	                google_ad_width = 468;
+	                google_ad_height = 60;
+	        </script>
+	        <!-- Starhub main -->
+	        <script type="text/javascript"
+	                src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+	        </script>
+	</div>
+
+	</br>
+	
+{{ end }}

@@ -55,6 +55,7 @@ const myNotification = window.createNotification({
 		- My-Starhub: notification for new followers, un-follower, stars, un-star</br>
 		- My-Starhub: global user statistics on activities and used languages</br>
 		- My-Starhub: main user organization statistic</br>
+		- My-Starhub: list search and filter starred repos</br>		
 		- Statistics: stars and releases downloads counter analytics</br>
 		- Tools: github applications selection and listing</br>
 		- Tools: mail finder, username and user-id converter, site preview and git downloader</br>
@@ -615,20 +616,34 @@ const myNotification = window.createNotification({
 		</div>
 
 		<div class="ui padded segment">
-				<p style="text-align:center; font-size:17px;"><b>Github Profile Center</b></p>
+				<p style="text-align:center; font-size:17px;"><b>Starhub Profile Center</b></p>
 
-				<a class="ui primary small button" target="_blank" title="Github.com dashboard (open in new tab)" style="margin:1%; width:31%;" href="https://github.com/" >
+				<a class="ui primary small button" title="List search and filter my starred repos" style="margin:1%; width:31%;" href="/starred" >
+					<img src="" height="16" width="0" style="vertical-align:middle; margin-right:0px;">
+					<i class="github black icon" height="16" width="16" style="margin-right:5px"></i>
+					Starred repos
+				</a>				
+				
+				<a class="ui primary small button" target="_blank" title="Starhub tools for github (open in new tab)" style="margin:1%; width:31%;" href="/tools" >
+					<img src="static/logo/logo-16.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
+					Starhub tools
+				</a>
+				
+				<a class="ui primary small button" target="_blank" title="Starhub's applications listing (open in new tab)" style="margin:1%; width:31%;" href="/apps" >
+					<img src="" height="16" width="0" style="vertical-align:middle; margin-right:0px;">
+					<i class="star black icon" height="16" width="16" style="margin-right:5px"></i>
+					Apps listing
+				</a>
+				
+		</div>
+
+		<div class="ui padded segment">
+				<p style="text-align:center; font-size:17px;"><b>Github Tools Bookmarks</b></p>
+
+				<a class="ui primary small button" target="_blank" title="Github.com dashboard (open in new tab)" style="margin:1%; width:98%;" href="https://github.com/" >
 					<img src="" height="16" width="0" style="vertical-align:middle; margin-right:0px;">
 					<i class="github black icon" height="16" width="16" style="margin-right:5px"></i>
 					Github dashboard
-				</a>
-				<a class="ui primary small button" target="_blank" title="Octobox.io (open in new tab)" style="margin:1%; width:31%;" href="https://octobox.io/login" >
-					<img src="static/logo/3rd/octobox.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
-					Manage issues
-				</a>
-				<a class="ui primary small button" target="_blank" title="Astralapp.com (open in new tab)" style="margin:1%; width:31%;" href="https://app.astralapp.com/auth/github" >
-					<img src="static/logo/3rd/astral.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
-					Manage starred
 				</a>
 
 				<a class="ui primary small button" target="_blank" title="Ghuser.io (open in new tab)" style="margin:1%; width:31%;" href="https://ghuser.io/{{ .User.Login}}" >
@@ -636,14 +651,13 @@ const myNotification = window.createNotification({
 					Ghuser profile
 				</a>
 				
-				<a class="ui primary small button" target="_blank" title="Starhub tools for github (open in new tab)" style="margin:1%; width:31%;" href="/tools" >
-					<img src="static/logo/logo-16.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
-					Starhub tools
+				<a class="ui primary small button" target="_blank" title="Octobox.io (open in new tab)" style="margin:1%; width:31%;" href="https://octobox.io/login" >
+					<img src="static/logo/3rd/octobox.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
+					Manage issues
 				</a>
-				<a class="ui primary small button" target="_blank" title="Starhub's applications listing (open in new tab)" style="margin:1%; width:31%;" href="/apps" >
-					<img src="" height="16" width="0" style="vertical-align:middle; margin-right:0px;">
-					<i class="star black icon" height="16" width="16" style="margin-right:5px"></i>
-					Apps listing
+				<a class="ui primary small button" target="_blank" title="Astralapp.com (open in new tab)" style="margin:1%; width:31%;" href="https://app.astralapp.com/auth/github" >
+					<img src="static/logo/3rd/astral.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
+					Manage starred
 				</a>
 				
 		</div>
