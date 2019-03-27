@@ -9,49 +9,45 @@
 
 {{ define "content-naked" }}
 
-<div class="container">
+
 
 	<script type="text/javascript" src="static/resources/downloads/third-party/jquery/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="static/resources/downloads/third-party/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="static/resources/downloads/third-party/typahead/bootstrap3-typeahead.min.js"></script>
 	<script type="text/javascript" src="static/resources/downloads/js/main.js"></script>
 
-    <script>
-		//$("h4.what-is-it").text("Get stats like download counts, release dates, authors for any Github project");
-    </script>
-	    
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Get the latest release stats like download counts, release dates, author on any Github project">
 	<meta name="keywords" content="Github, release, download, count">
 	<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="static/resources/downloads/third-party/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="static/resources/downloads/css/main.css">
+	
+<div class="container" style="margin-right:auto; margin-left:auto;">
 
 	</br>
 	
-    <div class="container">
-        <div class="row" id="search">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="form form-inline">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="username" placeholder="Github username">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="repository" placeholder="Repository name">
-                    </div>
-                    <button class="btn btn-primary" id="get-stats-button">Get the latest release stats!</button>
+    <div class="row" id="search" style="margin-right:auto; margin-left:auto;">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="form form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="username" placeholder="Github username">
                 </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="repository" placeholder="Repository name">
+                </div>
+                <button class="btn btn-primary" id="get-stats-button">Get the latest release stats!</button>
             </div>
         </div>
-        <div class="row" id="title">
-            <h1><span class="username"></span>/<span class="repository"></span></h1>
-            <span class="description">release stats</span>
-        </div>
-        <div class="row" id="stats-result">
-        </div>
-        <div id="loader-gif">
-            <img src="static/logo/gif-load.gif">
-        </div>
+    </div>
+    <div class="row" id="title">
+        <h1><span class="username"></span>/<span class="repository"></span></h1>
+        <span class="description">release stats</span>
+    </div>
+    <div class="row" id="stats-result">
+    </div>
+    <div id="loader-gif">
+        <img src="static/logo/gif-load.gif">
     </div>
 
 	<script src="static/resources/images/ads.js"></script>
@@ -73,6 +69,8 @@
 	                src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 	        </script>
 	</div>
+
+	</br>
 
 </div>
 

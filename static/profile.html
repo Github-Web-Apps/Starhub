@@ -321,28 +321,6 @@
 	</div>
 </div>
 
-<script src="static/resources/images/ads.js"></script>
-<div id="div2" class="ui very padded segment" style="visibility:hidden; height:0px; padding:0px; margin:0px;">
-	<script>
-      if( window.canRunAds === undefined ){
-        // adblocker detected, show fallback
-        document.write('<div align="center" style="background-image: url(static/resources/images/image.png);');
-        document.write('background-repeat:no-repeat; background-position:center;height:60px;"></div>');}
-    </script>
-	<div align="center">
-		<script type="text/javascript">
-	    google_ad_client = "ca-pub-4643883406855060";
-	    google_ad_slot = "6799285178";
-	    google_ad_width = 468;
-	    google_ad_height = 60;
-		</script>
-		<!-- Starhub main -->
-		<script type="text/javascript"
-		src="//pagead2.googlesyndication.com/pagead/show_ads.js">
-		</script>
-	</div>
-</div>
-
 <div id="div3" class="ui very padded segment" style="text-align: center; visibility:hidden; height:0px; padding:0px; margin:0px;">
 	<p style="text-align:center; font-size:17px;"><b>Global Statistics</b></p>
 	</br>
@@ -384,7 +362,7 @@
 </div>
 
 <script src="static/resources/images/ads.js"></script>
-<div id="div5"class="ui very padded segment" style="visibility:hidden; height:0px; padding:0px; margin:0px;">
+<div id="div5"class="ui very padded segment">
 	<script>
       if( window.canRunAds === undefined ){
         // adblocker detected, show fallback
@@ -475,8 +453,8 @@ function getIdFor (username, callback) {
 	function(json) {
 		var id = json["data"]["id"]
 		if (id) {callback(username, id)} else {
-			$('#div2').hide();
-			$('#div5').hide();
+			//$('#div2').hide();
+			//$('#div5').hide();
 			showDiv("titleBox");
 			showDiv("searchBox");
 			myNotification({message: 'Unknown github user, or limit reached',});
@@ -492,8 +470,8 @@ $(document).ready(function() {
 	if ((usernameProf) && (usernameProf != 'profile')) {
 		checkUserIDandProceed(usernameProf);
 	} else {
-		$('#div2').hide();
-		$('#div5').hide();
+		//$('#div2').hide();
+		//$('#div5').hide();
 		showDiv("titleBox");
 		showDiv("searchBox");
 	}
@@ -518,13 +496,13 @@ function loadScript(src){
 function loadGlobal(user) {
 
 	showDiv("activityDiv");
-	showDiv("div2");
+	//showDiv("div2");
+	//showDiv("div5");
+	//$('#div2').show();
+	//$('#div5').show();
 	showDiv("div3");
 	showDiv("div4");
-	showDiv("div5");
 	showDiv("div6");
-	$('#div2').show();
-	$('#div5').show();
 	document.getElementById("activityDiv").style.height = "auto";
 	document.getElementById("activityDiv").style.visibility = "visible";
 	
