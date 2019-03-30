@@ -161,7 +161,7 @@ const myNotification = window.createNotification({
 				This will trigger a welcome mail to your <b>main github email address.</b></br></br>
 				<b>Changes</b> to your account are checked once a day, you'll only receive an email if there were changes since the last notification email.</br></br>
 				Refresh the home page after the profile creation needed delay to see the changes, or wait for the notification/welcome email.</br></br>
-				Thank you for using our service, <b>if you like it please consider a <a href="donate">donation</a> to help us with the server fees</b>
+				Thank you for using our service, <b>if you like it please consider a <a href="donate">donation</a></b>
 			</p>
 
 			</br>
@@ -231,7 +231,7 @@ const myNotification = window.createNotification({
 			</a>
 
 			<p style="text-align:center;">
-				</br>Thank you for using Starhub, <b>if you like it please consider a <a href="donate">donation</a> to help us with the server fees.</b>
+				</br>Thank you for using Starhub, <b>if you like it please consider a <a href="donate">donation</a></b>
 			</p>
 
 		</div>
@@ -665,11 +665,15 @@ const myNotification = window.createNotification({
 	    <script>
 	    	function loadGhuser() {
 	    		var urlSrc="https://ghuser.io/{{ .User.Login}}";
+	    		document.getElementById('divIframeLinkLink').innerHTML = urlSrc + '</br> (does not work on the iframe for new users)';
+	    		document.getElementById('divIframeLinkLink').href = urlSrc;
 	    		document.getElementById("iframeSurf").src='about:blank';
 	    		document.getElementById("divIframeLoader").style.height = "";
 	    		document.getElementById("pIframeContainer").style.height = "";
 	    		document.getElementById("divIframeLoader").style.marginTop = "10px";
 	    		document.getElementById("divIframeLoader").style.visibility = "visible";
+	    		document.getElementById("divIframeLink").style.paddingBottom = "30px";
+	    		document.getElementById("divIframeLink").style.visibility = "visible";
 	    		document.getElementById("iframeSurf").style.visibility = "visible";
 	    		document.getElementById("iframeSurf").height = "50px";
 	    		document.getElementById("iframeSurf").style.height = "50px";
@@ -686,11 +690,40 @@ const myNotification = window.createNotification({
 	    	}
 	    	function loadFedepot() {
 	    		var urlSrc="https://gp.fedepot.com/profile/{{ .User.Login}}";
+	    		document.getElementById('divIframeLinkLink').innerHTML = urlSrc;
+	    		document.getElementById('divIframeLinkLink').href = urlSrc;
 	    		document.getElementById("iframeSurf").src='about:blank';
 	    		document.getElementById("divIframeLoader").style.height = "";
 	    		document.getElementById("pIframeContainer").style.height = "";
 	    		document.getElementById("divIframeLoader").style.marginTop = "10px";
 	    		document.getElementById("divIframeLoader").style.visibility = "visible";
+	    		document.getElementById("divIframeLink").style.paddingBottom = "10px";
+	    		document.getElementById("divIframeLink").style.visibility = "visible";
+	    		document.getElementById("iframeSurf").style.visibility = "visible";
+	    		document.getElementById("iframeSurf").height = "50px";
+	    		document.getElementById("iframeSurf").style.height = "50px";
+	    		document.getElementById("iframeSurf").scrollIntoView();
+	    		document.getElementById("iframeSurf").src=urlSrc;
+	    		document.getElementById("iframeSurf").onload = function(){
+	    			document.getElementById("iframeSurf").height = "1250px";
+	    			document.getElementById("iframeSurf").style.height = "1250px";
+	    			document.getElementById("divIframeLoader").style.height = "0px";
+	    			document.getElementById("divIframeLoader").style.marginTop = "0px";
+	    			document.getElementById("divIframeLoader").style.visibility = "hidden";};
+	    		document.getElementById("divIframeCloser").style.visibility = "visible";
+	    		document.getElementById("divIframeCloser").style.height = "";
+	    	}
+			function loadGitmemory() {
+	    		var urlSrc="https://www.gitmemory.com/{{ .User.Login}}";
+	    		document.getElementById('divIframeLinkLink').innerHTML = urlSrc;
+	    		document.getElementById('divIframeLinkLink').href = urlSrc;
+	    		document.getElementById("iframeSurf").src='about:blank';
+	    		document.getElementById("divIframeLoader").style.height = "";
+	    		document.getElementById("pIframeContainer").style.height = "";
+	    		document.getElementById("divIframeLoader").style.marginTop = "10px";
+	    		document.getElementById("divIframeLoader").style.visibility = "visible";
+	    		document.getElementById("divIframeLink").style.paddingBottom = "10px";
+	    		document.getElementById("divIframeLink").style.visibility = "visible";
 	    		document.getElementById("iframeSurf").style.visibility = "visible";
 	    		document.getElementById("iframeSurf").height = "50px";
 	    		document.getElementById("iframeSurf").style.height = "50px";
@@ -707,11 +740,15 @@ const myNotification = window.createNotification({
 	    	}
 	    	function loadTipsy() {
 	    		var urlSrc="https://profile-summary-for-github.com/user/{{ .User.Login}}";
+	    		document.getElementById('divIframeLinkLink').innerHTML = urlSrc;
+	    		document.getElementById('divIframeLinkLink').href = urlSrc;
 	    		document.getElementById("iframeSurf").src='about:blank';
 	    		document.getElementById("divIframeLoader").style.height = "";
 	    		document.getElementById("pIframeContainer").style.height = "";
 	    		document.getElementById("divIframeLoader").style.marginTop = "10px";
 	    		document.getElementById("divIframeLoader").style.visibility = "visible";
+	    		document.getElementById("divIframeLink").style.paddingBottom = "10px";
+	    		document.getElementById("divIframeLink").style.visibility = "visible";
 	    		document.getElementById("iframeSurf").style.visibility = "visible";
 	    		document.getElementById("iframeSurf").height = "50px";
 	    		document.getElementById("iframeSurf").style.height = "50px";
@@ -728,6 +765,10 @@ const myNotification = window.createNotification({
 	    	}
 	    	function closeIframe() {
 	    		//document.getElementById("iframeSurf").src='about:blank';
+	    		document.getElementById('divIframeLinkLink').innerHTML = '';
+	    		document.getElementById('divIframeLinkLink').href = '';
+	    		document.getElementById("divIframeLink").style.paddingBottom = "0px";
+	    		document.getElementById("divIframeLink").style.visibility = "hidden";
 	    		document.getElementById("iframeSurf").style.height = "0px";
 	    		document.getElementById("iframeSurf").height = "0px";
 	    		document.getElementById("divIframeCloser").style.height = "0px";
@@ -742,16 +783,20 @@ const myNotification = window.createNotification({
 		<div class="ui padded segment">
 				<p style="text-align:center; font-size:17px;"><b>Starhub iFrame App Loader</b></p>
 				
-				<a class="ui primary small button" title="Load my ghuser.io profile" style="margin:1%; width:31%;" onclick="loadGhuser()" >
+				<a class="ui primary small button" title="Load my ghuser.io profile" style="margin:1%; width:22.5%;" onclick="loadGhuser()" >
 					<img src="static/logo/3rd/ghu.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
 					Get my ghuser profile
 				</a>
-				<a class="ui small button" title="Load my fedepot profile (this app is not accurate!)" style="margin:1%; width:31%;" onclick="loadFedepot()" >
+				<a class="ui small button" title="Load my gitmemory profile (this app is not accurate!)" style="margin:1%; width:22.5%;" onclick="loadGitmemory()" >
+					<img src="static/logo/3rd/gitmemory.ico" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
+					Get my gitmemory profile
+				</a>
+				<a class="ui small button" title="Load my fedepot profile (this app is not accurate!)" style="margin:1%; width:22.5%;" onclick="loadFedepot()" >
 					<img src="" height="16" width="0" style="vertical-align:middle; margin-right:5px;">
 					<i class="user black icon" height="16" width="16" style="margin-right:0px"></i>
 					Get my fedepot profile
 				</a>
-				<a class="ui small button" title="Load my tipsy profile (this app is not accurate!)" style="margin:1%; width:31%;" onclick="loadTipsy()" >
+				<a class="ui small button" title="Load my tipsy profile (this app is not accurate!)" style="margin:1%; width:22.5%;" onclick="loadTipsy()" >
 					<img src="static/logo/3rd/tipsy.png" height="16" width="16" style="vertical-align:middle; margin-right:5px;">
 					Get my tipsy profile
 				</a>
@@ -762,6 +807,11 @@ const myNotification = window.createNotification({
 						Close the iframe
 					</a>
 				</div>
+
+				<div id="divIframeLink" style="height:0px; visibility:hidden; text-align:center;">
+					<a id="divIframeLinkLink" target="_blank" ></a>
+				</div>
+				
 				<div id="divIframeLoader" class="ui active centered inline loader" style="height:0px; visibility:hidden;"></div>
 		</div>		
 
