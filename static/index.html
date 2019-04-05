@@ -5,28 +5,6 @@
 {{ end }}
 
 {{ define "content-naked" }}
-<link rel="stylesheet" href="static/resources/notifications/notifications.css" type="text/css">
-<script src="static/resources/notifications/notifications.js" type="text/javascript"></script>
-<script>
-const myNotification = window.createNotification({
-  	closeOnClick: true,
-  	displayCloseButton: false,
-  	//nfc-top-right
-	//nfc-top-left
-	//nfc-bottom-right
-	//nfc-bottom-left
-	positionClass: 'nfc-bottom-right',
-	onclick: false,
-  	showDuration:5000,
-	// success, info, warning, error, and none
-	theme: 'info'
-});
-	{{ if eq .User.ID 0 }}
-		myNotification({
-		  	message: 'We are moving to https://starhub.be',	
-		});
-	{{ end }}
-</script>
 {{ end }}
 
 {{ define "content" }}
