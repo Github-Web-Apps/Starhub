@@ -3,7 +3,7 @@
   <h1 align="center">Starhub</h1>
   <h3 align="center">https://starhub.be/</h3>
   <h5 align="center">https://starhub.be/YOUR-GITHUB-LOGIN</h5>
-  <p align="center">All about your Github account, public and private activity, stars count, release download count, who followed/unfollowed and starred/unstarred your Github repositories plus daily email notification about changes and much more.</p>
+  <p align="center">All about your GitHub account, public and private activity, stars count, release download count, who followed/unfollowed and starred/unstarred your GitHub repositories plus daily email notification about changes and much more.</p>
 </p>
 
 ---
